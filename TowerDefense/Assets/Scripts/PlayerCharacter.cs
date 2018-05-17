@@ -19,15 +19,13 @@ public class PlayerCharacter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (rb.velocity.y == 0 && transform.position.y < 2) isGrounded = true;
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
                 Jump();
         }
     }
 
     public void Jump(){
-        rb.AddForce(jump * jumpForce, ForceMode.Impulse);
-        isGrounded = false;
+        
     }
 
 }
