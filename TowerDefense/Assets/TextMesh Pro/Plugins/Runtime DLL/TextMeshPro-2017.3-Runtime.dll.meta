@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 809621a904383014fbb3f4e3a1b5688c
 timeCreated: 1526485693
+=======
+guid: 1fea3f0f207ccad4cba0949b80a6e4c5
+timeCreated: 1526487320
+>>>>>>> 37bae87c7b1fa428b8cdb1ae3a08db3928927c8b
 licenseType: Free
 PluginImporter:
   externalObjects: {}
