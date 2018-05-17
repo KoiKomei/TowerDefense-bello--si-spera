@@ -22,9 +22,6 @@ public class FPSInput : MonoBehaviour {
 	void Update () {
         float deltaX = Input.GetAxis("Horizontal") * speed;
         float deltaZ = Input.GetAxis("Vertical") * speed;
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded){
-            Jump();
-        }
         Vector3 movement = new Vector3(deltaX, 0, deltaZ);
         movement = Vector3.ClampMagnitude(movement, speed);
         movement.y = gravity;
