@@ -1,0 +1,16 @@
+Patch notes 0.1
+-Remy può correre!
+-Camminare!
+-e persino star fermo come un normale cristiano
+
+x Remy non sa mantenere un'arma decentemente
+x Ancora non sa saltare per bene
+x Non sa scalare le montagne come il cavallo di skyrim
+
+Patch notes 0.2
+
+-Remy ora può sparare!
+-e saltare come un normale cristiano (o quasi)
+
+x Remy non sa sparare decentemente
+x Non sa saltare da fermo perché unga bunga salto continuamente se sto in idle
