@@ -55,16 +55,16 @@ public class OptionsMenuNew : MonoBehaviour {
 		// check difficulty
 		if(PlayerPrefs.GetInt("NormalDifficulty") == 1){
 			//difficultynormaltext.GetComponent<Text>().text = "NORMAL";
-			difficultynormaltextLINE.gameObject.active = true;
-			difficultyhardcoretextLINE.gameObject.active = false;
+			difficultynormaltextLINE.gameObject.SetActive(true);
+			difficultyhardcoretextLINE.gameObject.SetActive(false);
 			//difficultyhardcoretext.GetComponent<Text>().text = "hardcore";
 		}
 		else
 		{
 			//difficultynormaltext.GetComponent<Text>().text = "normal";
 			//difficultyhardcoretext.GetComponent<Text>().text = "HARDCORE";
-			difficultyhardcoretextLINE.gameObject.active = true;
-			difficultynormaltextLINE.gameObject.active = false;
+			difficultyhardcoretextLINE.gameObject.SetActive(true);
+			difficultynormaltextLINE.gameObject.SetActive(false);
 
 		}
 
@@ -106,9 +106,9 @@ public class OptionsMenuNew : MonoBehaviour {
 			shadowofftext.GetComponent<Text>().text = "OFF";
 			shadowlowtext.GetComponent<Text>().text = "low";
 			shadowhightext.GetComponent<Text>().text = "high";
-			shadowofftextLINE.gameObject.active = true;
-			shadowlowtextLINE.gameObject.active = false;
-			shadowhightextLINE.gameObject.active = false;
+			shadowofftextLINE.gameObject.SetActive(true);
+			shadowlowtextLINE.gameObject.SetActive(false);
+			shadowhightextLINE.gameObject.SetActive(false);
 		}
 		else if(PlayerPrefs.GetInt("Shadows") == 1){
 			QualitySettings.shadowCascades = 2;
@@ -116,9 +116,9 @@ public class OptionsMenuNew : MonoBehaviour {
 			shadowofftext.GetComponent<Text>().text = "off";
 			shadowlowtext.GetComponent<Text>().text = "LOW";
 			shadowhightext.GetComponent<Text>().text = "high";
-			shadowofftextLINE.gameObject.active = false;
-			shadowlowtextLINE.gameObject.active = true;
-			shadowhightextLINE.gameObject.active = false;
+			shadowofftextLINE.gameObject.SetActive(false);
+			shadowlowtextLINE.gameObject.SetActive(true);
+			shadowhightextLINE.gameObject.SetActive(false);
 		}
 		else if(PlayerPrefs.GetInt("Shadows") == 2){
 			QualitySettings.shadowCascades = 4;
@@ -126,9 +126,9 @@ public class OptionsMenuNew : MonoBehaviour {
 			shadowofftext.GetComponent<Text>().text = "off";
 			shadowlowtext.GetComponent<Text>().text = "low";
 			shadowhightext.GetComponent<Text>().text = "HIGH";
-			shadowofftextLINE.gameObject.active = false;
-			shadowlowtextLINE.gameObject.active = false;
-			shadowhightextLINE.gameObject.active = true;
+			shadowofftextLINE.gameObject.SetActive(false);
+			shadowlowtextLINE.gameObject.SetActive(false);
+			shadowhightextLINE.gameObject.SetActive(true);
 		}
 
 		// check vsync
@@ -169,27 +169,27 @@ public class OptionsMenuNew : MonoBehaviour {
 			texturelowtext.GetComponent<Text>().text = "LOW";
 			texturemedtext.GetComponent<Text>().text = "med";
 			texturehightext.GetComponent<Text>().text = "high";
-			texturelowtextLINE.gameObject.active = true;
-			texturemedtextLINE.gameObject.active = false;
-			texturehightextLINE.gameObject.active = false;
+			texturelowtextLINE.gameObject.SetActive(true);
+			texturemedtextLINE.gameObject.SetActive(false);
+			texturehightextLINE.gameObject.SetActive(false);
 		}
 		else if(PlayerPrefs.GetInt("Textures") == 1){
 			QualitySettings.masterTextureLimit = 1;
 			texturelowtext.GetComponent<Text>().text = "low";
 			texturemedtext.GetComponent<Text>().text = "MED";
 			texturehightext.GetComponent<Text>().text = "high";
-			texturelowtextLINE.gameObject.active = false;
-			texturemedtextLINE.gameObject.active = true;
-			texturehightextLINE.gameObject.active = false;
+			texturelowtextLINE.gameObject.SetActive(false);
+			texturemedtextLINE.gameObject.SetActive(true);
+			texturehightextLINE.gameObject.SetActive(false);
 		}
 		else if(PlayerPrefs.GetInt("Textures") == 2){
 			QualitySettings.masterTextureLimit = 0;
 			texturelowtext.GetComponent<Text>().text = "low";
 			texturemedtext.GetComponent<Text>().text = "med";
 			texturehightext.GetComponent<Text>().text = "HIGH";
-			texturelowtextLINE.gameObject.active = false;
-			texturemedtextLINE.gameObject.active = false;
-			texturehightextLINE.gameObject.active = true;
+			texturelowtextLINE.gameObject.SetActive(false);
+			texturemedtextLINE.gameObject.SetActive(false);
+			texturehightextLINE.gameObject.SetActive(true);
 		}
 	}
 
@@ -260,8 +260,8 @@ public class OptionsMenuNew : MonoBehaviour {
 	public void  NormalDifficulty (){
 		//difficultynormaltext.GetComponent<Text>().text = "NORMAL";
 		//difficultyhardcoretext.GetComponent<Text>().text = "hardcore";
-		difficultyhardcoretextLINE.gameObject.active = false;
-		difficultynormaltextLINE.gameObject.active = true;
+		difficultyhardcoretextLINE.gameObject.SetActive(false);
+		difficultynormaltextLINE.gameObject.SetActive(true);
 		PlayerPrefs.SetInt("NormalDifficulty",1);
 		PlayerPrefs.SetInt("HardCoreDifficulty",0);
 	}
@@ -269,8 +269,8 @@ public class OptionsMenuNew : MonoBehaviour {
 	public void  HardcoreDifficulty (){
 		//difficultynormaltext.GetComponent<Text>().text = "normal";
 		//difficultyhardcoretext.GetComponent<Text>().text = "HARDCORE";
-		difficultyhardcoretextLINE.gameObject.active = true;
-		difficultynormaltextLINE.gameObject.active = false;
+		difficultyhardcoretextLINE.gameObject.SetActive(true);
+		difficultynormaltextLINE.gameObject.SetActive(false);
 		PlayerPrefs.SetInt("NormalDifficulty",0);
 		PlayerPrefs.SetInt("HardCoreDifficulty",1);
 	}
@@ -282,9 +282,9 @@ public class OptionsMenuNew : MonoBehaviour {
 		shadowofftext.GetComponent<Text>().text = "OFF";
 		shadowlowtext.GetComponent<Text>().text = "low";
 		shadowhightext.GetComponent<Text>().text = "high";
-		shadowofftextLINE.gameObject.active = true;
-		shadowlowtextLINE.gameObject.active = false;
-		shadowhightextLINE.gameObject.active = false;
+		shadowofftextLINE.gameObject.SetActive(true);
+		shadowlowtextLINE.gameObject.SetActive(false);
+		shadowhightextLINE.gameObject.SetActive(false);
 	}
 
 	public void  ShadowsLow (){
@@ -294,9 +294,9 @@ public class OptionsMenuNew : MonoBehaviour {
 		shadowofftext.GetComponent<Text>().text = "off";
 		shadowlowtext.GetComponent<Text>().text = "LOW";
 		shadowhightext.GetComponent<Text>().text = "high";
-		shadowofftextLINE.gameObject.active = false;
-		shadowlowtextLINE.gameObject.active = true;
-		shadowhightextLINE.gameObject.active = false;
+		shadowofftextLINE.gameObject.SetActive(false);
+		shadowlowtextLINE.gameObject.SetActive(true);
+		shadowhightextLINE.gameObject.SetActive(false);
 	}
 
 	public void  ShadowsHigh (){
@@ -306,9 +306,9 @@ public class OptionsMenuNew : MonoBehaviour {
 		shadowofftext.GetComponent<Text>().text = "off";
 		shadowlowtext.GetComponent<Text>().text = "low";
 		shadowhightext.GetComponent<Text>().text = "HIGH";
-		shadowofftextLINE.gameObject.active = false;
-		shadowlowtextLINE.gameObject.active = false;
-		shadowhightextLINE.gameObject.active = true;
+		shadowofftextLINE.gameObject.SetActive(false);
+		shadowlowtextLINE.gameObject.SetActive(false);
+		shadowhightextLINE.gameObject.SetActive(true);
 	}
 
 	public void  vsync (){
@@ -372,9 +372,9 @@ public class OptionsMenuNew : MonoBehaviour {
 		texturelowtext.GetComponent<Text>().text = "LOW";
 		texturemedtext.GetComponent<Text>().text = "med";
 		texturehightext.GetComponent<Text>().text = "high";
-		texturelowtextLINE.gameObject.active = true;
-		texturemedtextLINE.gameObject.active = false;
-		texturehightextLINE.gameObject.active = false;
+		texturelowtextLINE.gameObject.SetActive(true);
+		texturemedtextLINE.gameObject.SetActive(false);
+		texturehightextLINE.gameObject.SetActive(false);
 	}
 
 	public void  TexturesMed (){
@@ -383,9 +383,9 @@ public class OptionsMenuNew : MonoBehaviour {
 		texturelowtext.GetComponent<Text>().text = "low";
 		texturemedtext.GetComponent<Text>().text = "MED";
 		texturehightext.GetComponent<Text>().text = "high";
-		texturelowtextLINE.gameObject.active = false;
-		texturemedtextLINE.gameObject.active = true;
-		texturehightextLINE.gameObject.active = false;
+		texturelowtextLINE.gameObject.SetActive(false);
+		texturemedtextLINE.gameObject.SetActive(true);
+		texturehightextLINE.gameObject.SetActive(false);
 	}
 
 	public void  TexturesHigh (){
@@ -394,8 +394,8 @@ public class OptionsMenuNew : MonoBehaviour {
 		texturelowtext.GetComponent<Text>().text = "low";
 		texturemedtext.GetComponent<Text>().text = "med";
 		texturehightext.GetComponent<Text>().text = "HIGH";
-		texturelowtextLINE.gameObject.active = false;
-		texturemedtextLINE.gameObject.active = false;
-		texturehightextLINE.gameObject.active = true;
+		texturelowtextLINE.gameObject.SetActive(false);
+		texturemedtextLINE.gameObject.SetActive(false);
+		texturehightextLINE.gameObject.SetActive(true);
 	}
 }
