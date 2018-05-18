@@ -11,7 +11,7 @@ public class RelativeMovement : MonoBehaviour {
     [SerializeField] private Transform target;
     public float rotSpeed = 15f;
     public float pushForce = 3.0f;
-    private bool isshooting = false;
+    private bool isshooting;
    
     public float moveSpeed = 6.0f;
     public float sprint = 15.0f;
@@ -29,6 +29,7 @@ public class RelativeMovement : MonoBehaviour {
         _charController = GetComponent<CharacterController>();
         _vertSpeed = minFall;
         animator = GetComponent<Animator>();
+        isshooting = false;
     }
 	
 	// Update is called once per frame
