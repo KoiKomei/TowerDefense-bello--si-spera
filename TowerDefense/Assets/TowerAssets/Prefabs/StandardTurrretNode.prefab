@@ -111,3 +111,4 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   turret: {fileID: 0}
   Standard: {fileID: 11422402, guid: 64f2ae8c83ee6bb49a47a2d3f43d307e, type: 2}
+  STGhost: {fileID: 0}

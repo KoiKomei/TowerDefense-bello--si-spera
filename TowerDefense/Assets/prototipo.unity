@@ -1618,12 +1618,12 @@ MonoBehaviour:
   target: {fileID: 1773022730}
   rotSpeed: 15
   pushForce: 3
-  moveSpeed: 6
-  sprint: 15
+  moveSpeed: 3
+  sprint: 8
   jumpSpeed: 15
   gravity: -9.8
   terminalVelocity: -10
-  minFall: -1.5
+  minFall: -5
 --- !u!143 &1773022732
 CharacterController:
   m_ObjectHideFlags: 0
