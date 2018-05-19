@@ -11,7 +11,7 @@ public class RelativeMovement : MonoBehaviour {
     [SerializeField] private Transform target;
     public float rotSpeed = 15f;
     public float pushForce = 3.0f;
-    private bool isshooting;
+    //private bool isshooting;
    
     public float moveSpeed = 6.0f;
     public float sprint = 15.0f;
@@ -29,7 +29,7 @@ public class RelativeMovement : MonoBehaviour {
         _charController = GetComponent<CharacterController>();
         _vertSpeed = minFall;
         animator = GetComponent<Animator>();
-        isshooting = false;
+        //isshooting = false;
     }
 	
 	// Update is called once per frame
@@ -37,12 +37,12 @@ public class RelativeMovement : MonoBehaviour {
 
         if (Input.GetButton("Fire1"))
         {
-            isshooting = true;
+            //isshooting = true;
             animator.SetBool("Shoot", true);
         }
         else
         {
-            isshooting = false;
+            //isshooting = false;
             animator.SetBool("Shoot", false);
 
         }
@@ -71,11 +71,11 @@ public class RelativeMovement : MonoBehaviour {
                 transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
                 if (Input.GetButton("Fire1"))
                 {
-                    isshooting = true;
+                    //isshooting = true;
                     animator.SetBool("Run Shoot", true);
                 }
                 else {
-                    isshooting = false;
+                    //isshooting = false;
                     animator.SetBool("Run Shoot", false);
 
                 }
@@ -93,12 +93,12 @@ public class RelativeMovement : MonoBehaviour {
                 transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
                 if (Input.GetButton("Fire1"))
                 {
-                    isshooting = true;
+                    //isshooting = true;
                     animator.SetBool("Shoot", true);
                 }
                 else
                 {
-                    isshooting = false;
+                    //isshooting = false;
                     animator.SetBool("Shoot", false);
 
                 }

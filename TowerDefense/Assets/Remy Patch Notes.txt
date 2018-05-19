@@ -14,3 +14,10 @@ Patch notes 0.2
 
 x Remy non sa sparare decentemente
 x Non sa saltare da fermo perché unga bunga salto continuamente se sto in idle
+
+Patch notes 0.3
+
+-Remy ora sa saltare anche da fermo!
+-Ora i suoi piedi toccano il terreno
+
+x ha perso l'arma perché gli si è clippata tra le mani e gli è caduta a terra
