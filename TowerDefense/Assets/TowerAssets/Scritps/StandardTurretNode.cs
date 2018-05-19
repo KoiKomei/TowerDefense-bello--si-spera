@@ -9,6 +9,8 @@ public class StandardTurretNode : MonoBehaviour {
     public Vector3 positionOffset;
     [HideInInspector]
     public GameObject turret;
+    [HideInInspector]
+    public GameObject turretGhost;
     public Turret Standard;
 
     private bool builded;
@@ -26,6 +28,7 @@ public class StandardTurretNode : MonoBehaviour {
     {
         if (!builded)
         {
+            Destroy(turretGhost);
             builded = true;
             BuildTurret();
         }
@@ -34,10 +37,18 @@ public class StandardTurretNode : MonoBehaviour {
     private void OnMouseEnter()
     {
         rend.material.color = hoverColor;
+        if (!builded)
+        {
+            GameObject _turret = (GameObject)Instantiate(Standard.prefab, GetBuildPosition(), Quaternion.identity);
+            turretGhost = _turret;
+            turretGhost.GetComponent<Turret>().enabled = false;
+        }
+        
     }
 
     void OnMouseExit()
     {
+        Destroy(turretGhost);
         rend.material.color = startColor;
     }
 
