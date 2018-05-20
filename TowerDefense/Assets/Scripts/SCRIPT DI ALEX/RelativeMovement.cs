@@ -35,17 +35,6 @@ public class RelativeMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetButton("Fire1"))
-        {
-            //isshooting = true;
-            animator.SetBool("Shoot", true);
-        }
-        else
-        {
-            //isshooting = false;
-            animator.SetBool("Shoot", false);
-
-        }
 
         bool hitGround = false;
         RaycastHit hit;
@@ -69,16 +58,7 @@ public class RelativeMovement : MonoBehaviour {
                 target.rotation = tmp;
                 Quaternion direction = Quaternion.LookRotation(movement);
                 transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
-                if (Input.GetButton("Fire1"))
-                {
-                    //isshooting = true;
-                    animator.SetBool("Run Shoot", true);
-                }
-                else {
-                    //isshooting = false;
-                    animator.SetBool("Run Shoot", false);
-
-                }
+               
             }
             else
             {
@@ -91,17 +71,7 @@ public class RelativeMovement : MonoBehaviour {
                 target.rotation = tmp;
                 Quaternion direction = Quaternion.LookRotation(movement);
                 transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
-                if (Input.GetButton("Fire1"))
-                {
-                    //isshooting = true;
-                    animator.SetBool("Shoot", true);
-                }
-                else
-                {
-                    //isshooting = false;
-                    animator.SetBool("Shoot", false);
-
-                }
+               
             }
         }
         animator.SetFloat("Speed", movement.magnitude);
