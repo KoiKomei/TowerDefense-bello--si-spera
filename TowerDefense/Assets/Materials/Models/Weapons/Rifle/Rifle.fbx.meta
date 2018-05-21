@@ -48,7 +48,12 @@ ModelImporter:
     4300010: R_Sight
     4300012: R_FusionSource
     4300014: R_Trigger
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UVs
+    second: {fileID: 2100000, guid: e1a64a01529426f4d85ef3581e228952, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
