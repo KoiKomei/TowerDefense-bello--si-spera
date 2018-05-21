@@ -11,7 +11,7 @@ public class RelativeMovement : MonoBehaviour {
     [SerializeField] private Transform target;
     public float rotSpeed = 15f;
     public float pushForce = 3.0f;
-    private bool isshooting;
+    //private bool isshooting;
    
     public float moveSpeed = 6.0f;
     public float sprint = 15.0f;
@@ -29,23 +29,12 @@ public class RelativeMovement : MonoBehaviour {
         _charController = GetComponent<CharacterController>();
         _vertSpeed = minFall;
         animator = GetComponent<Animator>();
-        isshooting = false;
+        //isshooting = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetButton("Fire1"))
-        {
-            isshooting = true;
-            animator.SetBool("Shoot", true);
-        }
-        else
-        {
-            isshooting = false;
-            animator.SetBool("Shoot", false);
-
-        }
 
         bool hitGround = false;
         RaycastHit hit;
@@ -69,16 +58,7 @@ public class RelativeMovement : MonoBehaviour {
                 target.rotation = tmp;
                 Quaternion direction = Quaternion.LookRotation(movement);
                 transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
-                if (Input.GetButton("Fire1"))
-                {
-                    isshooting = true;
-                    animator.SetBool("Run Shoot", true);
-                }
-                else {
-                    isshooting = false;
-                    animator.SetBool("Run Shoot", false);
-
-                }
+               
             }
             else
             {
@@ -91,17 +71,7 @@ public class RelativeMovement : MonoBehaviour {
                 target.rotation = tmp;
                 Quaternion direction = Quaternion.LookRotation(movement);
                 transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
-                if (Input.GetButton("Fire1"))
-                {
-                    isshooting = true;
-                    animator.SetBool("Shoot", true);
-                }
-                else
-                {
-                    isshooting = false;
-                    animator.SetBool("Shoot", false);
-
-                }
+               
             }
         }
         animator.SetFloat("Speed", movement.magnitude);
