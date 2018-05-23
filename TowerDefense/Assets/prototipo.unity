@@ -333,7 +333,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 179201950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44a154870f745cb48a0158d7e791630a, type: 3}
+  m_Script: {fileID: 11500000, guid: 809ed6a3c75853441b52cf80dee950ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1773022730}
@@ -1756,18 +1756,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773022728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa13f879c3346d9499153f5b8fcdca25, type: 3}
+  m_Script: {fileID: 11500000, guid: c7f6ef80c4d9761408f7429ae9c4793b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1773022730}
-  rotSpeed: 3
+  target: {fileID: 179201954}
+  rotSpeed: 4
   pushForce: 3
-  moveSpeed: 3
-  sprint: 8
+  moveSpeed: 2
+  sprint: 7
   jumpSpeed: 15
   gravity: -9.8
   terminalVelocity: -10
-  minFall: -5
+  minFall: -1.5
 --- !u!143 &1773022732
 CharacterController:
   m_ObjectHideFlags: 0
