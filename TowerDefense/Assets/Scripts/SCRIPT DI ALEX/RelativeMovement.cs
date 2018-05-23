@@ -34,7 +34,9 @@ public class RelativeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        Vector3 movement = Vector3.zero;
+        float horInput = Input.GetAxis("Horizontal");
+        float vertInput = Input.GetAxis("Vertical");
 
         bool hitGround = false;
         RaycastHit hit;
@@ -43,9 +45,7 @@ public class RelativeMovement : MonoBehaviour {
             float check = (_charController.height + _charController.radius) / 1.9f;
             hitGround = hit.distance <= check;
         }
-        Vector3 movement = Vector3.zero;
-        float horInput = Input.GetAxis("Horizontal");
-        float vertInput = Input.GetAxis("Vertical");
+        
         if (horInput != 0 || vertInput != 0) {
             if (Input.GetKey("left shift"))
             {

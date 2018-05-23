@@ -27,3 +27,9 @@ Patch notes 0.4
 - Remy ha di nuovo un'arma
 
 x Non sa mantenerla come Cristo comanda
+
+Patch notes 0.5
+
+- Remy ha imparato a mantenere un'arma a due mani
+
+x Per qualche strano motivo ancora ama fare una sottospecie di movewalk
