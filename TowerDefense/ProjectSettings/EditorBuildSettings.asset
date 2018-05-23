@@ -11,3 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/prototipo.unity
     guid: d80b89de92ee05b408935921d838da16
+  - enabled: 1
+    path: Assets/AS_ModernMenu1/OfficialScenes/Menu_Scene.unity
+    guid: 53e0db7c579d54f4da5d360b96be0985
+  m_configObjects: {}
