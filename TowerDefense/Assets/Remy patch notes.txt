@@ -33,3 +33,7 @@ Patch notes 0.5
 - Remy ha imparato a mantenere un'arma a due mani
 
 x Per qualche strano motivo ancora ama fare una sottospecie di movewalk
+
+Patch notes 0.6 
+
+-Remy ora sa voltarsi
