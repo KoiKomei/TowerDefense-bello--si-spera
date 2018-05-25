@@ -3,6 +3,23 @@ guid: 7d42596f908623a4e902843d0924181d
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: Turret
+    100004: Turret_001
+    400000: //RootNode
+    400002: Turret
+    400004: Turret_001
+    2100000: Turret_Metal
+    2100002: Turret_Metal2
+    2100004: Turret_GunMetal
+    2300000: Turret
+    2300002: Turret_001
+    3300000: Turret
+    3300002: Turret_001
+    4300000: Turret_001
+    4300002: Turret
+    7400000: Default Take
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -23,7 +40,6 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
