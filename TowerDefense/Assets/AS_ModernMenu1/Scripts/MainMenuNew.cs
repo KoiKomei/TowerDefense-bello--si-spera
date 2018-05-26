@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuNew : MonoBehaviour {
 
@@ -155,4 +156,9 @@ public class MainMenuNew : MonoBehaviour {
 	public void  Yes (){
 		Application.Quit();
 	}
+
+    public void playNewGame()
+    {
+        SceneManager.LoadScene("game");
+    }
 }
