@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour {
 
-    [SerializeField] private SettingsPopup settingsPopup;
+    [SerializeField] private DisplayableUIObject settingsPopup;
+    [SerializeField] private DisplayableUIObject revolverImage;
+    [SerializeField] private DisplayableUIObject m4Image;
+    [SerializeField] private DisplayableUIObject pumpImage;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Text healthLabel;
 
@@ -15,7 +18,7 @@ public class UIController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         LockCursor();
-        settingsPopup.Close();
+        initializeUI();
 	}
 
     // Update is called once per frame
@@ -38,6 +41,13 @@ public class UIController : MonoBehaviour {
             OnCloseSettings();
             LockCursor();
         }
+    }
+
+    private void initializeUI() {
+        settingsPopup.Close();
+        revolverImage.Close();
+        m4Image.Close();
+        pumpImage.Close();
     }
 
     private void OnOpenSettings() {

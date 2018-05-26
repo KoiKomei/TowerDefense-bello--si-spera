@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class HealthText : MonoBehaviour {
-
-    [SerializeField] private Slider slider;
+public class DisplayableUIObject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -16,4 +13,14 @@ public class HealthText : MonoBehaviour {
 	void Update () {
 		
 	}
+    
+    public void Open()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
+    }
 }
