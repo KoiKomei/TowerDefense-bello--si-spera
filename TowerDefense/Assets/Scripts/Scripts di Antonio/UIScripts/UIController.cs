@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour {
 
-    [SerializeField] private DisplayableUIObject settingsPopup;
-    [SerializeField] private DisplayableUIObject revolverImage;
-    [SerializeField] private DisplayableUIObject m4Image;
-    [SerializeField] private DisplayableUIObject pumpImage;
+    [SerializeField] private SettingsPopup settingsPopup;
+    [SerializeField] private WeaponTooltip revolverImage;
+    [SerializeField] private WeaponTooltip m4Image;
+    [SerializeField] private WeaponTooltip shotgunImage;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Text healthLabel;
 
@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour {
         settingsPopup.Close();
         revolverImage.Close();
         m4Image.Close();
-        pumpImage.Close();
+        shotgunImage.Close();
     }
 
     private void OnOpenSettings() {
@@ -69,15 +69,15 @@ public class UIController : MonoBehaviour {
     }
 
     public void RestartScene() {
-        SceneManager.LoadScene("TestAnt");
+        SceneManager.LoadScene("Game");
     }
 
     public void MainMenuScene() {
-        
+        SceneManager.LoadScene("Menu_Scene");
     }
 
     public void ExitScene() {
-        SceneManager.LoadScene("prototipo");
+        SceneManager.LoadScene("TestAnt");
     }
 	
 	

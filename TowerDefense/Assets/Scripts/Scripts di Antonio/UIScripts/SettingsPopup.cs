@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisplayableUIObject : MonoBehaviour {
+public class SettingsPopup : MonoBehaviour, IDisplayableUIObject {
 
 	// Use this for initialization
 	void Start () {
@@ -13,14 +13,12 @@ public class DisplayableUIObject : MonoBehaviour {
 	void Update () {
 		
 	}
-    
-    public void Open()
-    {
-        gameObject.SetActive(true);
+
+    public void Open() {
+        this.gameObject.SetActive(true);
     }
 
-    public void Close()
-    {
-        gameObject.SetActive(false);
+    public void Close() {
+        this.gameObject.SetActive(false);
     }
 }

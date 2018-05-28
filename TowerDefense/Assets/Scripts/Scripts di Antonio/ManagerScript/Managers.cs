@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
 
 public class Managers : MonoBehaviour {
 
+    public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
     private List<IGameManager> startSequence;
 
@@ -20,13 +22,17 @@ public class Managers : MonoBehaviour {
 	}
 
     void Awake() {
+
+        Player = GetComponent<PlayerManager>();
         Inventory = GetComponent<InventoryManager>();
 
         startSequence = new List<IGameManager>();
 
+        startSequence.Add(Player);
         startSequence.Add(Inventory);
 
         StartCoroutine(StartupManagers());
+
     }
 
     private IEnumerator StartupManagers() { 

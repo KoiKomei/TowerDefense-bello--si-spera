@@ -18,6 +18,7 @@ public class CollectibleItem : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
        if (other.GetComponent<CharacterController>()) {
+            Managers.Inventory.AddItem(itemName);
             Destroy(this.gameObject);     
        }
     }
