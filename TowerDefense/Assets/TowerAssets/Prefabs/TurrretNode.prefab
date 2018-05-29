@@ -9,20 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1535012312434322}
+  m_RootGameObject: {fileID: 1748161771848152}
   m_IsPrefabParent: 1
---- !u!1 &1535012312434322
+--- !u!1 &1748161771848152
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4290010674682256}
-  - component: {fileID: 33134169269017088}
-  - component: {fileID: 65528321077333130}
-  - component: {fileID: 23292410301238000}
-  - component: {fileID: 114804219919675722}
+  - component: {fileID: 4428557068201574}
+  - component: {fileID: 33746484948542204}
+  - component: {fileID: 65319074267846088}
+  - component: {fileID: 23805171391625638}
+  - component: {fileID: 114510324383161900}
   m_Layer: 0
   m_Name: TurrretNode
   m_TagString: Untagged
@@ -30,12 +30,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4290010674682256
+--- !u!4 &4428557068201574
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535012312434322}
+  m_GameObject: {fileID: 1748161771848152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.04, y: 0.25, z: 1.02}
   m_LocalScale: {x: 2.5, y: 0.5, z: 2.5}
@@ -43,12 +43,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23292410301238000
+--- !u!23 &23805171391625638
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535012312434322}
+  m_GameObject: {fileID: 1748161771848152}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -77,39 +77,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33134169269017088
+--- !u!33 &33746484948542204
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535012312434322}
+  m_GameObject: {fileID: 1748161771848152}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65528321077333130
+--- !u!65 &65319074267846088
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535012312434322}
+  m_GameObject: {fileID: 1748161771848152}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114804219919675722
+--- !u!114 &114510324383161900
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535012312434322}
+  m_GameObject: {fileID: 1748161771848152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03852df7d3f82394da323341a6a99ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 026a7c7cd551cc34089770cba9fbedf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0, g: 0.0068967342, b: 1, a: 0}
+  hoverColor: {r: 0.33034167, g: 0.6452692, b: 0.9558824, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
   turret: {fileID: 0}
   turretGhost: {fileID: 0}
   bullet: {fileID: 11422402, guid: 64f2ae8c83ee6bb49a47a2d3f43d307e, type: 2}
   rocket: {fileID: 114000013549965756, guid: 28886474c13dfff4cb183350df126081, type: 2}
+  laser: {fileID: 114000013491523152, guid: f35a3ddf9c7f5434c95074493b543706, type: 2}
