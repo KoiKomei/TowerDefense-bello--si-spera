@@ -7,16 +7,18 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour {
 
     [SerializeField] private SettingsPopup settingsPopup;
+    [SerializeField] private InventoryPopup inventoryPopup;
     [SerializeField] private WeaponTooltip revolverImage;
     [SerializeField] private WeaponTooltip m4Image;
     [SerializeField] private WeaponTooltip shotgunImage;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Text healthLabel;
 
-    private bool isPopupOpen = false;
+    private bool isSettingsPopupOpen = false;
+    private bool isInventoryPopupOpen = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         LockCursor();
         initializeUI();
 	}
@@ -29,17 +31,33 @@ public class UIController : MonoBehaviour {
     }
     
     private void manageSettingsPopup() {
-        if (Input.GetButtonDown("Cancel") && !isPopupOpen)
+
+        //Apertura e Chiusura Menu
+        if (Input.GetButtonDown("Cancel") && !isSettingsPopupOpen)
         {
-            isPopupOpen = true;
+            isSettingsPopupOpen = true;
             OnOpenSettings();
             UnlockCursor();
         }
-        else if (Input.GetButtonDown("Cancel") && isPopupOpen)
+        else if (Input.GetButtonDown("Cancel") && isSettingsPopupOpen)
         {
-            isPopupOpen = false;
+            isSettingsPopupOpen = false;
             OnCloseSettings();
-            LockCursor();
+            if (!isSettingsPopupOpen && !isInventoryPopupOpen) LockCursor();
+        }
+
+        //Apertura e Chiusura Inventario
+        if (Input.GetButtonDown("Inventory") && !isInventoryPopupOpen)
+        {
+            isInventoryPopupOpen = true;
+            OnOpenInventory();
+            UnlockCursor();
+        }
+        else if (Input.GetButtonDown("Inventory") && isInventoryPopupOpen)
+        {
+            isInventoryPopupOpen = false;
+            OnCloseInventory();
+            if (!isSettingsPopupOpen && !isInventoryPopupOpen) LockCursor();
         }
     }
 
@@ -58,13 +76,23 @@ public class UIController : MonoBehaviour {
         settingsPopup.Close();
     }
 
+    private void OnOpenInventory()
+    {
+        inventoryPopup.Open();
+    }
+
+    private void OnCloseInventory()
+    {
+        inventoryPopup.Close();
+    }
+
     private void LockCursor() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     private void UnlockCursor() {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 

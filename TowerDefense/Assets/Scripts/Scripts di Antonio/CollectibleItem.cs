@@ -5,9 +5,11 @@ using UnityEngine;
 public class CollectibleItem : MonoBehaviour {
 
     [SerializeField] private string itemName;
+    [SerializeField] private Categoria type;
+    [SerializeField] private Rarity rarity;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -18,7 +20,7 @@ public class CollectibleItem : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
        if (other.GetComponent<CharacterController>()) {
-            Managers.Inventory.AddItem(itemName);
+            Managers.Inventory.AddItem(itemName, type, rarity);
             Destroy(this.gameObject);     
        }
     }
