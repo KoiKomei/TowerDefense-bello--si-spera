@@ -57,7 +57,7 @@ public class RelativeMove : MonoBehaviour {
                 movement = target.TransformDirection(movement);
                 target.rotation = tmp;
                 Quaternion direction = Quaternion.LookRotation(movement);
-                transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
                
             }
             else
@@ -70,7 +70,7 @@ public class RelativeMove : MonoBehaviour {
                 movement = target.TransformDirection(movement);
                 target.rotation = tmp;
                 Quaternion direction = Quaternion.LookRotation(movement);
-                transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
                
             }
         }

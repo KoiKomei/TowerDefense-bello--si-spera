@@ -23,11 +23,8 @@ public class MouseRotation : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        Rigidbody body = GetComponent<Rigidbody>();
-        if (body != null)
-        {
-            body.freezeRotation = true;
-        }
+        CharacterController ech = GetComponent<CharacterController>();
+ 
     }
 
     // Update is called once per frame

@@ -6,105 +6,118 @@ using UnityEngine;
 
 public class RelativeMovement : MonoBehaviour {
 
-    [SerializeField] private Transform target;
     private Animator animator;
+    [SerializeField] private Transform target;
+    public float rotSpeed = 15f;
+    public float pushForce = 3.0f;
 
-    public float rotSpeed = 15.0f;
-    public float moveSpeed = 1.0f;
+    public float moveSpeed = 6.0f;
+    public float sprint = 15.0f;
+
     public float jumpSpeed = 15.0f;
     public float gravity = -9.8f;
     public float terminalVelocity = -10.0f;
     public float minFall = -1.5f;
-    private float vertSpeed;
+    private float _vertSpeed;
+    private CharacterController _charController;
 
-
-    private CharacterController characterController;
-    private ControllerColliderHit contact;
-
-	// Use this for initialization
-	void Start () {
-        vertSpeed = minFall;
-        characterController = GetComponent<CharacterController>();
+    private ControllerColliderHit _contact;
+    // Use this for initialization
+    void Start()
+    {
+        _charController = GetComponent<CharacterController>();
+        _vertSpeed = minFall;
         animator = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        Vector3 movement = Vector3.zero;
-        float horInput = Input.GetAxis("Horizontal");
-        float vertInput = Input.GetAxis("Vertical");
+
+    // Update is called once per frame
+    void Update()
+    {
 
         bool hitGround = false;
         RaycastHit hit;
-
-        if(vertSpeed<0 && Physics.Raycast(transform.position,Vector3.down,out hit))
+        if (_vertSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit))
         {
-            float check = (characterController.height + characterController.radius) / 1.9f;
+            float check = (_charController.height + _charController.radius) / 1.9f;
             hitGround = hit.distance <= check;
         }
-        if (Input.GetKeyDown("left shift"))
-        {
-            moveSpeed = 6.0f;
-        }
-        if (Input.GetKeyUp("left shift"))
-        {
-            moveSpeed = 1.0f;
-        }
+        Vector3 movement = Vector3.zero;
+        float horInput = Input.GetAxis("Horizontal");
+        float vertInput = Input.GetAxis("Vertical");
         if (horInput != 0 || vertInput != 0)
         {
-            movement.x = horInput*moveSpeed;
-            movement.z = vertInput * moveSpeed;
-            movement = Vector3.ClampMagnitude(movement, moveSpeed);
-            Quaternion tmp = target.rotation;
-            target.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
-            movement = target.TransformDirection(movement);
-            target.rotation = tmp;
-
-             Quaternion direction = Quaternion.LookRotation(movement);
-             transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
-            //transform.rotation = Quaternion.LookRotation(movement);
-        }
-       
-        animator.SetFloat("Speed", movement.magnitude);
-        if (hitGround)
-        {
-            if (Input.GetButton("Jump"))
+            if (Input.GetKey("left shift"))
             {
-                vertSpeed = jumpSpeed;
+                movement.x = horInput * sprint;
+                movement.z = vertInput * sprint;
+                movement = Vector3.ClampMagnitude(movement, sprint);
+                Quaternion tmp = target.rotation;
+                target.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
+                movement = target.TransformDirection(movement);
+                target.rotation = tmp;
+                Quaternion direction = Quaternion.LookRotation(movement);
+                transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
+
             }
             else
             {
-                vertSpeed = minFall;
+                movement.x = horInput * moveSpeed;
+                movement.z = vertInput * moveSpeed;
+                movement = Vector3.ClampMagnitude(movement, moveSpeed);
+                Quaternion tmp = target.rotation;
+                target.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
+                movement = target.TransformDirection(movement);
+                target.rotation = tmp;
+                Quaternion direction = Quaternion.LookRotation(movement);
+                transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
+            }
+        }
+        animator.SetFloat("Speed", movement.magnitude);
+        if (hitGround)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                _vertSpeed = jumpSpeed;
+            }
+            else
+            {
+                _vertSpeed = minFall;
                 animator.SetBool("Jumping", false);
             }
         }
         else
         {
-            
-            vertSpeed += gravity * 5 * Time.deltaTime;
-            if (vertSpeed < terminalVelocity) { 
-                vertSpeed = terminalVelocity;
+            _vertSpeed += gravity * 5 * Time.deltaTime;
+            if (_vertSpeed < terminalVelocity)
+            {
+                _vertSpeed = terminalVelocity;
             }
             animator.SetBool("Jumping", true);
-            if (characterController.isGrounded)
+            if (_charController.isGrounded)
             {
-                if (Vector3.Dot(movement, contact.normal) < 0)
+                if (Vector3.Dot(movement, _contact.normal) < 0)
                 {
-                    movement = contact.normal * moveSpeed;
+                    movement = _contact.normal * moveSpeed;
                 }
                 else
                 {
-                    movement += contact.normal * moveSpeed;
+                    movement += _contact.normal * moveSpeed;
                 }
             }
         }
-        movement.y = vertSpeed;
+        movement.y = _vertSpeed;
         movement *= Time.deltaTime;
-        characterController.Move(movement);
+        _charController.Move(movement);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        contact = hit;
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body != null && !body.isKinematic)
+        {
+            body.velocity = hit.moveDirection * pushForce;
+        }
+        _contact = hit;
     }
+
 }
