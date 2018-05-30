@@ -12,6 +12,7 @@ public class TurretBase : MonoBehaviour {
     public GameObject turretGhost;
     public Turret bullet;
     public Turret rocket;
+    public Turret laser;
 
     private bool builded;
     private bool selected;
@@ -44,8 +45,10 @@ public class TurretBase : MonoBehaviour {
                 if (type == 1)
                     type = 2;
                 else if (type == 2)
+                    type = 3;
+                else if (type == 3)
                     type = 1;
-                
+
                 if (type == 1)
                 {
                     GameObject _turret = (GameObject)Instantiate(bullet.prefab, GetBuildPosition(), Quaternion.identity);
@@ -55,6 +58,12 @@ public class TurretBase : MonoBehaviour {
                 {
                     GameObject _turret = (GameObject)Instantiate(rocket.prefab, GetBuildPosition(), Quaternion.identity);
                     turretGhost = _turret;
+                }
+                if (type == 3)
+                {
+                    GameObject _turret = (GameObject)Instantiate(laser.prefab, GetBuildPosition(), Quaternion.identity);
+                    turretGhost = _turret;
+                    turretGhost.GetComponent<LineRenderer>().enabled = false;
                 }
                 turretGhost.GetComponent<Turret>().enabled = false;
                 
@@ -93,6 +102,12 @@ public class TurretBase : MonoBehaviour {
                 GameObject _turret = (GameObject)Instantiate(rocket.prefab, GetBuildPosition(), Quaternion.identity);
                 turretGhost = _turret;
             }
+            if (type == 3)
+            {
+                GameObject _turret = (GameObject)Instantiate(laser.prefab, GetBuildPosition(), Quaternion.identity);
+                turretGhost = _turret;
+                turretGhost.GetComponent<LineRenderer>().enabled = false;
+            }
             turretGhost.GetComponent<Turret>().enabled = false;
         }
 
@@ -120,6 +135,11 @@ public class TurretBase : MonoBehaviour {
         if (type == 2)
         {
             GameObject _turret = (GameObject)Instantiate(rocket.prefab, GetBuildPosition(), Quaternion.identity);
+            turret = _turret;
+        }
+        if (type == 3)
+        {
+            GameObject _turret = (GameObject)Instantiate(laser.prefab, GetBuildPosition(), Quaternion.identity);
             turret = _turret;
         }
         Debug.Log("Turret build!");

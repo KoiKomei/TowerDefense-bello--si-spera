@@ -9,5 +9,6 @@ public class CheckSFXVolume : MonoBehaviour {
 
 	public void  UpdateVolume (){
 		GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("SFXVolume");
+
 	}
 }
