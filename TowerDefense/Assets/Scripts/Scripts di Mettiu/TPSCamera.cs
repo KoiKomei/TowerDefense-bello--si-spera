@@ -20,11 +20,10 @@ public class TPSCamera : MonoBehaviour {
 	
 	void LateUpdate () {
         float horInput = Input.GetAxis("Horizontal");
-
         rotY += Input.GetAxis("Mouse X") * rotSpeed * 3;
 
         Quaternion rotation = Quaternion.Euler(0, rotY, 0);
-        if(Input.GetAxis("Mouse X") != 0 && horInput==0)
+        if(Input.GetAxis("Mouse X") != 0 && horInput==0 && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.DownArrow))
         {
             target.rotation = Quaternion.Lerp(target.rotation,rotation,17*Time.deltaTime);
         }
