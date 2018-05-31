@@ -8,9 +8,6 @@ public class UIController : MonoBehaviour {
 
     [SerializeField] private SettingsPopup settingsPopup;
     [SerializeField] private InventoryPopup inventoryPopup;
-    [SerializeField] private WeaponTooltip revolverImage;
-    [SerializeField] private WeaponTooltip m4Image;
-    [SerializeField] private WeaponTooltip shotgunImage;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Text healthLabel;
 
@@ -63,9 +60,6 @@ public class UIController : MonoBehaviour {
 
     private void initializeUI() {
         settingsPopup.Close();
-        revolverImage.Close();
-        m4Image.Close();
-        shotgunImage.Close();
     }
 
     private void OnOpenSettings() {
