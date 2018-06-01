@@ -19,11 +19,14 @@ public class InventoryManager : MonoBehaviour, IGameManager {
     private int maxWeapons;
     private int maxAmmo;
     private int maxConsumables;
+
     public bool somethingChanged;
+    public bool canRenderHUD;
 
     public void Startup() {
         status = ManagerStatus.Started;
         somethingChanged = false;
+        canRenderHUD = false;
         consumables = new Dictionary<string, int>();
         ammo = new Dictionary<string, int>();
         weapons = new List<string>();
@@ -61,7 +64,7 @@ public class InventoryManager : MonoBehaviour, IGameManager {
         Debug.Log(itemsDisplayed);
     }
     
-    public void AddItem(string name, Categoria type, Rarity rarity) {
+    public void AddItem(string name, Categoria type) {
         if (type == Categoria.Weapon) {
             if (numWeapons >= maxWeapons) {
                 ReplaceWeapon();
@@ -87,7 +90,7 @@ public class InventoryManager : MonoBehaviour, IGameManager {
             } 
         }
         somethingChanged = true;
-        DisplayItems();
+        //DisplayItems();
     }
 
     public void ConsumeItem(string name, Categoria type) { 
@@ -122,7 +125,7 @@ public class InventoryManager : MonoBehaviour, IGameManager {
             }
         }
         somethingChanged = true;
-        DisplayItems();
+        //DisplayItems();
     }
 
     public Dictionary<string, int> GetConsumablesDict() {

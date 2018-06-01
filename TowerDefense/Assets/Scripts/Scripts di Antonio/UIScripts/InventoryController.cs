@@ -17,7 +17,7 @@ public class InventoryController : MonoBehaviour {
     [SerializeField] private List<Image> consumablesImages;
 
     //Sprites degli oggetti
-    [SerializeField] private Sprite medikitSprite;
+    [SerializeField] private Sprite healthpotionSprite;
     [SerializeField] private Sprite revolverSprite;
     [SerializeField] private Sprite m4Sprite;
     [SerializeField] private Sprite pumpSprite;
@@ -32,6 +32,7 @@ public class InventoryController : MonoBehaviour {
 		if (manager.somethingChanged) {
             Debug.Log("Something changed in Inventory");
             RenderItems();
+            manager.canRenderHUD = true;
             manager.somethingChanged = false;
         }
 	}
@@ -88,8 +89,8 @@ public class InventoryController : MonoBehaviour {
     }
 
     private void assignBackgroundAndSprite(string name, Image mainImage, Image backgroundImage) {
-        if (name == "Medikit"){
-            mainImage.sprite = medikitSprite;
+        if (name == "healthpotion"){
+            mainImage.sprite = healthpotionSprite;
             backgroundImage.color = Color.green;
         }
         else if (name == "revolver"){
@@ -116,5 +117,13 @@ public class InventoryController : MonoBehaviour {
             mainImage.sprite = m4Sprite;
             backgroundImage.color = new Color(1.0f, 0.5f, 0f);
         }
+    }
+
+    public List<Image> getWeaponsImages() {
+        return weaponsImages;
+    }
+
+    public List<Image> getBgWeaponsImages() {
+        return bgWeaponsImages;
     }
 }
