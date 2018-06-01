@@ -6,101 +6,6 @@ using UnityEngine;
 
 public class TPSMovement : MonoBehaviour {
 
-	/*[SerializeField] private Transform target;
-
-    public float rotSpeed = 15.0f;
-    public float moveSpeed = 6.0f;
-    public float jumpSpeed = 15.0f;
-    public float gravity = -9.8f;
-    public float terminalSpeed = -10.0f;
-    public float minFall = -1.5f;
-	public float pushForce = 3.0f;
-
-	private float verticalSpeed;
-    private CharacterController characterController;
-	private ControllerColliderHit _contact;
-
-
-	// Use this for initialization
-	void Start () {
-        characterController = GetComponent<CharacterController>();
-        verticalSpeed = minFall;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        Vector3 movement = Vector3.zero;
-        float horInput = Input.GetAxis("Horizontal");
-        float verInput = Input.GetAxis("Vertical");
-
-		bool hitGround = false;
-		RaycastHit hit;
-		if (verticalSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit))
-		{
-			float check = (characterController.height + characterController.radius) / 1.9f;
-			hitGround = hit.distance <= check;
-		}
-
-		if (horInput!=0 || verInput != 0)
-        {
-            movement.x = horInput*moveSpeed;
-            movement.z = verInput*moveSpeed;
-            movement = Vector3.ClampMagnitude(movement, moveSpeed);
-
-            Quaternion tmp = target.rotation;
-            target.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
-            movement = target.TransformDirection(movement);
-            target.rotation = tmp;
-
-            Quaternion direction = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
-        }
-
-		if (hitGround)
-		{
-			if (Input.GetButtonDown("Jump"))
-			{
-				verticalSpeed = jumpSpeed;
-			}
-			else
-			{
-				verticalSpeed = minFall;
-			}
-		}
-		else
-		{
-			verticalSpeed += gravity * 5 * Time.deltaTime;
-			if (verticalSpeed < terminalSpeed)
-			{
-				verticalSpeed = terminalSpeed;
-			}
-			
-			if (characterController.isGrounded)
-			{
-				if (Vector3.Dot(movement, _contact.normal) < 0)
-				{
-					movement = _contact.normal * moveSpeed;
-				}
-				else
-				{
-					movement += _contact.normal * moveSpeed;
-				}
-			}
-		}
-		movement.y = verticalSpeed;
-        movement *= Time.deltaTime;
-        characterController.Move(movement);
-	}
-
-	void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		Rigidbody body = hit.collider.attachedRigidbody;
-		if (body != null && !body.isKinematic)
-		{
-			body.velocity = hit.moveDirection * pushForce;
-		}
-		_contact = hit;
-	}*/
 
 	private Animator animator;
 	[SerializeField] private Transform target;
@@ -163,7 +68,7 @@ public class TPSMovement : MonoBehaviour {
 			movement = target.TransformDirection(movement);
 			target.rotation = tmp;
 			
-			Quaternion direction = Quaternion.LookRotation(movement);
+			//Quaternion direction = Quaternion.LookRotation(movement);
 			
 			//transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
 		}
