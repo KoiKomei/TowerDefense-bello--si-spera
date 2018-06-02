@@ -12,15 +12,16 @@ public class TPSMovement : MonoBehaviour {
 	public float rotSpeed = 15f;
 	public float pushForce = 3.0f;
 
-	public float moveSpeed = 6.0f;
+	public float moveSpeed = 1.0f;
 	public float sprint = 15.0f;
-	public float noSprint = 6.0f;
+	public float noSprint = 1.0f;
 
 	public float jumpSpeed = 15.0f;
 	public float gravity = -9.8f;
 	public float terminalVelocity = -10.0f;
 	public float minFall = -1.5f;
 	private float _vertSpeed;
+    
 	private CharacterController _charController;
 
 	private ControllerColliderHit _contact;
@@ -30,6 +31,7 @@ public class TPSMovement : MonoBehaviour {
 		_charController = GetComponent<CharacterController>();
 		_vertSpeed = minFall;
 		animator = GetComponent<Animator>();
+        
 	}
 
 	// Update is called once per frame
@@ -46,6 +48,8 @@ public class TPSMovement : MonoBehaviour {
 		Vector3 movement = Vector3.zero;
 		float horInput = Input.GetAxis("Horizontal");
 		float vertInput = Input.GetAxis("Vertical");
+        BlendMove(horInput, vertInput);
+        
 		if (horInput != 0 || vertInput != 0)
 		{
 			if (Input.GetKeyDown("left shift"))
@@ -106,6 +110,13 @@ public class TPSMovement : MonoBehaviour {
 				}
 			}
 		}
+        if (Input.GetButtonDown("Fire1"))
+        {
+            animator.SetBool("Dance", true);
+        }
+        else {
+            animator.SetBool("Dance", false);
+        }
 		movement.y = _vertSpeed;
 		movement *= Time.deltaTime;
 		_charController.Move(movement);
@@ -120,5 +131,10 @@ public class TPSMovement : MonoBehaviour {
 		}
 		_contact = hit;
 	}
+
+    private void BlendMove(float x, float y) {
+        animator.SetFloat("VelX", x);
+        animator.SetFloat("VelY", y);
+    }
 
 }
