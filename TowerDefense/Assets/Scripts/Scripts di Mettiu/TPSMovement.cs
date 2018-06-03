@@ -118,7 +118,7 @@ public class TPSMovement : MonoBehaviour {
 				}
 			}
 		}
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && _charController.isGrounded == true)
         {
             Shoot();
         }
@@ -146,13 +146,17 @@ public class TPSMovement : MonoBehaviour {
     }
 
 
-    void Shoot() {
+    void Shoot()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
-        {
-            Debug.Log(hit.transform.name);
-        }
-        animator.SetBool("Shoot", true);
+
+        
+            if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
+            {
+                Debug.Log(hit.transform.name);
+            }
+            animator.SetBool("Shoot", true);
+        
     }
 
 }

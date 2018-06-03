@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5e1cf1f08272e2a459fb88eca90fc3f5
-timeCreated: 1528035066
+guid: 48d78c0496bbb6e498eef3cb58140b68
+timeCreated: 1528043089
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -141,7 +141,7 @@ ModelImporter:
     400130: mixamorig:Spine
     400132: mixamorig:Spine1
     400134: mixamorig:Spine2
-    7400000: 'Firing '
+    7400000: walk fire
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -171,10 +171,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 'Firing '
+      name: walk fire
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 80
+      lastFrame: 196
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -186,7 +186,7 @@ ModelImporter:
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
