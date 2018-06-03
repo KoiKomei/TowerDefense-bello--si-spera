@@ -16,9 +16,14 @@ public class InventoryManager : MonoBehaviour, IGameManager {
     private int numWeapons;
     private int numAmmo;
     private int numConsumables;
+
     private int maxWeapons;
     private int maxAmmo;
     private int maxConsumables;
+
+    [SerializeField] private int numBullets;
+    [SerializeField] private int numHeavyAmmo;
+    [SerializeField] private int numLightAmmo;
 
     public bool somethingChanged;
     public bool canRenderHUD;
@@ -73,11 +78,16 @@ public class InventoryManager : MonoBehaviour, IGameManager {
                 numWeapons++;
             }
         }
+        //TODO: optimize
         else if (type == Categoria.Ammo) { 
             if (ammo.ContainsKey(name)) {
-                ammo[name]++;
+                if (name == "heavyammo") ammo[name] += numHeavyAmmo;
+                else if (name == "bullets") ammo[name] += numBullets;
+                else if (name == "lightammo") ammo[name] += numLightAmmo;
             } else {
-                ammo[name] = 1;
+                if (name == "heavyammo") ammo[name] = numHeavyAmmo;
+                else if (name == "bullets") ammo[name] = numBullets;
+                else if (name == "lightammo") ammo[name] = numLightAmmo;
                 numAmmo++;
             } 
         }
