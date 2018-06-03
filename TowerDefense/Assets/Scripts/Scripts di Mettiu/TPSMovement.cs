@@ -21,6 +21,14 @@ public class TPSMovement : MonoBehaviour {
 	public float terminalVelocity = -10.0f;
 	public float minFall = -1.5f;
 	private float _vertSpeed;
+
+    private bool _shooting;
+    public Camera fpscam;
+
+
+    public float damage = 10f;
+
+
     
 	private CharacterController _charController;
 
@@ -31,7 +39,7 @@ public class TPSMovement : MonoBehaviour {
 		_charController = GetComponent<CharacterController>();
 		_vertSpeed = minFall;
 		animator = GetComponent<Animator>();
-        
+        _shooting = false;
 	}
 
 	// Update is called once per frame
@@ -112,10 +120,10 @@ public class TPSMovement : MonoBehaviour {
 		}
         if (Input.GetButtonDown("Fire1"))
         {
-            animator.SetBool("Dance", true);
+            Shoot();
         }
         else {
-            animator.SetBool("Dance", false);
+            animator.SetBool("Shoot", false);
         }
 		movement.y = _vertSpeed;
 		movement *= Time.deltaTime;
@@ -135,6 +143,16 @@ public class TPSMovement : MonoBehaviour {
     private void BlendMove(float x, float y) {
         animator.SetFloat("VelX", x);
         animator.SetFloat("VelY", y);
+    }
+
+
+    void Shoot() {
+        RaycastHit hit;
+        if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
+        {
+            Debug.Log(hit.transform.name);
+        }
+        animator.SetBool("Shoot", true);
     }
 
 }
