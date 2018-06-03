@@ -122,7 +122,7 @@ public class TPSMovement : MonoBehaviour {
         {
             Shoot();
         }
-        else {
+        if (Input.GetButtonUp("Fire1")) {
             animator.SetBool("Shoot", false);
         }
 		movement.y = _vertSpeed;
