@@ -22,9 +22,25 @@ public class TPSMovement : MonoBehaviour {
 	public float minFall = -1.5f;
 	private float _vertSpeed;
 
+    bool running = false;
+    
+
+
+    public int maxAmmo = 20;
+    private int currentAmmo;
+    private float reloadTime = 3.0f;
+    private bool isReloading = false;
+
+
     private bool _shooting;
     public Camera fpscam;
 
+    public GameObject impact;
+
+
+    public float fireRate = 15f;
+    public float nextTimeToFire = 0f;
+    public float impactForce = 30f;
 
     public float damage = 10f;
 
@@ -40,14 +56,18 @@ public class TPSMovement : MonoBehaviour {
 		_vertSpeed = minFall;
 		animator = GetComponent<Animator>();
         _shooting = false;
+        currentAmmo = maxAmmo;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		bool running = false;
-		bool hitGround = false;
-		RaycastHit hit;
+
+
+        //movement
+
+        bool hitGround = false;
+        RaycastHit hit;
 		if (_vertSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit))
 		{
 			float check = (_charController.height + _charController.radius) / 1.9f;
@@ -60,7 +80,7 @@ public class TPSMovement : MonoBehaviour {
         
 		if (horInput != 0 || vertInput != 0)
 		{
-			if (Input.GetKeyDown("left shift"))
+            if (Input.GetKeyDown("left shift") && _shooting == false && isReloading==false)
 			{
 				moveSpeed = sprint;
 				running = true;
@@ -86,9 +106,14 @@ public class TPSMovement : MonoBehaviour {
 		}
 		
 		animator.SetFloat("Speed", movement.magnitude);
+       
+
+
+
+        //jump
 		if (hitGround)
 		{
-			if (Input.GetButtonDown("Jump"))
+			if (Input.GetButtonDown("Jump") && _shooting==false)
 			{
 				_vertSpeed = jumpSpeed;
 			}
@@ -118,17 +143,46 @@ public class TPSMovement : MonoBehaviour {
 				}
 			}
 		}
-        if (Input.GetButton("Fire1") && _charController.isGrounded == true)
-        {
-            Shoot();
-        }
-        if (Input.GetButtonUp("Fire1")) {
-            animator.SetBool("Shoot", false);
-        }
+
+        //END OF JUMP
+
+
+
+        //SHOOTING
+        
 		movement.y = _vertSpeed;
 		movement *= Time.deltaTime;
 		_charController.Move(movement);
-	}
+
+        if (isReloading)
+        {           
+            return;
+        }
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+
+            return;
+        }
+        if (Input.GetButton("Fire1") && _charController.isGrounded == true && running == false && Time.time >= nextTimeToFire)
+        {
+
+            nextTimeToFire = Time.time + 1f / fireRate;
+
+            _shooting = true;
+            Shoot();
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+
+            _shooting = false;
+            animator.SetBool("Shoot", false);
+        }
+
+    }
+
+    //END OF SHOOTING
+    //END OF MOVEMENT
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
 	{
@@ -148,15 +202,41 @@ public class TPSMovement : MonoBehaviour {
 
     void Shoot()
     {
+        
+
         RaycastHit hit;
 
+        currentAmmo--;
         
             if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
                 Debug.Log(hit.transform.name);
             }
-            animator.SetBool("Shoot", true);
+        animator.SetBool("Shoot", true);
+
+        if (hit.rigidbody != null) {
+            hit.rigidbody.AddForce(-hit.normal * impactForce);
+        }
+        GameObject impactGO= Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(impactGO, 0.5f);
+    }
+
+    IEnumerator Reload() {
+        isReloading = true;
+        Debug.Log("Reloading...");
+
+        IKController.ikActive = false;
+        animator.SetBool("Shoot", false);
+        animator.SetBool("Reloading", true);
+        _shooting = false;
         
+        yield return new WaitForSeconds(reloadTime);
+        Debug.Log("Reloading done");
+        
+        animator.SetBool("Reloading", false);
+        currentAmmo = maxAmmo;
+        IKController.ikActive = true;
+        isReloading = false;
     }
 
 }

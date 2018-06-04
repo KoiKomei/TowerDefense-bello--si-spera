@@ -37,3 +37,10 @@ x Per qualche strano motivo ancora ama fare una sottospecie di movewalk
 Patch notes 0.6 
 
 -Remy ora sa voltarsi
+
+Patch notes 0.7
+-Remy è finalmente un noto membro della nostra società
+-è riuscito a far tutto
+-sa sparare
+-sa ricaricare
+-è un bravo giovanotto

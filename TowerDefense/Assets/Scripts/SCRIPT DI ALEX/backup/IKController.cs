@@ -12,7 +12,7 @@ public class IKController : MonoBehaviour {
 
     protected Animator animator;
 
-    public bool ikActive = false;
+    public static bool ikActive = true;
     public Transform leftHandObj = null;
     public Transform lookObj = null;
 
@@ -55,6 +55,8 @@ public class IKController : MonoBehaviour {
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
                 animator.SetLookAtWeight(0);
             }
+            
+
         }
     }
 }
