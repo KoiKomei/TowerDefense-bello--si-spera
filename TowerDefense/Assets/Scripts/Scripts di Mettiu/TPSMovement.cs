@@ -23,9 +23,11 @@ public class TPSMovement : MonoBehaviour {
 	private float _vertSpeed;
 
     bool running = false;
-    
 
 
+    private AudioSource _soundSource;
+    [SerializeField] private AudioClip reloadSound;
+  
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
@@ -46,7 +48,14 @@ public class TPSMovement : MonoBehaviour {
 
 
     
-	private CharacterController _charController;
+    [SerializeField] private AudioClip footStepSound;
+    private float _footStepSoundLength=0.6f;
+    private bool _step;
+
+
+
+
+    private CharacterController _charController;
 
 	private ControllerColliderHit _contact;
 	// Use this for initialization
@@ -57,7 +66,12 @@ public class TPSMovement : MonoBehaviour {
 		animator = GetComponent<Animator>();
         _shooting = false;
         currentAmmo = maxAmmo;
-	}
+
+        _soundSource = GetComponent<AudioSource>();
+        _step = true;
+        
+
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -83,12 +97,14 @@ public class TPSMovement : MonoBehaviour {
             if (Input.GetKeyDown("left shift") && _shooting == false && isReloading==false)
 			{
 				moveSpeed = sprint;
+                _footStepSoundLength = 0.3f;
 				running = true;
 
 			}
 			if (Input.GetKeyUp("left shift"))
 			{
 				moveSpeed = noSprint;
+                _footStepSoundLength = 0.6f;
 				running = false;
 			}
 
@@ -104,8 +120,14 @@ public class TPSMovement : MonoBehaviour {
 			
 			//transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
 		}
-		
-		animator.SetFloat("Speed", movement.magnitude);
+
+        if (_charController.velocity.magnitude > 1f && _step && _charController.isGrounded)
+        {
+            _soundSource.PlayOneShot(footStepSound);
+            StartCoroutine(WaitForFootSteps(_footStepSoundLength));
+        }
+
+        animator.SetFloat("Speed", movement.magnitude);
        
 
 
@@ -226,6 +248,7 @@ public class TPSMovement : MonoBehaviour {
         Debug.Log("Reloading...");
 
         IKController.ikActive = false;
+        _soundSource.PlayOneShot(reloadSound);
         animator.SetBool("Shoot", false);
         animator.SetBool("Reloading", true);
         _shooting = false;
@@ -237,6 +260,13 @@ public class TPSMovement : MonoBehaviour {
         currentAmmo = maxAmmo;
         IKController.ikActive = true;
         isReloading = false;
+    }
+
+    IEnumerator WaitForFootSteps(float stepsLength)
+    {
+        _step = false;
+        yield return new WaitForSeconds(stepsLength);
+        _step = true;
     }
 
 }
