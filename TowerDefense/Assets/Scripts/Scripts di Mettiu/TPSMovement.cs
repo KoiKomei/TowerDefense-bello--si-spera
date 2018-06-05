@@ -29,7 +29,7 @@ public class TPSMovement : MonoBehaviour {
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
-    private bool isReloading = false;
+    public static bool isReloading = false;
 
 
     private bool _shooting;
@@ -145,15 +145,15 @@ public class TPSMovement : MonoBehaviour {
 		}
 
         //END OF JUMP
+        //END OF MOVEMENT
 
 
 
-        //SHOOTING
-        
-		movement.y = _vertSpeed;
+
+        movement.y = _vertSpeed;
 		movement *= Time.deltaTime;
 		_charController.Move(movement);
-
+        //SHOOTING
         if (isReloading)
         {           
             return;
@@ -182,7 +182,7 @@ public class TPSMovement : MonoBehaviour {
     }
 
     //END OF SHOOTING
-    //END OF MOVEMENT
+    
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
 	{
