@@ -29,7 +29,7 @@ public class TPSMovement : MonoBehaviour {
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
-    private bool isReloading = false;
+    public static bool isReloading = false;
 
 
     private bool _shooting;
