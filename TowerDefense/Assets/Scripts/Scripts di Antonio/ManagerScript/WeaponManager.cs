@@ -13,12 +13,14 @@ public class WeaponManager : MonoBehaviour, IGameManager {
     private int notChanged;
     private bool firstWeaponAssigned;
     public bool weaponChanged;
+    public bool changeWeapon;
 
     public void Startup() {
         status = ManagerStatus.Started;
         notChanged = sw.getSelectedWeapon();
         firstWeaponAssigned = false;
         weaponChanged = false;
+        changeWeapon = false;
         inventory = Managers.Inventory;
     }
 
@@ -29,6 +31,7 @@ public class WeaponManager : MonoBehaviour, IGameManager {
 	
 	// Update is called once per frame
 	void Update () {
+        //ASSEGNAMENTO PRIMA ARMA RACCOLTA
         if (sw.hasFirstGun && !firstWeaponAssigned) {
             string weaponName = inventory.GetWeaponsList()[0];
             for (int i = 0; i < armory.Count; i++){
@@ -39,7 +42,9 @@ public class WeaponManager : MonoBehaviour, IGameManager {
             }
             notChanged = sw.getSelectedWeapon();
             firstWeaponAssigned = true;
+            changeWeapon = true;
         }
+        //ASSEGNAMENTO CAMBIO ARMA
         else if (notChanged != sw.getSelectedWeapon()) {
             string nextWeaponName = inventory.GetWeaponsList()[sw.getSelectedWeapon()];
             for (int i = 0; i < armory.Count; i++){
@@ -49,7 +54,9 @@ public class WeaponManager : MonoBehaviour, IGameManager {
                 }
             }
             notChanged = sw.getSelectedWeapon();
+            changeWeapon = true;
         }
+        //ASSEGNAMENTO ARMA SOSTITUITA
         if (weaponChanged){
             string weaponName = inventory.GetWeaponsList()[0];
             for (int i = 0; i < armory.Count; i++){
@@ -59,6 +66,7 @@ public class WeaponManager : MonoBehaviour, IGameManager {
                     weaponChanged = false;
                 }
             }
+            changeWeapon = true;
 	    }
     }
 
