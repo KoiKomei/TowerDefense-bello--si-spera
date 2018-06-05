@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour {
 
+    /*Si lavora coi figli degli oggetti qui, selectedWeapon indica un "figlio" dell'oggetto a cui è attaccato questo script*/
+
     public int selectedWeapon = 0;
     
 
-
-	// Use this for initialization
+    /*childCount è a -6 perché oltre alle armi ci sono le dita e quelle non dobbiamo contarle*/
+	
 	void Start () {
         SelectWeapon();
 	}
 	
-	// Update is called once per frame
+	
 	void Update () {
        
         int previousWeapon = selectedWeapon;

@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class TPSMovement : MonoBehaviour {
 
-
+    /* animazioni*/
 	private Animator animator;
+
+
+    /*statistiche personaggio*/
 	[SerializeField] private Transform target;
 	public float rotSpeed = 15f;
 	public float pushForce = 3.0f;
@@ -21,44 +24,34 @@ public class TPSMovement : MonoBehaviour {
 	public float terminalVelocity = -10.0f;
 	public float minFall = -1.5f;
 	private float _vertSpeed;
+    private CharacterController _charController;
 
+    private ControllerColliderHit _contact;
     bool running = false;
-
+    /*file audio*/
 
     private AudioSource _soundSource;
     [SerializeField] private AudioClip reloadSound;
-  
+    [SerializeField] private AudioClip footStepSound;
+    private float _footStepSoundLength = 0.6f;
+    private bool _step;
+
+
+    /*munizione e ricarica*/
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
     public static bool isReloading = false;
-
-
     private bool _shooting;
     public Camera fpscam;
-
     public GameObject impact;
-
-
     public float fireRate = 15f;
     public float nextTimeToFire = 0f;
     public float impactForce = 30f;
 
     public float damage = 10f;
 
-
     
-    [SerializeField] private AudioClip footStepSound;
-    private float _footStepSoundLength=0.6f;
-    private bool _step;
-
-
-
-
-    private CharacterController _charController;
-
-	private ControllerColliderHit _contact;
-	// Use this for initialization
 	void Start()
 	{
 		_charController = GetComponent<CharacterController>();
@@ -73,12 +66,12 @@ public class TPSMovement : MonoBehaviour {
 
     }
 
-	// Update is called once per frame
+	
 	void Update()
 	{
 
 
-        //movement
+        /*movement*/
 
         bool hitGround = false;
         RaycastHit hit;
@@ -132,7 +125,7 @@ public class TPSMovement : MonoBehaviour {
 
 
 
-        //jump
+        /* Jump */
 		if (hitGround)
 		{
 			if (Input.GetButtonDown("Jump") && _shooting==false)
@@ -166,16 +159,17 @@ public class TPSMovement : MonoBehaviour {
 			}
 		}
 
-        //END OF JUMP
-        //END OF MOVEMENT
-
-
-
-
+       /*END OF JUMP*/
         movement.y = _vertSpeed;
 		movement *= Time.deltaTime;
 		_charController.Move(movement);
-        //SHOOTING
+        /*END OF MOVEMENT*/
+
+
+
+
+
+        /* shooting */
         if (isReloading)
         {           
             return;
@@ -203,7 +197,7 @@ public class TPSMovement : MonoBehaviour {
 
     }
 
-    //END OF SHOOTING
+    /*end of shooting*/
     
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
@@ -216,16 +210,17 @@ public class TPSMovement : MonoBehaviour {
 		_contact = hit;
 	}
 
+    /* NON TOCCARE PER NESSUNA QUESTIONE AL MONDO, SERVONO PER LE ANIMAZIONI*/
     private void BlendMove(float x, float y) {
         animator.SetFloat("VelX", x);
         animator.SetFloat("VelY", y);
     }
 
 
+    /*Metodi aggiuntivi per sparare, ricaricare ed altro*/
+
     void Shoot()
     {
-        
-
         RaycastHit hit;
 
         currentAmmo--;
