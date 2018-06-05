@@ -41,7 +41,6 @@ public class InventoryController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		if (manager.somethingChanged) {
-            Debug.Log("Something changed in Inventory");
             RenderItems();
             manager.canRenderHUD = true;
             manager.somethingChanged = false;
@@ -51,7 +50,6 @@ public class InventoryController : MonoBehaviour {
     private void RenderItems() {
 
         int count = 0;
-        Debug.Log("Rendering Inventory");
 
         foreach (KeyValuePair<string, int> item in manager.GetConsumablesDict()) {
             Image current = consumablesImages[count];
@@ -95,8 +93,7 @@ public class InventoryController : MonoBehaviour {
         for (int i = count; i < bgWeaponsImages.Count; i++) {
             bgWeaponsImages[count].gameObject.SetActive(false);
         }
-
-        Debug.Log("Completed Rendering Inventory");
+        
     }
 
     private void assignBackgroundAndSprite(string name, Image mainImage, Image backgroundImage) {

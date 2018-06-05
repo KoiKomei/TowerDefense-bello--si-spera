@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IGameManager {
 
     public ManagerStatus status { get; private set; }
-
     public int health { get; private set; }
     public int maxHealth { get; private set; }
     public int healthPackValue { get; private set; }
@@ -22,7 +21,7 @@ public class PlayerManager : MonoBehaviour, IGameManager {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame

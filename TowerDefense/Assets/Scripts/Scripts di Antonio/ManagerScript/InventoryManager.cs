@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour, IGameManager {
 
     public ManagerStatus status { get; private set; }
+    [SerializeField] private WeaponDropper WeaponDropper;
 
     //strutture dati
     private List<string> weapons;
@@ -17,9 +18,9 @@ public class InventoryManager : MonoBehaviour, IGameManager {
     private int numAmmo;
     private int numConsumables;
 
-    private int maxWeapons;
-    private int maxAmmo;
-    private int maxConsumables;
+    [SerializeField] private int maxWeapons;
+    [SerializeField] private int maxAmmo;
+    [SerializeField] private int maxConsumables;
 
     [SerializeField] private int numBullets;
     [SerializeField] private int numHeavyAmmo;
@@ -42,9 +43,6 @@ public class InventoryManager : MonoBehaviour, IGameManager {
         numWeapons = 0;
         numAmmo = 0;
         numConsumables = 0;
-        maxWeapons = 5;
-        maxAmmo = 5;
-        maxConsumables = 10;
 	}
 	
 	// Update is called once per frame
@@ -69,13 +67,17 @@ public class InventoryManager : MonoBehaviour, IGameManager {
         Debug.Log(itemsDisplayed);
     }
     
-    public void AddItem(string name, Categoria type) {
+    public bool AddItem(string name, Categoria type) {
         if (type == Categoria.Weapon) {
             if (numWeapons >= maxWeapons) {
-                ReplaceWeapon();
+                ReplaceWeapon(name);
+                somethingChanged = true;
+                return true;
             } else {
                 weapons.Add(name);
                 numWeapons++;
+                somethingChanged = true;
+                return true;
             }
         }
         //TODO: optimize
@@ -89,17 +91,23 @@ public class InventoryManager : MonoBehaviour, IGameManager {
                 else if (name == "bullets") ammo[name] = numBullets;
                 else if (name == "lightammo") ammo[name] = numLightAmmo;
                 numAmmo++;
-            } 
+            }
+            somethingChanged = true;
+            return true;
         }
         else if (type == Categoria.Consumable) { 
             if (consumables.ContainsKey(name)) {
                 consumables[name]++;
+                somethingChanged = true;
+                return true;
             } else {
                 consumables[name] = 1;
                 numConsumables++;
-            } 
+                somethingChanged = true;
+                return true;
+            }
         }
-        somethingChanged = true;
+        return false;
         //DisplayItems();
     }
 
@@ -164,7 +172,12 @@ public class InventoryManager : MonoBehaviour, IGameManager {
         return weapons;
     }
 
-    public void ReplaceWeapon() { 
-    
+    public void ReplaceWeapon(string name) {
+        string toDrop = Managers.Weapon.getCurrentWeapon().nome;
+        WeaponDropper.drop(toDrop);
+        int i = Managers.Weapon.sw.getSelectedWeapon();
+        Managers.Weapon.weaponChanged = true; ;
+        weapons[i] = name;
+        //somethingChanged = true;
     }
 }

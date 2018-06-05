@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class CollectibleItem : MonoBehaviour {
 
     [SerializeField] private string itemName;
     [SerializeField] private Categoria type;
 
+    private SphereCollider colliderr;
     private float speed;
 
     // Use this for initialization
     void Start () {
         speed = 50f;
+        colliderr = this.gameObject.GetComponent<SphereCollider>();
+        colliderr.enabled = false;
+        StartCoroutine(IssTrigger());
 	}
 	
 	// Update is called once per frame
@@ -21,8 +26,12 @@ public class CollectibleItem : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
        if (other.GetComponent<CharacterController>()) {
-            Managers.Inventory.AddItem(itemName, type);
-            Destroy(this.gameObject);     
+            if (Managers.Inventory.AddItem(itemName, type)) Destroy(this.gameObject);     
        }
+    }
+
+    private IEnumerator IssTrigger() {
+        yield return new WaitForSeconds(3);
+        colliderr.enabled = true;
     }
 }

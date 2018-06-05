@@ -4,11 +4,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
+[RequireComponent(typeof(WeaponManager))]
 
 public class Managers : MonoBehaviour {
 
     public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
+    public static WeaponManager Weapon { get; private set; }
     private List<IGameManager> startSequence;
 
 	// Use this for initialization
@@ -25,11 +27,13 @@ public class Managers : MonoBehaviour {
 
         Player = GetComponent<PlayerManager>();
         Inventory = GetComponent<InventoryManager>();
+        Weapon = GetComponent <WeaponManager>();
 
         startSequence = new List<IGameManager>();
 
         startSequence.Add(Player);
         startSequence.Add(Inventory);
+        startSequence.Add(Weapon);
 
         StartCoroutine(StartupManagers());
 
