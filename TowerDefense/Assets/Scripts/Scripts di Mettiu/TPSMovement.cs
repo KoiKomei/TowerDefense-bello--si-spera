@@ -128,7 +128,7 @@ public class TPSMovement : MonoBehaviour {
         /* Jump */
 		if (hitGround)
 		{
-			if (Input.GetButtonDown("Jump") && _shooting==false)
+			if (Input.GetButtonDown("Jump") && _shooting==false && isReloading==false)
 			{
 				_vertSpeed = jumpSpeed;
 			}
@@ -174,7 +174,7 @@ public class TPSMovement : MonoBehaviour {
         {           
             return;
         }
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0  || Input.GetButton("Reload") && currentAmmo<maxAmmo)
         {
             StartCoroutine(Reload());
 

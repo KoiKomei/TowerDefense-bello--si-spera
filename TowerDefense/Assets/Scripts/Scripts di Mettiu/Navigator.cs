@@ -13,6 +13,7 @@ public class Navigator : MonoBehaviour {
 
 	[SerializeField] private Transform[] Waypoints;
 	[SerializeField] private bool loop;
+	public float PlayerDetectionRadius;
 
 	private int goingTo;
 
@@ -35,6 +36,28 @@ public class Navigator : MonoBehaviour {
 		if(!agent.pathPending && agent.remainingDistance < 0.5f)
 		{
 			GoToNext();
+		}
+
+		Collider[] colliders = Physics.OverlapSphere(transform.position, PlayerDetectionRadius);
+		//Debug.Log(colliders.Length);
+		bool found = false;
+		Collider player = null;
+		foreach (Collider c in colliders)
+		{
+			if (c.GetComponentInParent<CharacterController>() != null)
+			{
+				found = true;
+				player = c;
+				break;
+			}
+		}
+		if (found)
+		{
+			agent.destination = player.transform.position;
+		}
+		else
+		{
+			agent.destination = Waypoints[goingTo].position;
 		}
 
 	}
