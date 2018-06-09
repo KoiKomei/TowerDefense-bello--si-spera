@@ -14,8 +14,7 @@ public class IKController : MonoBehaviour {
 
     public static bool ikActive = true;
     public Transform leftHandObj = null;
-    public GameObject obj1 = null;
-    public Transform leftHandObj2 = null;
+   
     public Transform lookObj = null;
 
     void Start()
