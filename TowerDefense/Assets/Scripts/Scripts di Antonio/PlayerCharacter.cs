@@ -43,14 +43,14 @@ public class PlayerCharacter : MonoBehaviour {
         }
         damaged = false;
 
-        if (Input.GetKeyDown(KeyCode.H) && Managers.Inventory.GetConsumablesCount("Medikit") > 0) {
+        if (Input.GetKeyDown(KeyCode.H) && Managers.Inventory.GetConsumablesCount("healthpotion") > 0) {
             hp += healthPackValue;
             healthBar.value += (barValueDamage * healthPackValue);
             if (hp > Managers.Player.health) {
                 hp = Managers.Player.health;
                 healthBar.value = healthBar.maxValue;
             }
-            Managers.Inventory.ConsumeItem("Medikit", Categoria.Consumable);
+            Managers.Inventory.ConsumeItem("healthpotion", Categoria.Consumable);
         }
     }
 

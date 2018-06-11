@@ -17,21 +17,32 @@ public class InventoryController : MonoBehaviour {
     [SerializeField] private List<Image> consumablesImages;
 
     //Sprites degli oggetti
-    [SerializeField] private Sprite medikitSprite;
+    [SerializeField] private Sprite healthpotionSprite;
+    [SerializeField] private Sprite shieldpotionSprite;
+    [SerializeField] private Sprite rushpotionSprite;
     [SerializeField] private Sprite revolverSprite;
     [SerializeField] private Sprite m4Sprite;
     [SerializeField] private Sprite pumpSprite;
+    [SerializeField] private Sprite bulletsSprite;
+    [SerializeField] private Sprite heavyammoSprite;
+    [SerializeField] private Sprite lightammoSprite;
+
+    //utility
+    private Color purple;
+    private Color orange;
 
 	// Use this for initialization
 	void Start () {
         manager = Managers.Inventory;
+        purple = new Color(0.6f, 0f, 0.65f);
+        orange = new Color(1.0f, 0.5f, 0f);
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 		if (manager.somethingChanged) {
-            Debug.Log("Something changed in Inventory");
             RenderItems();
+            manager.canRenderHUD = true;
             manager.somethingChanged = false;
         }
 	}
@@ -39,7 +50,6 @@ public class InventoryController : MonoBehaviour {
     private void RenderItems() {
 
         int count = 0;
-        Debug.Log("Rendering Inventory");
 
         foreach (KeyValuePair<string, int> item in manager.GetConsumablesDict()) {
             Image current = consumablesImages[count];
@@ -83,22 +93,41 @@ public class InventoryController : MonoBehaviour {
         for (int i = count; i < bgWeaponsImages.Count; i++) {
             bgWeaponsImages[count].gameObject.SetActive(false);
         }
-
-        Debug.Log("Completed Rendering Inventory");
+        
     }
 
     private void assignBackgroundAndSprite(string name, Image mainImage, Image backgroundImage) {
-        if (name == "Medikit"){
-            mainImage.sprite = medikitSprite;
-            backgroundImage.color = Color.green;
+        if (name == "healthpotion"){
+            mainImage.sprite = healthpotionSprite;
+            backgroundImage.color = Color.gray;
         }
-        else if (name == "revolver"){
+        if (name == "shieldpotion"){
+            mainImage.sprite = shieldpotionSprite;
+            backgroundImage.color = Color.gray;
+        }
+        if (name == "rushpotion"){
+            mainImage.sprite = rushpotionSprite;
+            backgroundImage.color = Color.gray;
+        }
+        else if (name == "revolvercommon"){
             mainImage.sprite = revolverSprite;
             backgroundImage.color = Color.white;
         }
-        else if (name == "pumprare"){
-            mainImage.sprite = pumpSprite;
+        else if (name == "revolveruncommon"){
+            mainImage.sprite = revolverSprite;
+            backgroundImage.color = Color.green;
+        }
+        else if (name == "revolverrare"){
+            mainImage.sprite = revolverSprite;
             backgroundImage.color = Color.blue;
+        }
+        else if (name == "revolverepic"){
+            mainImage.sprite = revolverSprite;
+            backgroundImage.color = purple;
+        }
+        else if (name == "revolverlegendary"){
+            mainImage.sprite = revolverSprite;
+            backgroundImage.color = orange;
         }
         else if (name == "m4uncommon"){
             mainImage.sprite = m4Sprite;
@@ -110,11 +139,47 @@ public class InventoryController : MonoBehaviour {
         }
         else if (name == "m4epic"){
             mainImage.sprite = m4Sprite;
-            backgroundImage.color = new Color(0.6f, 0f, 0.65f);
+            backgroundImage.color = purple;
         }
         else if (name == "m4legendary"){
             mainImage.sprite = m4Sprite;
-            backgroundImage.color = new Color(1.0f, 0.5f, 0f);
+            backgroundImage.color = orange;
         }
+        else if (name == "pumpuncommon"){
+            mainImage.sprite = pumpSprite;
+            backgroundImage.color = Color.green;
+        }
+        else if (name == "pumprare"){
+            mainImage.sprite = pumpSprite;
+            backgroundImage.color = Color.blue;
+        }
+        else if (name == "pumpepic"){
+            mainImage.sprite = pumpSprite;
+            backgroundImage.color = purple;
+        }
+        else if (name == "pumplegendary"){
+            mainImage.sprite = pumpSprite;
+            backgroundImage.color = orange;
+        }
+        else if (name == "bullets"){
+            mainImage.sprite = bulletsSprite;
+            backgroundImage.color = Color.gray;
+        }
+        else if (name == "heavyammo"){
+            mainImage.sprite = heavyammoSprite;
+            backgroundImage.color = Color.gray;
+        }
+        else if (name == "lightammo"){
+            mainImage.sprite = lightammoSprite;
+            backgroundImage.color = Color.gray;
+        }
+    }
+
+    public List<Image> getWeaponsImages() {
+        return weaponsImages;
+    }
+
+    public List<Image> getBgWeaponsImages() {
+        return bgWeaponsImages;
     }
 }
