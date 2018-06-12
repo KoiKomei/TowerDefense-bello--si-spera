@@ -38,6 +38,7 @@ public class TPSMovement2 : MonoBehaviour {
 
 
     /*munizione e ricarica*/
+    WeaponManager weaponManager;
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
@@ -62,19 +63,21 @@ public class TPSMovement2 : MonoBehaviour {
 
         _soundSource = GetComponent<AudioSource>();
         _step = true;
-        
+        weaponManager = Managers.Weapon;
 
     }
 
 	
-	void Update()
-	{
+	void Update() {
+
         //Cambio Arma
-        if(Managers.Weapon.changeWeapon) {
-            Weapon weapon = Managers.Weapon.getCurrentWeapon();
+        if(weaponManager.changeWeapon) {
+            Weapon weapon = weaponManager.getCurrentWeapon();
             fireRate = weapon.rateOfFire;
             damage = weapon.damage;
             impactForce = weapon.impact;
+            maxAmmo = weapon.capacity;
+            currentAmmo = weapon.getCurrentAmmo();
         }
 
         /*movement*/
@@ -176,31 +179,30 @@ public class TPSMovement2 : MonoBehaviour {
 
 
         /* shooting */
-        if (isReloading)
-        {           
-            return;
+        if (weaponManager.firstWeaponAssigned) {
+            if (isReloading) {           
+                return;
+            }
+            if (weaponManager.getCurrentWeapon().getCurrentAmmo() <= 0) {
+                if (Managers.Inventory.GetAmmoDict().ContainsKey(weaponManager.getCurrentAmmoType())){
+                    if (Managers.Inventory.GetAmmoDict()[weaponManager.getCurrentAmmoType()] > 0) {
+                        StartCoroutine(Reload());
+                    }
+                }
+                _shooting = false;
+                animator.SetBool("Shoot", false);
+                return;
+            }
+            if (Input.GetButton("Fire1") && _charController.isGrounded == true && running == false && Time.time >= nextTimeToFire) {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                _shooting = true;
+                Shoot();
+            }
+            if (Input.GetButtonUp("Fire1")) {
+                _shooting = false;
+                animator.SetBool("Shoot", false);
+            }
         }
-        if (currentAmmo <= 0)
-        {
-            StartCoroutine(Reload());
-
-            return;
-        }
-        if (Input.GetButton("Fire1") && _charController.isGrounded == true && running == false && Time.time >= nextTimeToFire)
-        {
-
-            nextTimeToFire = Time.time + 1f / fireRate;
-
-            _shooting = true;
-            Shoot();
-        }
-        if (Input.GetButtonUp("Fire1"))
-        {
-
-            _shooting = false;
-            animator.SetBool("Shoot", false);
-        }
-
     }
 
     /*end of shooting*/
@@ -229,7 +231,7 @@ public class TPSMovement2 : MonoBehaviour {
     {
         RaycastHit hit;
 
-        currentAmmo--;
+        weaponManager.getCurrentWeapon().consumeAmmo();
         
             if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
@@ -246,7 +248,7 @@ public class TPSMovement2 : MonoBehaviour {
 
     IEnumerator Reload() {
         isReloading = true;
-        Debug.Log("Reloading...");
+        //Debug.Log("Reloading...");
 
         IKController.ikActive = false;
         _soundSource.PlayOneShot(reloadSound);
@@ -255,10 +257,20 @@ public class TPSMovement2 : MonoBehaviour {
         _shooting = false;
         
         yield return new WaitForSeconds(reloadTime);
-        Debug.Log("Reloading done");
+        //Debug.Log("Reloading done");
         
         animator.SetBool("Reloading", false);
-        currentAmmo = maxAmmo;
+
+        //SOTTRAZIONE PROIETTILI DALL INVENTARIO
+        Dictionary<string, int> ammo = Managers.Inventory.GetAmmoDict();
+        if (ammo[weaponManager.getCurrentAmmoType()] >= maxAmmo) {
+            weaponManager.getCurrentWeapon().reloadAmmo(maxAmmo);
+            ammo[weaponManager.getCurrentAmmoType()] -= maxAmmo;
+        }
+        else if (ammo[weaponManager.getCurrentAmmoType()] > 0) {
+            weaponManager.getCurrentWeapon().reloadAmmo(ammo[weaponManager.getCurrentAmmoType()]);
+            ammo[weaponManager.getCurrentAmmoType()] = 0;
+        }
         IKController.ikActive = true;
         isReloading = false;
     }
