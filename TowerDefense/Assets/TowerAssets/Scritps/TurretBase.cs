@@ -14,6 +14,8 @@ public class TurretBase : MonoBehaviour {
     public Turret rocket;
     public Turret laser;
 
+    public TriggerDestroy triggerController;
+
     private bool builded;
     private bool selected;
 
@@ -21,6 +23,7 @@ public class TurretBase : MonoBehaviour {
     private Color startColor;
 
     private int type;
+    private int turretNumber;
 
 
     void Start()
@@ -30,14 +33,17 @@ public class TurretBase : MonoBehaviour {
         builded = false;
         type = 1;
         selected = false;
-
+        triggerController.SetNumber(2);
+        turretNumber = triggerController.GetNumber();
     }
 
 
 
     void Update()
     {
-        if (!builded)
+        
+        turretNumber = triggerController.GetNumber();
+        if (!builded && turretNumber>0)
         {
             if (Input.GetKeyDown("q") && selected)
             {
@@ -76,7 +82,7 @@ public class TurretBase : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (!builded)
+        if (!builded && turretNumber > 0)
         {
             Destroy(turretGhost);
             builded = true;
@@ -86,10 +92,12 @@ public class TurretBase : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        selected = true;
-        rend.material.color = hoverColor;
-        if (!builded)
+
+        
+        if (!builded && turretNumber > 0)
         {
+            selected = true;
+            rend.material.color = hoverColor;
             Destroy(turretGhost);
 
             if (type == 1)
@@ -143,8 +151,21 @@ public class TurretBase : MonoBehaviour {
             turret = _turret;
         }
         Debug.Log("Turret build!");
+        turretNumber --;
+        triggerController.SetNumber(turretNumber);
     }
 
+
+    public void DestroyTurret()
+    {
+        if (builded)
+        {
+            Destroy(turret);
+            builded = false;
+            triggerController.SetNumber(2);
+        }
+    }
+    
 }
 
 

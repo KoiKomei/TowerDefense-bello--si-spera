@@ -128,7 +128,7 @@ public class TPSMovement : MonoBehaviour {
         /* Jump */
 		if (hitGround)
 		{
-			if (Input.GetButtonDown("Jump") && _shooting==false)
+			if (Input.GetButtonDown("Jump") && _shooting==false && isReloading==false)
 			{
 				_vertSpeed = jumpSpeed;
 			}
@@ -174,7 +174,7 @@ public class TPSMovement : MonoBehaviour {
         {           
             return;
         }
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0  || Input.GetButton("Reload") && currentAmmo<maxAmmo)
         {
             StartCoroutine(Reload());
 
@@ -227,9 +227,15 @@ public class TPSMovement : MonoBehaviour {
         
             if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
-                Debug.Log(hit.transform.name);
-            }
-        animator.SetBool("Shoot", true);
+				GameObject hitted = hit.transform.gameObject; //Mattia start
+				if (hitted != null)
+				{
+					hitted.SendMessage("Hurt", 1);
+				}
+				//Mattia end
+				//Debug.Log(hit.transform.name);
+		}
+		animator.SetBool("Shoot", true);
 
         if (hit.rigidbody != null) {
             hit.rigidbody.AddForce(-hit.normal * impactForce);
