@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Giacomo : MonoBehaviour,IEnemy
-{
-	public int MaxHealth=10;
+public class EnemyBehaviour : MonoBehaviour,IEnemy {
+
+	public int MaxHealth = 10;
 	private int Health;
-	public int AttackDamage=1;
+	public int AttackDamage = 1;
 	private float Speed;
 
 	private float maXHealthBar;
@@ -34,13 +33,14 @@ public class Giacomo : MonoBehaviour,IEnemy
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		Health = MaxHealth;
 		Speed = 7f;
 
 		maXHealthBar = HealthBar.sizeDelta.x;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
