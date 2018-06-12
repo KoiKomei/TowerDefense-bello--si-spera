@@ -128,7 +128,7 @@ public class TPSMovement : MonoBehaviour {
         /* Jump */
 		if (hitGround)
 		{
-			if (Input.GetButtonDown("Jump") && _shooting==false && isReloading==false)
+			if (Input.GetButtonDown("Jump") && _shooting==false && isReloading==false && _charController.isGrounded)
 			{
 				_vertSpeed = jumpSpeed;
 			}

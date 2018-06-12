@@ -233,14 +233,14 @@ public class TPSMovement2 : MonoBehaviour {
         
             if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
             }
         animator.SetBool("Shoot", true);
 
         if (hit.rigidbody != null) {
             hit.rigidbody.AddForce(-hit.normal * impactForce);
         }
-        GameObject impactGO= Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+        GameObject impactGO = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impactGO, 0.5f);
     }
 
