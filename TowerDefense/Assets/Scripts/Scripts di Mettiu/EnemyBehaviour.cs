@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
+[RequireComponent(typeof(NavMeshAgent))]
 
 public class EnemyBehaviour : MonoBehaviour,IEnemy {
+
+	private NavMeshAgent agent;
 
 	public int MaxHealth = 10;
 	private int Health;
 	public int AttackDamage = 1;
 	private float Speed;
+	public float AttackRange = 1;
 
 	private float maXHealthBar;
 	[SerializeField] private RectTransform HealthBar;
@@ -39,6 +45,9 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		Speed = 7f;
 
 		maXHealthBar = HealthBar.sizeDelta.x;
+
+		agent = GetComponent<NavMeshAgent>();
+		Speed = agent.speed;
 	}
 
 	// Update is called once per frame

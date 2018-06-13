@@ -230,7 +230,7 @@ public class TPSMovement : MonoBehaviour {
 				GameObject hitted = hit.transform.gameObject; //Mattia start
 				if (hitted != null)
 				{
-					hitted.SendMessage("Hurt", 1);
+					hitted.SendMessage("Hurt", 1,SendMessageOptions.DontRequireReceiver);
 				}
 				//Mattia end
 				//Debug.Log(hit.transform.name);
