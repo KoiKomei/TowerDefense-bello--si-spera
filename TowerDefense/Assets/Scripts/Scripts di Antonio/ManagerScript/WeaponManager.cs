@@ -8,9 +8,11 @@ public class WeaponManager : MonoBehaviour, IGameManager {
 
     [SerializeField] public SelectedWeapon sw;
     [SerializeField] private List<Weapon> armory;
+    [SerializeField] private List<AudioClip> shotSounds;
     InventoryManager inventory;
     private Weapon currentWeapon;
     private string currentAmmoType;
+    private AudioClip shotSound;
     private int notChanged;
     public bool firstWeaponAssigned;
     public bool weaponChanged;
@@ -73,13 +75,16 @@ public class WeaponManager : MonoBehaviour, IGameManager {
         //ASSEGNAMENTO MUNIZIONI
         if (changeWeapon) {
             if (currentWeapon.nome.StartsWith("revolver")) {
-                currentAmmoType = "lightammo";    
+                currentAmmoType = "lightammo";
+                shotSound = shotSounds[0];
             }
             else if (currentWeapon.nome.StartsWith("m4")) {
-                currentAmmoType = "heavyammo";    
+                currentAmmoType = "heavyammo";
+                shotSound = shotSounds[1];
             }
             else if (currentWeapon.nome.StartsWith("pump")) {
-                currentAmmoType = "bullets";    
+                currentAmmoType = "bullets";
+                shotSound = shotSounds[2];
             }
         }
     }
@@ -90,5 +95,9 @@ public class WeaponManager : MonoBehaviour, IGameManager {
 
     public string getCurrentAmmoType() {
         return currentAmmoType;
+    }
+
+    public AudioClip getShotSound() {
+        return shotSound;
     }
 }

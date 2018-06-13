@@ -6,7 +6,7 @@ public class AudioManager : MonoBehaviour, IGameManager {
 
     public ManagerStatus status { get; private set;}
 
-    public float soundvolume {
+    public float soundVolume {
         get { return AudioListener.volume; }
         set { AudioListener.volume = value; }
     }
@@ -16,6 +16,26 @@ public class AudioManager : MonoBehaviour, IGameManager {
         set { AudioListener.pause = value; }
     }
 
+    public float musicVolume {
+        get { return musicSource.volume; }
+        set { if (musicSource != null) {
+                musicSource.volume = value;
+            }
+        }
+    }
+
+    public bool musicMute {
+        get { if (musicSource != null) {
+                return musicSource.mute;
+            }
+            return false;
+        }
+        set { if (musicSource != null) {
+                musicSource.mute = value;
+            }
+        }
+    }
+
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private string introBGMusic;
@@ -23,7 +43,10 @@ public class AudioManager : MonoBehaviour, IGameManager {
 
     public void Startup() {
         Debug.Log("Audio Manager Starting...");
-        soundvolume = 1f;
+        musicSource.ignoreListenerVolume = true;
+        musicSource.ignoreListenerPause = true;
+        soundVolume = 1f;
+        musicVolume = 1f;
         status = ManagerStatus.Started;
     }
 

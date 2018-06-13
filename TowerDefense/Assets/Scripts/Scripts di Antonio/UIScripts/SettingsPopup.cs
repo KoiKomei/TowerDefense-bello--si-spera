@@ -25,11 +25,21 @@ public class SettingsPopup : MonoBehaviour, IDisplayableUIObject {
     }
 
     public void OnSoundToggle() {
+        Managers.Audio.PlaySound(sound);
         Managers.Audio.soundMute = !Managers.Audio.soundMute;
     }
 
     public void OnSoundValue (float volume) {
-        Managers.Audio.soundvolume = volume;
+        Managers.Audio.soundVolume = volume;
+    }
+
+    public void OnMusicToggle() {
+        Managers.Audio.PlaySound(sound);
+        Managers.Audio.musicMute = !Managers.Audio.musicMute;
+    }
+
+    public void OnMusicValue (float volume) {
+        Managers.Audio.musicVolume = volume;
     }
     
     public void OnPlayMusic(int selector) {
