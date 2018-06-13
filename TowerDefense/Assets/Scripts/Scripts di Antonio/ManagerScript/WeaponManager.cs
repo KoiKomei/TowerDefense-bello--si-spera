@@ -8,10 +8,13 @@ public class WeaponManager : MonoBehaviour, IGameManager {
 
     [SerializeField] public SelectedWeapon sw;
     [SerializeField] private List<Weapon> armory;
+    [SerializeField] private List<AudioClip> shotSounds;
     InventoryManager inventory;
     private Weapon currentWeapon;
+    private string currentAmmoType;
+    private AudioClip shotSound;
     private int notChanged;
-    private bool firstWeaponAssigned;
+    public bool firstWeaponAssigned;
     public bool weaponChanged;
     public bool changeWeapon;
 
@@ -22,6 +25,7 @@ public class WeaponManager : MonoBehaviour, IGameManager {
         weaponChanged = false;
         changeWeapon = false;
         inventory = Managers.Inventory;
+        foreach (Weapon w in armory) w.bugFix();
     }
 
 	// Use this for initialization
@@ -37,7 +41,7 @@ public class WeaponManager : MonoBehaviour, IGameManager {
             for (int i = 0; i < armory.Count; i++){
                 if (armory[i].nome == weaponName) {
                     currentWeapon = armory[i];
-                    Debug.Log("Current Weapon: " + currentWeapon.toString());
+                    //Debug.Log("Current Weapon: " + currentWeapon.toString());
                 }
             }
             notChanged = sw.getSelectedWeapon();
@@ -50,7 +54,7 @@ public class WeaponManager : MonoBehaviour, IGameManager {
             for (int i = 0; i < armory.Count; i++){
                 if (armory[i].nome == nextWeaponName) {
                     currentWeapon = armory[i];
-                    Debug.Log("Current Weapon: " + currentWeapon.toString());
+                    //Debug.Log("Current Weapon: " + currentWeapon.toString());
                 }
             }
             notChanged = sw.getSelectedWeapon();
@@ -58,19 +62,42 @@ public class WeaponManager : MonoBehaviour, IGameManager {
         }
         //ASSEGNAMENTO ARMA SOSTITUITA
         if (weaponChanged){
-            string weaponName = inventory.GetWeaponsList()[0];
+            string weaponName = inventory.GetWeaponsList()[sw.getSelectedWeapon()];
             for (int i = 0; i < armory.Count; i++){
                 if (armory[i].nome == weaponName) {
                     currentWeapon = armory[i];
-                    Debug.Log("Current Weapon: " + currentWeapon.toString());
+                    //Debug.Log("Current Weapon: " + currentWeapon.toString());
                     weaponChanged = false;
                 }
             }
             changeWeapon = true;
 	    }
+        //ASSEGNAMENTO MUNIZIONI
+        if (changeWeapon) {
+            if (currentWeapon.nome.StartsWith("revolver")) {
+                currentAmmoType = "lightammo";
+                shotSound = shotSounds[0];
+            }
+            else if (currentWeapon.nome.StartsWith("m4")) {
+                currentAmmoType = "heavyammo";
+                shotSound = shotSounds[1];
+            }
+            else if (currentWeapon.nome.StartsWith("pump")) {
+                currentAmmoType = "bullets";
+                shotSound = shotSounds[2];
+            }
+        }
     }
 
     public Weapon getCurrentWeapon() {
         return currentWeapon;
+    }
+
+    public string getCurrentAmmoType() {
+        return currentAmmoType;
+    }
+
+    public AudioClip getShotSound() {
+        return shotSound;
     }
 }
