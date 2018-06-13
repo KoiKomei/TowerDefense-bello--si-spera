@@ -39,6 +39,7 @@ public class TPSMovement2 : MonoBehaviour {
 
     /*munizione e ricarica*/
     WeaponManager weaponManager;
+    AudioClip shotSound;
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
@@ -72,12 +73,17 @@ public class TPSMovement2 : MonoBehaviour {
 
         //Cambio Arma
         if(weaponManager.changeWeapon) {
+
             Weapon weapon = weaponManager.getCurrentWeapon();
+            
             fireRate = weapon.rateOfFire;
             damage = weapon.damage;
             impactForce = weapon.impact;
             maxAmmo = weapon.capacity;
+
             currentAmmo = weapon.getCurrentAmmo();
+            shotSound = weaponManager.getShotSound();
+
         }
 
         /*movement*/
@@ -229,6 +235,7 @@ public class TPSMovement2 : MonoBehaviour {
 
     void Shoot()
     {
+        animator.SetBool("Shoot", true);
         RaycastHit hit;
 
         weaponManager.getCurrentWeapon().consumeAmmo();
@@ -237,7 +244,8 @@ public class TPSMovement2 : MonoBehaviour {
             {
                 //Debug.Log(hit.transform.name);
             }
-        animator.SetBool("Shoot", true);
+
+        Managers.Audio.PlaySound(shotSound);
 
         if (hit.rigidbody != null) {
             hit.rigidbody.AddForce(-hit.normal * impactForce);
@@ -263,13 +271,15 @@ public class TPSMovement2 : MonoBehaviour {
 
         //SOTTRAZIONE PROIETTILI DALL INVENTARIO
         Dictionary<string, int> ammo = Managers.Inventory.GetAmmoDict();
-        if (ammo[weaponManager.getCurrentAmmoType()] >= maxAmmo) {
-            weaponManager.getCurrentWeapon().reloadAmmo(maxAmmo);
-            ammo[weaponManager.getCurrentAmmoType()] -= maxAmmo;
-        }
-        else if (ammo[weaponManager.getCurrentAmmoType()] > 0) {
-            weaponManager.getCurrentWeapon().reloadAmmo(ammo[weaponManager.getCurrentAmmoType()]);
-            ammo[weaponManager.getCurrentAmmoType()] = 0;
+        if (ammo.ContainsKey(weaponManager.getCurrentAmmoType())) {
+            if (ammo[weaponManager.getCurrentAmmoType()] >= maxAmmo) {
+                weaponManager.getCurrentWeapon().reloadAmmo(maxAmmo);
+                ammo[weaponManager.getCurrentAmmoType()] -= maxAmmo;
+            }
+            else if (ammo[weaponManager.getCurrentAmmoType()] > 0) {
+                weaponManager.getCurrentWeapon().reloadAmmo(ammo[weaponManager.getCurrentAmmoType()]);
+                ammo[weaponManager.getCurrentAmmoType()] = 0;
+            }
         }
         IKController.ikActive = true;
         isReloading = false;
