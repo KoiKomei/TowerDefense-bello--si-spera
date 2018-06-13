@@ -9,19 +9,35 @@ public class Weapon : MonoBehaviour{
     public float rateOfFire;
     public float rechargeTime;
     public int capacity;
-    public int currentAmmo;
+    private int currentAmmo;
     public float impact;
     public bool isAutomatic;
 
-    private void Start() {
+    void Start() {
 
     }
 
-    private void Update() {
+    void Update() {
         
+    }
+
+    public void bugFix(){
+        currentAmmo = capacity;
     }
 
     public string toString() {
         return nome + " " + damage + " " + capacity;    
+    }
+
+    public int getCurrentAmmo() {
+        return currentAmmo;
+    }
+
+    public void consumeAmmo() {
+        currentAmmo--;
+    }
+
+    public void reloadAmmo(int value) {
+        currentAmmo = value;
     }
 }

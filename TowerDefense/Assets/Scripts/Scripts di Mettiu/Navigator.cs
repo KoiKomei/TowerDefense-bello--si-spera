@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(EnemyBehaviour))]
 
 public class Navigator : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class Navigator : MonoBehaviour {
 	[SerializeField] private Transform[] Waypoints;
 	[SerializeField] private bool loop;
 	public float PlayerDetectionRadius;
+	private float range;
 
 	private int goingTo;
 
@@ -21,6 +23,8 @@ public class Navigator : MonoBehaviour {
 	void Start () {
 		Assert.IsNotNull(Waypoints);
 		Assert.AreNotEqual(0, Waypoints.Length);
+
+		range = GetComponent<EnemyBehaviour>().AttackRange;
 
 		agent = GetComponent<NavMeshAgent>();
 		agent.autoBraking = false;
@@ -44,7 +48,8 @@ public class Navigator : MonoBehaviour {
 		Collider player = null;
 		foreach (Collider c in colliders)
 		{
-			if (c.GetComponentInParent<CharacterController>() != null)
+			GameObject target = c.gameObject;
+			if (c.GetComponentInParent<TPSMovement>() != null)
 			{
 				found = true;
 				player = c;
@@ -54,6 +59,17 @@ public class Navigator : MonoBehaviour {
 		if (found)
 		{
 			agent.destination = player.transform.position;
+			if (agent.remainingDistance <= range)
+			{
+				agent.isStopped = true;
+				agent.autoBraking = true;
+
+			}
+			else
+			{
+				agent.isStopped = false;
+				agent.autoBraking = false;
+			}
 		}
 		else
 		{
