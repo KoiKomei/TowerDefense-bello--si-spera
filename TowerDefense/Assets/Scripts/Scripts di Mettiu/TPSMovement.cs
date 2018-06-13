@@ -33,6 +33,7 @@ public class TPSMovement : MonoBehaviour {
     private AudioSource _soundSource;
     [SerializeField] private AudioClip reloadSound;
     [SerializeField] private AudioClip footStepSound;
+    [SerializeField] private AudioClip fireinthehole;
     private float _footStepSoundLength = 0.6f;
     private bool _step;
 
@@ -41,6 +42,7 @@ public class TPSMovement : MonoBehaviour {
     public int maxAmmo = 20;
     private int currentAmmo;
     private float reloadTime = 3.0f;
+    private float secondreloadtime = 0.5f;
     public static bool isReloading = false;
     private bool _shooting;
     public Camera fpscam;
@@ -221,11 +223,12 @@ public class TPSMovement : MonoBehaviour {
 
     void Shoot()
     {
+        _soundSource.PlayOneShot(fireinthehole);
         RaycastHit hit;
 
         currentAmmo--;
-        
-            if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
+        animator.SetBool("Shoot", true);
+        if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
 				GameObject hitted = hit.transform.gameObject; //Mattia start
 				if (hitted != null)
@@ -235,7 +238,7 @@ public class TPSMovement : MonoBehaviour {
 				//Mattia end
 				//Debug.Log(hit.transform.name);
 		}
-		animator.SetBool("Shoot", true);
+		
 
         if (hit.rigidbody != null) {
             hit.rigidbody.AddForce(-hit.normal * impactForce);
@@ -260,7 +263,10 @@ public class TPSMovement : MonoBehaviour {
         animator.SetBool("Reloading", false);
         currentAmmo = maxAmmo;
         IKController.ikActive = true;
+        yield return new WaitForSeconds(secondreloadtime);
         isReloading = false;
+
+        
     }
 
     IEnumerator WaitForFootSteps(float stepsLength)
