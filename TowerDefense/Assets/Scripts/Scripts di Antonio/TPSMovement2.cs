@@ -9,7 +9,6 @@ public class TPSMovement2 : MonoBehaviour {
     /* animazioni*/
 	private Animator animator;
 
-
     /*statistiche personaggio*/
 	[SerializeField] private Transform target;
 	public float rotSpeed = 15f;
@@ -38,33 +37,32 @@ public class TPSMovement2 : MonoBehaviour {
 
 
     /*munizione e ricarica*/
-    WeaponManager weaponManager;
-    AudioClip shotSound;
-    public int maxAmmo = 20;
+    private WeaponManager weaponManager;
+    private AudioClip shotSound;
+    private int maxAmmo;
     private int currentAmmo;
-    private float reloadTime = 3.0f;
-    public static bool isReloading = false;
+    private float reloadTime;
+    private static bool isReloading = false;
     private bool _shooting;
+    private float fireRate;
+    private float nextTimeToFire;
+    private float impactForce;
+    private float damage;
+    
     public Camera fpscam;
     public GameObject impact;
-    public float fireRate = 15f;
-    public float nextTimeToFire = 0f;
-    public float impactForce = 30f;
 
-    public float damage = 10f;
+	void Start() {   
 
-    
-	void Start()
-	{
-		_charController = GetComponent<CharacterController>();
-		_vertSpeed = minFall;
-		animator = GetComponent<Animator>();
-        _shooting = false;
-        currentAmmo = maxAmmo;
-
-        _soundSource = GetComponent<AudioSource>();
-        _step = true;
         weaponManager = Managers.Weapon;
+
+		_charController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        _soundSource = GetComponent<AudioSource>();
+
+        _vertSpeed = minFall;
+        _shooting = false;
+        _step = true;
 
     }
 
@@ -80,6 +78,7 @@ public class TPSMovement2 : MonoBehaviour {
             damage = weapon.damage;
             impactForce = weapon.impact;
             maxAmmo = weapon.capacity;
+            reloadTime = weapon.rechargeTime;
 
             currentAmmo = weapon.getCurrentAmmo();
             shotSound = weaponManager.getShotSound();
@@ -143,7 +142,7 @@ public class TPSMovement2 : MonoBehaviour {
         /* Jump */
 		if (hitGround)
 		{
-			if (Input.GetButtonDown("Jump") && _shooting==false)
+			if (Input.GetButtonDown("Jump") && _shooting==false && isReloading==false && _charController.isGrounded)
 			{
 				_vertSpeed = jumpSpeed;
 			}
@@ -189,7 +188,7 @@ public class TPSMovement2 : MonoBehaviour {
             if (isReloading) {           
                 return;
             }
-            if (weaponManager.getCurrentWeapon().getCurrentAmmo() <= 0) {
+            if (weaponManager.getCurrentWeapon().getCurrentAmmo() <= 0 || Input.GetButtonDown("Reload")) {
                 if (Managers.Inventory.GetAmmoDict().ContainsKey(weaponManager.getCurrentAmmoType())){
                     if (Managers.Inventory.GetAmmoDict()[weaponManager.getCurrentAmmoType()] > 0) {
                         StartCoroutine(Reload());
@@ -242,7 +241,13 @@ public class TPSMovement2 : MonoBehaviour {
         
             if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
-                //Debug.Log(hit.transform.name);
+                GameObject hitted = hit.transform.gameObject; //Mattia start
+				if (hitted != null)
+				{
+					hitted.SendMessage("Hurt", 1,SendMessageOptions.DontRequireReceiver);
+				}
+				//Mattia end
+				//Debug.Log(hit.transform.name);
             }
 
         Managers.Audio.PlaySound(shotSound);
@@ -272,15 +277,16 @@ public class TPSMovement2 : MonoBehaviour {
         //SOTTRAZIONE PROIETTILI DALL INVENTARIO
         Dictionary<string, int> ammo = Managers.Inventory.GetAmmoDict();
         if (ammo.ContainsKey(weaponManager.getCurrentAmmoType())) {
-            if (ammo[weaponManager.getCurrentAmmoType()] >= maxAmmo) {
-                weaponManager.getCurrentWeapon().reloadAmmo(maxAmmo);
-                ammo[weaponManager.getCurrentAmmoType()] -= maxAmmo;
+            if (ammo[weaponManager.getCurrentAmmoType()] >= maxAmmo - currentAmmo) {
+                ammo[weaponManager.getCurrentAmmoType()] -= maxAmmo - currentAmmo;
+                weaponManager.getCurrentWeapon().reloadAmmo(maxAmmo);  
             }
             else if (ammo[weaponManager.getCurrentAmmoType()] > 0) {
-                weaponManager.getCurrentWeapon().reloadAmmo(ammo[weaponManager.getCurrentAmmoType()]);
+                weaponManager.getCurrentWeapon().reloadAmmo(ammo[weaponManager.getCurrentAmmoType()] + currentAmmo);
                 ammo[weaponManager.getCurrentAmmoType()] = 0;
             }
         }
+        Managers.Inventory.somethingChanged = true;
         IKController.ikActive = true;
         isReloading = false;
     }

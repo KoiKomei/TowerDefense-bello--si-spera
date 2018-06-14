@@ -16,6 +16,8 @@ public class TurretBase : MonoBehaviour {
 
     public TriggerDestroy triggerController;
 
+    public GameObject destroyEffect;
+
     private bool builded;
     private bool selected;
 
@@ -33,7 +35,7 @@ public class TurretBase : MonoBehaviour {
         builded = false;
         type = 1;
         selected = false;
-        triggerController.SetNumber(2);
+        triggerController.SetNumber(5);
         turretNumber = triggerController.GetNumber();
     }
 
@@ -161,8 +163,10 @@ public class TurretBase : MonoBehaviour {
         if (builded)
         {
             Destroy(turret);
+            GameObject effect = (GameObject)Instantiate(destroyEffect, transform.position, transform.rotation);
+            Destroy(effect, 5f);
             builded = false;
-            triggerController.SetNumber(2);
+            triggerController.SetNumber(5);
         }
     }
     

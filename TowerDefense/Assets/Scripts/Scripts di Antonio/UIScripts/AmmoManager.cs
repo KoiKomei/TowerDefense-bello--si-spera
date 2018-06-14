@@ -24,6 +24,9 @@ public class AmmoManager : MonoBehaviour {
             if (inventory.GetAmmoDict().ContainsKey(weapon.getCurrentAmmoType())) {
                 totalAmmoText.text = inventory.GetAmmoDict()[weapon.getCurrentAmmoType()].ToString();
             }
+            else {
+                totalAmmoText.text = "0";     
+            }
         }
 	}
 }
