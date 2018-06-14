@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerArea4 : MonoBehaviour {
+public class TriggerEndGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

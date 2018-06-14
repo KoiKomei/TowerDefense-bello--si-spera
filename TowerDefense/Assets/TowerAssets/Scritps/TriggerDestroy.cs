@@ -18,14 +18,6 @@ public class TriggerDestroy : MonoBehaviour {
     public TurretBase node10;
     public TurretBase node11;
     public TurretBase node12;
-    public TurretBase node13;
-    public TurretBase node14;
-    public TurretBase node15;
-    public TurretBase node16;
-    public TurretBase node17;
-    public TurretBase node18;
-    public TurretBase node19;
-    public TurretBase node20;
 
 
     [SerializeField] public Text turretNumber;
@@ -45,14 +37,6 @@ public class TriggerDestroy : MonoBehaviour {
         node10.DestroyTurret();
         node11.DestroyTurret();
         node12.DestroyTurret();
-        node13.DestroyTurret();
-        node14.DestroyTurret();
-        node15.DestroyTurret();
-        node16.DestroyTurret();
-        node17.DestroyTurret();
-        node18.DestroyTurret();
-        node19.DestroyTurret();
-        node20.DestroyTurret();
 
         node1.enabled = false;
         node2.enabled = false;
@@ -66,14 +50,6 @@ public class TriggerDestroy : MonoBehaviour {
         node10.enabled = false;
         node11.enabled = false;
         node12.enabled = false;
-        node13.enabled = false;
-        node14.enabled = false;
-        node15.enabled = false;
-        node16.enabled = false;
-        node17.enabled = false;
-        node18.enabled = false;
-        node19.enabled = false;
-        node20.enabled = false;
     }
 
    
