@@ -1,0 +1,160 @@
+fileFormatVersion: 2
+guid: d996ac8dff9ef0c4e80f9b1d18adb31e
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: 0000_fauw_umbrella01
+    100002: 0003_fauw_umbrella01
+    100004: CINEMA_4D_Editor
+    100006: //RootNode
+    100008: G_FAkit_box
+    100010: G_FAkit_cover
+    100012: G_FAkit_def
+    100014: G_FAkit_grip_attach
+    100016: G_karte_def
+    100018: G_karte_grip_attach
+    100020: G_umbrella_1_
+    100022: G_umbrella_2_
+    100024: G_umbrella_3_
+    100026: G_umbrella_4_
+    100028: G_umbrella_5_
+    100030: G_umbrella_6_
+    100032: G_umbrella_7_
+    100034: G_umbrella_8_
+    100036: G_umbrella_def
+    100038: G_umbrella_grip_attach
+    100040: G_umbrella_handle
+    100042: G_umbrella_root
+    100044: G_umbrella_root_def
+    400000: 0000_fauw_umbrella01
+    400002: 0003_fauw_umbrella01
+    400004: CINEMA_4D_Editor
+    400006: //RootNode
+    400008: G_FAkit_box
+    400010: G_FAkit_cover
+    400012: G_FAkit_def
+    400014: G_FAkit_grip_attach
+    400016: G_karte_def
+    400018: G_karte_grip_attach
+    400020: G_umbrella_1_
+    400022: G_umbrella_2_
+    400024: G_umbrella_3_
+    400026: G_umbrella_4_
+    400028: G_umbrella_5_
+    400030: G_umbrella_6_
+    400032: G_umbrella_7_
+    400034: G_umbrella_8_
+    400036: G_umbrella_def
+    400038: G_umbrella_grip_attach
+    400040: G_umbrella_handle
+    400042: G_umbrella_root
+    400044: G_umbrella_root_def
+    2000000: CINEMA_4D_Editor
+    2100000: Mat
+    2100002: Mat.1
+    4300000: 0000_fauw_umbrella01
+    4300002: 0003_fauw_umbrella01
+    9500000: //RootNode
+    13700000: 0000_fauw_umbrella01
+    13700002: 0003_fauw_umbrella01
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: e4ffc9aecfc86ac43bb8f1ace42286f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.1
+    second: {fileID: 2100000, guid: 7aca8e282b864b941897f018d5ae3128, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FAUW_base
+    second: {fileID: 2800000, guid: 78eeabf9be6a7604bbc3e2e1c9555188, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FAU_decal
+    second: {fileID: 2800000, guid: 1b64492d6e5419842987176e5e160764, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.5
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
