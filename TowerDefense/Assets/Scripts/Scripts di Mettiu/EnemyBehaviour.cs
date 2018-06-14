@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 	private NavMeshAgent agent;
+	private Animator animator;
 
 	public int MaxHealth = 10;
 	private int Health;
@@ -16,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	public float AttackRange = 1;
 
 	private float maXHealthBar;
+	private bool attacking = false;
 	[SerializeField] private RectTransform HealthBar;
 
 	public void Attack()
@@ -42,16 +44,26 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	void Start()
 	{
 		Health = MaxHealth;
-		Speed = 7f;
 
 		maXHealthBar = HealthBar.sizeDelta.x;
+		animator = GetComponent<Animator>();
 
 		agent = GetComponent<NavMeshAgent>();
 		Speed = agent.speed;
+
+		animator.SetFloat("Speed", Speed);
+
 	}
 
 	// Update is called once per frame
 	void Update () {
-		
+		if(agent.velocity.magnitude>=0 && agent.velocity.magnitude <= 0.2f && !attacking)
+		{
+			animator.SetFloat("Speed", 0);
+		}
+		else
+		{
+			animator.SetFloat("Speed", Speed);
+		}
 	}
 }
