@@ -159,6 +159,6 @@ public class MainMenuNew : MonoBehaviour {
 
     public void playNewGame()
     {
-        SceneManager.LoadScene("game");
+        SceneManager.LoadScene("game", LoadSceneMode.Additive);
     }
 }

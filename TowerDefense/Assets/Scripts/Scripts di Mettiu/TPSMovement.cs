@@ -9,6 +9,10 @@ public class TPSMovement : MonoBehaviour {
     /* animazioni*/
 	private Animator animator;
 
+    /* mira*/
+
+    private bool focusing=false;
+    [SerializeField] private Camera _cam;
 
     /*statistiche personaggio*/
 	[SerializeField] private Transform target;
@@ -72,9 +76,7 @@ public class TPSMovement : MonoBehaviour {
 	void Update()
 	{
 
-
-        /*movement*/
-
+        
         bool hitGround = false;
         RaycastHit hit;
 		if (_vertSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit))
@@ -167,8 +169,29 @@ public class TPSMovement : MonoBehaviour {
 		_charController.Move(movement);
         /*END OF MOVEMENT*/
 
+        
+        if (Input.GetMouseButtonDown(1) && !focusing)
+        {
+            _cam.fieldOfView = 30f;
 
 
+            PlayerCharacter player = GetComponentInParent<PlayerCharacter>();
+
+
+            focusing = true;
+        }
+
+        if (Input.GetMouseButtonUp(1) && focusing)
+        {
+            _cam.fieldOfView = 60f;
+
+
+            PlayerCharacter player = GetComponentInParent<PlayerCharacter>();
+
+            focusing = false;
+
+
+        }
 
 
         /* shooting */
@@ -196,6 +219,9 @@ public class TPSMovement : MonoBehaviour {
             _shooting = false;
             animator.SetBool("Shoot", false);
         }
+
+
+        
 
     }
 
@@ -249,6 +275,9 @@ public class TPSMovement : MonoBehaviour {
 
     IEnumerator Reload() {
         isReloading = true;
+        moveSpeed = noSprint;
+        _footStepSoundLength = 0.6f;
+        running = false;
         Debug.Log("Reloading...");
 
         IKController.ikActive = false;
