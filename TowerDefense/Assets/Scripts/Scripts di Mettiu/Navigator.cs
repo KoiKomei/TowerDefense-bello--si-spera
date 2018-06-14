@@ -16,6 +16,7 @@ public class Navigator : MonoBehaviour {
 	[SerializeField] private bool loop;
 	public float PlayerDetectionRadius;
 	private float range;
+	public float WaypointRadius=10f;
 
 	private int goingTo;
 
@@ -36,15 +37,28 @@ public class Navigator : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-		if(!agent.pathPending && agent.remainingDistance < 0.5f)
+
+		bool found = false;
+
+
+
+
+		if (!agent.pathPending && agent.remainingDistance < WaypointRadius)
 		{
-			GoToNext();
+
+			foreach(Transform t in Waypoints)
+			{
+				if (agent.destination.x==t.position.x && agent.destination.z==t.position.z)
+				{
+					GoToNext();
+					break;
+				}
+			}
 		}
 
 		Collider[] colliders = Physics.OverlapSphere(transform.position, PlayerDetectionRadius);
 		//Debug.Log(colliders.Length);
-		bool found = false;
+		
 		Collider player = null;
 		foreach (Collider c in colliders)
 		{
@@ -59,23 +73,33 @@ public class Navigator : MonoBehaviour {
 		if (found)
 		{
 			agent.destination = player.transform.position;
+
 			if (agent.remainingDistance <= range)
 			{
-				agent.isStopped = true;
-				agent.autoBraking = true;
 
 			}
-			else
-			{
-				agent.isStopped = false;
-				agent.autoBraking = false;
-			}
+			
+			
 		}
 		else
 		{
 			agent.destination = Waypoints[goingTo].position;
 		}
 
+		if (found || (!loop && goingTo == Waypoints.Length - 1))
+		{
+			agent.stoppingDistance = range;
+			agent.autoBraking = true;
+			//agent.acceleration = -(agent.speed * 5 / 100);
+		}
+		else
+		{
+			agent.stoppingDistance = 0;
+			agent.autoBraking = true;
+		}
+		//Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
+		//Debug.Log(agent.velocity.magnitude);
+		
 	}
 
 	private void GoToNext()
