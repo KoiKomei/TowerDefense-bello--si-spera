@@ -169,7 +169,7 @@ public class TPSMovement : MonoBehaviour {
 		_charController.Move(movement);
         /*END OF MOVEMENT*/
 
-
+        
         if (Input.GetMouseButtonDown(1) && !focusing)
         {
             _cam.fieldOfView = 30f;
@@ -275,6 +275,9 @@ public class TPSMovement : MonoBehaviour {
 
     IEnumerator Reload() {
         isReloading = true;
+        moveSpeed = noSprint;
+        _footStepSoundLength = 0.6f;
+        running = false;
         Debug.Log("Reloading...");
 
         IKController.ikActive = false;
