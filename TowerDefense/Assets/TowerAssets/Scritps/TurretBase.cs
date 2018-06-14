@@ -77,25 +77,25 @@ public class TurretBase : MonoBehaviour {
                 
 
             }
+            if (Input.GetKeyDown("f") && selected)
+            {
+                if (turretNumber > 0)
+                {
+                    Destroy(turretGhost);
+                    builded = true;
+                    BuildTurret();
+                }
+            }
 
         }
-    }
 
-
-    void OnMouseDown()
-    {
-        if (!builded && turretNumber > 0)
-        {
-            Destroy(turretGhost);
-            builded = true;
-            BuildTurret();
-        }
     }
+    
 
     private void OnMouseEnter()
     {
 
-        
+
         if (!builded && turretNumber > 0)
         {
             selected = true;
