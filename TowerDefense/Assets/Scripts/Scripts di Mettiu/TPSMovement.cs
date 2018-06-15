@@ -16,12 +16,12 @@ public class TPSMovement : MonoBehaviour {
 
     /*statistiche personaggio*/
 	[SerializeField] private Transform target;
-	public float rotSpeed = 15f;
+	private float rotSpeed = 15f;
 	public float pushForce = 3.0f;
 
-	public float moveSpeed = 1.0f;
-	public float sprint = 15.0f;
-	public float noSprint = 1.0f;
+	private float moveSpeed = 1.0f;
+	private float sprint = 7.0f;
+	private float noSprint = 1.0f;
 
 	public float jumpSpeed = 15.0f;
 	public float gravity = -9.8f;
@@ -169,7 +169,7 @@ public class TPSMovement : MonoBehaviour {
 		_charController.Move(movement);
         /*END OF MOVEMENT*/
 
-
+        
         if (Input.GetMouseButtonDown(1) && !focusing)
         {
             _cam.fieldOfView = 30f;
@@ -249,11 +249,13 @@ public class TPSMovement : MonoBehaviour {
 
     void Shoot()
     {
+        animator.SetBool("Shoot", true);
+        
         _soundSource.PlayOneShot(fireinthehole);
         RaycastHit hit;
 
         currentAmmo--;
-        animator.SetBool("Shoot", true);
+        
         if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit))
             {
 				GameObject hitted = hit.transform.gameObject; //Mattia start
@@ -275,6 +277,9 @@ public class TPSMovement : MonoBehaviour {
 
     IEnumerator Reload() {
         isReloading = true;
+        moveSpeed = noSprint;
+        _footStepSoundLength = 0.6f;
+        running = false;
         Debug.Log("Reloading...");
 
         IKController.ikActive = false;
@@ -301,5 +306,6 @@ public class TPSMovement : MonoBehaviour {
         yield return new WaitForSeconds(stepsLength);
         _step = true;
     }
+
 
 }
