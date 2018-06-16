@@ -54,8 +54,6 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		agent = GetComponent<NavMeshAgent>();
 		Speed = agent.speed;
 
-		animator.SetFloat("Speed", Speed);
-
 	}
 
 	// Update is called once per frame

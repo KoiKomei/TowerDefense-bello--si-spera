@@ -79,7 +79,7 @@ ModelImporter:
     400070: Mutant:Spine
     400072: Mutant:Spine1
     400074: Mutant:Spine2
-    7400000: Swipe
+    7400000: Attack
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -110,7 +110,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Swipe
+      name: Attack
       takeName: mixamo.com
       firstFrame: 0
       lastFrame: 160
