@@ -97,7 +97,7 @@ public class Navigator : MonoBehaviour {
 			agent.stoppingDistance = 0;
 			agent.autoBraking = true;
 		}
-		//Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
+		Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
 		//Debug.Log(agent.velocity.magnitude);
 		
 	}

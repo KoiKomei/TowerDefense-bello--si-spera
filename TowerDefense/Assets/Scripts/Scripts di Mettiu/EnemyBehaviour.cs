@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	public int MaxHealth = 10;
 	private int Health;
 	public int AttackDamage = 1;
+	public float AttackFrequency = 1f;
 	private float Speed;
 	public float AttackRange = 1;
 
@@ -26,7 +27,9 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 	public void Die()
 	{
-
+		agent.isStopped = true;
+		animator.SetBool("Dead", true);
+		Destroy(this.gameObject,5);
 	}
 
 	public void Hurt(int damage)
@@ -57,13 +60,16 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 	// Update is called once per frame
 	void Update () {
-		if(agent.velocity.magnitude>=0 && agent.velocity.magnitude <= 0.2f && !attacking)
-		{
-			animator.SetFloat("Speed", 0);
-		}
-		else
-		{
-			animator.SetFloat("Speed", Speed);
+		if (Health > 0) {
+			if(agent.velocity.magnitude>=0 && agent.velocity.magnitude <= 0.2f && !attacking)
+			{
+				animator.SetFloat("Speed", 0);
+			}
+			else
+			{
+				animator.SetFloat("Speed", Speed);
+			}
+
 		}
 	}
 }
