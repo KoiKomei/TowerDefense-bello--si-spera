@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 	private NavMeshAgent agent;
 	private Animator animator;
+	private AnimationClip atkClip;
 
 	public int MaxHealth = 10;
 	private int Health;
@@ -21,8 +22,13 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	private bool attacking = false;
 	[SerializeField] private RectTransform HealthBar;
 
-	public void Attack()
+	public void Attack(GameObject target)
 	{
+	
+
+		StartCoroutine(WaitAndAttack(target));
+
+
 	}
 
 	public void Die()
@@ -54,12 +60,22 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		agent = GetComponent<NavMeshAgent>();
 		Speed = agent.speed;
 
+		foreach(AnimationClip c in animator.runtimeAnimatorController.animationClips)
+		{
+			if (c.name == "Attack")
+			{
+				atkClip = c;
+				break;
+			}
+			
+		}
+
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Health > 0) {
-			if(agent.velocity.magnitude>=0 && agent.velocity.magnitude <= 0.2f && !attacking)
+			if(agent.velocity.magnitude>=0 && agent.velocity.magnitude <= 0.2f)
 			{
 				animator.SetFloat("Speed", 0);
 			}
@@ -69,5 +85,29 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 			}
 
 		}
+	}
+
+	private IEnumerator WaitAndAttack(GameObject target)
+	{
+		//animator.SetFloat("Speed", 0);
+		animator.SetBool("Attack", true);
+		attacking = true;
+
+		yield return new WaitForSeconds(atkClip.length-1.5f);
+		target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
+		Debug.Log(this.name+" Attacked " +target.name);
+		yield return new WaitForSeconds(1f);
+
+		attacking = false;
+		animator.SetBool("Attack", false);
+
+		yield return new WaitForSeconds(AttackFrequency);
+		
+		//animator.SetFloat("Speed", Speed);
+	}
+
+	public bool isAttacking()
+	{
+		return attacking;
 	}
 }

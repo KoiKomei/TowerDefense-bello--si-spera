@@ -74,10 +74,7 @@ public class Navigator : MonoBehaviour {
 		{
 			agent.destination = player.transform.position;
 
-			if (agent.remainingDistance <= range)
-			{
-
-			}
+			
 			
 			
 		}
@@ -90,14 +87,25 @@ public class Navigator : MonoBehaviour {
 		{
 			agent.stoppingDistance = range;
 			agent.autoBraking = true;
-			//agent.acceleration = -(agent.speed * 5 / 100);
+
+			if (agent.remainingDistance <= range && !GetComponent<EnemyBehaviour>().isAttacking())
+			{
+				if (found)
+				{
+					GetComponent<EnemyBehaviour>().Attack(player.gameObject);
+				}
+				else
+				{
+					GetComponent<EnemyBehaviour>().Attack(Waypoints[Waypoints.Length-1].gameObject);
+				}
+			}
 		}
 		else
 		{
 			agent.stoppingDistance = 0;
 			agent.autoBraking = true;
 		}
-		Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
+		//Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
 		//Debug.Log(agent.velocity.magnitude);
 		
 	}

@@ -6,5 +6,5 @@ public interface IEnemy {
 
 	void Hurt(int damage);
 	void Die();
-	void Attack();
+	void Attack(GameObject target);
 }
