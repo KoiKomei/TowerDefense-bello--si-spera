@@ -10,7 +10,9 @@ public class TriggerStartArea1 : MonoBehaviour {
     public GameObject Portal2;
     public GameObject Portal3;
     public GameObject Portal4;
-    
+    public GameObject ParticlePortal1;
+    public GameObject ParticlePortal4;
+
     private float movementUp = 0.1f;
     private bool levelStart = false;
 
@@ -26,6 +28,7 @@ public class TriggerStartArea1 : MonoBehaviour {
     {
         if (levelStart && Portal1.transform.position.y < 4.5)
         {
+            ParticlePortal1.transform.Translate(0, movementUp, 0);
             Portal1.transform.Translate(0, movementUp, 0);
         }
         if (levelStart && Portal2.transform.position.y < 4.5)
@@ -39,6 +42,7 @@ public class TriggerStartArea1 : MonoBehaviour {
         if (levelStart && Portal4.transform.position.y < 4.5)
         {
             Portal4.transform.Translate(0, movementUp, 0);
+            ParticlePortal4.transform.Translate(0, movementUp, 0);
         }
 
 

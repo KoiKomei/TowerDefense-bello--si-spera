@@ -12,6 +12,8 @@ public class TriggerEndArea1 : MonoBehaviour {
     public GameObject Portal2;
     public GameObject Portal3;
     public GameObject Portal4;
+    public GameObject ParticlePortal1;
+    public GameObject ParticlePortal4;
 
     public int enemyKill = 0;
 
@@ -46,6 +48,7 @@ public class TriggerEndArea1 : MonoBehaviour {
     public void Update()
     {
         if (levelComplete && Portal1.transform.position.y>-10) {
+            ParticlePortal1.transform.Translate(0, movementDown, 0);
             Portal1.transform.Translate(0, movementDown, 0);
         }
         if (levelComplete && Portal2.transform.position.y > -10)
@@ -59,6 +62,7 @@ public class TriggerEndArea1 : MonoBehaviour {
         if (levelComplete && Portal4.transform.position.y > -10)
         {
             Portal4.transform.Translate(0, movementDown, 0);
+            ParticlePortal4.transform.Translate(0, movementDown, 0);
         }
 
 

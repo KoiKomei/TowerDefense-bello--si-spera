@@ -8,6 +8,7 @@ public class TriggerStartArea2 : MonoBehaviour {
     [SerializeField] public Text runMessage;
     public GameObject Collider;
     public GameObject Portal1;
+    public GameObject ParticlePortal1;
 
     private float movementUp = 0.1f;
     private bool levelStart = false;
@@ -27,6 +28,7 @@ public class TriggerStartArea2 : MonoBehaviour {
         if (levelStart && Portal1.transform.position.y < 4.5)
         {
             Portal1.transform.Translate(0, movementUp, 0);
+            ParticlePortal1.transform.Translate(0, movementUp, 0);
         }
     }
 
