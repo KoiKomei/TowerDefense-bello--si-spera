@@ -5,6 +5,7 @@ using UnityEngine;
 public class MinimapCamera : MonoBehaviour {
 
     [SerializeField] private Transform target;
+    [SerializeField] private int altezza;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,6 @@ public class MinimapCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        transform.position = new Vector3(target.position.x, 60, target.position.z);
+        transform.position = new Vector3(target.position.x, altezza, target.position.z);
     }
 }
