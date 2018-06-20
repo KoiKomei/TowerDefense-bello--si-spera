@@ -16,7 +16,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	public int AttackDamage = 1;
 	public float AttackFrequency = 1f;
 	private float Speed;
-	public float AttackRange = 1;
+	public float AttackRange = 5;
 
 	private float maXHealthBar;
 	private bool attacking = false;
@@ -36,7 +36,10 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		agent.isStopped = true;
 		animator.SetBool("Dead", true);
 		Destroy(this.gameObject,5);
-	}
+
+        this.transform.Rotate(-75, 0, 0);
+        Destroy(this.gameObject);
+    }
 
 	public void Hurt(int damage)
 	{
