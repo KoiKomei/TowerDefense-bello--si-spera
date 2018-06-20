@@ -11,7 +11,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	private Animator animator;
 	private AnimationClip atkClip;
 
-	public int MaxHealth = 10;
+    public int MaxHealth = 10;
 	private int Health;
 	public int AttackDamage = 1;
 	public float AttackFrequency = 1f;
@@ -39,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
         this.transform.Rotate(-75, 0, 0);
         Destroy(this.gameObject);
+
     }
 
 	public void Hurt(int damage)
@@ -88,7 +89,8 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 			}
 
 		}
-	}
+
+    }
 
 	private IEnumerator WaitAndAttack(GameObject target)
 	{

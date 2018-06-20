@@ -28,13 +28,13 @@ public class SceneController : MonoBehaviour {
         for (int i = 0; i < _enemy.Length && cont < contMax; i++)
         {
            if(this.tag=="portal") { 
-                if (this.transform.position.y == 4.5) {
+                if (this.transform.position.y > 4) {
                     yield return new WaitForSeconds(wait);
 
                     if (_enemy[i] == null)
                     {
                         _enemy[i] = Instantiate(enemyPrefab) as GameObject;
-                        _enemy[i].transform.position = new Vector3(this.transform.position.x, 0.6f, this.transform.position.z);
+                        _enemy[i].transform.position = new Vector3(this.transform.position.x + 0.5f, 0.5f, this.transform.position.z + 0.5f);
                         float angle = Random.Range(0, 360);
                         _enemy[i].transform.Rotate(0, angle, 0);
                         cont++;
@@ -48,7 +48,7 @@ public class SceneController : MonoBehaviour {
                if (_enemy[i] == null)
                {
                     _enemy[i] = Instantiate(enemyPrefab) as GameObject;
-                    _enemy[i].transform.position = new Vector3(this.transform.position.x, 0.6f, this.transform.position.z);
+                    _enemy[i].transform.position = new Vector3(this.transform.position.x, 0.5f, this.transform.position.z);
                     float angle = Random.Range(0, 360);
                     _enemy[i].transform.Rotate(0, angle, 0);
                     cont++;
