@@ -9,13 +9,16 @@ public class TPSMovement2 : MonoBehaviour {
     /* animazioni*/
 	private Animator animator;
 
+    /* mira*/
+    private bool focusing = false;
+
     /*statistiche personaggio*/
 	[SerializeField] private Transform target;
 	public float rotSpeed = 15f;
 	public float pushForce = 3.0f;
 
 	public float moveSpeed = 1.0f;
-	public float sprint = 15.0f;
+	public float sprint = 7.0f;
 	public float noSprint = 1.0f;
 
 	public float jumpSpeed = 15.0f;
@@ -50,6 +53,7 @@ public class TPSMovement2 : MonoBehaviour {
     private float damage;
     
     public Camera fpscam;
+    PlayerCharacter player;
     public GameObject impact;
 
 	void Start() {   
@@ -59,6 +63,7 @@ public class TPSMovement2 : MonoBehaviour {
 		_charController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         _soundSource = GetComponent<AudioSource>();
+        player = GetComponentInParent<PlayerCharacter>();
 
         _vertSpeed = minFall;
         _shooting = false;
@@ -101,14 +106,14 @@ public class TPSMovement2 : MonoBehaviour {
         
 		if (horInput != 0 || vertInput != 0)
 		{
-            if (Input.GetKeyDown("left shift") && _shooting == false && isReloading==false)
+            if (Input.GetButtonDown("Dash") && _shooting == false && isReloading == false)
 			{
 				moveSpeed = sprint;
                 _footStepSoundLength = 0.3f;
 				running = true;
 
 			}
-			if (Input.GetKeyUp("left shift"))
+			else if (Input.GetButtonUp("Dash"))
 			{
 				moveSpeed = noSprint;
                 _footStepSoundLength = 0.6f;
@@ -142,7 +147,7 @@ public class TPSMovement2 : MonoBehaviour {
         /* Jump */
 		if (hitGround)
 		{
-			if (Input.GetButtonDown("Jump") && _shooting==false && isReloading==false && _charController.isGrounded)
+			if (Input.GetButtonDown("Jump") && _shooting == false && isReloading == false && _charController.isGrounded)
 			{
 				_vertSpeed = jumpSpeed;
 			}
@@ -172,16 +177,22 @@ public class TPSMovement2 : MonoBehaviour {
 				}
 			}
 		}
+        /*END OF JUMP*/
 
-       /*END OF JUMP*/
         movement.y = _vertSpeed;
 		movement *= Time.deltaTime;
 		_charController.Move(movement);
         /*END OF MOVEMENT*/
 
-
-
-
+        //Aiming
+        if (Input.GetMouseButtonDown(1) && !focusing) {
+            fpscam.fieldOfView = 30f;
+            focusing = true;
+        }
+        else if (Input.GetMouseButtonUp(1) && focusing) {
+            fpscam.fieldOfView = 60f;
+            focusing = false;
+        }
 
         /* shooting */
         if (weaponManager.firstWeaponAssigned) {

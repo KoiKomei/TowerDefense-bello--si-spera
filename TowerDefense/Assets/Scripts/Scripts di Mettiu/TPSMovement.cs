@@ -91,7 +91,7 @@ public class TPSMovement : MonoBehaviour {
         
 		if (horInput != 0 || vertInput != 0)
 		{
-            if (Input.GetKeyDown("left shift") && _shooting == false && isReloading==false)
+            if (Input.GetKeyDown("left shift") && _shooting == false && isReloading == false)
 			{
 				moveSpeed = sprint;
                 _footStepSoundLength = 0.3f;
