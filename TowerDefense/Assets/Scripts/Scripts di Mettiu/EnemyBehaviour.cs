@@ -38,7 +38,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		Destroy(this.gameObject,5);
 
         this.transform.Rotate(-75, 0, 0);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
 
     }
 
