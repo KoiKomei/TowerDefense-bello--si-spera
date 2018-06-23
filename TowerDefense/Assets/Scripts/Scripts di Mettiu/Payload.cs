@@ -27,6 +27,8 @@ public class Payload : MonoBehaviour {
 		goingTo = -1;
 
 		GoToNext();
+
+		
 	}
 	
 	// Update is called once per frame
@@ -39,7 +41,7 @@ public class Payload : MonoBehaviour {
 		foreach (Collider c in colliders)
 		{
 			GameObject target = c.gameObject;
-			if (c.GetComponentInParent<TPSMovement>() != null)
+			if (c.GetComponentInParent<TPSMovement2>() != null)
 			{
 				found = true;
 			}
