@@ -35,6 +35,13 @@ public class WeaponManager : MonoBehaviour, IGameManager {
 	
 	// Update is called once per frame
 	void Update () {
+
+        /*aggiunto da Alex*/
+        if (TPSMovement2.isReloading == true) {
+            return;
+        }
+        /*Alex.fine();*/
+
         //ASSEGNAMENTO PRIMA ARMA RACCOLTA
         if (sw.hasFirstGun && !firstWeaponAssigned) {
             string weaponName = inventory.GetWeaponsList()[0];
