@@ -18,19 +18,22 @@ public class TriggerStartArea1 : MonoBehaviour {
     private int cont = 0;
     private bool levelStart = false;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-        runMessage.text = "BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
-        yield return new WaitForSeconds(3);
-        runMessage.text = "";
-        if (payload.GetComponent<Payload>().transform.position.x== 395 && payload.GetComponent<Payload>().transform.position.z == -92)
+        if (c.tag == "Human")
         {
-            payload.GetComponent<Payload>().enabled = false;
-        }
-        if (cont == 0)
-        {
-            levelStart = true;
-            cont++;
+            runMessage.text = "BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
+            if (payload.GetComponent<Payload>().transform.position.x == 395 && payload.GetComponent<Payload>().transform.position.z == -92)
+            {
+                payload.GetComponent<Payload>().enabled = false;
+            }
+            if (cont == 0)
+            {
+                levelStart = true;
+                cont++;
+            }
         }
     }
 

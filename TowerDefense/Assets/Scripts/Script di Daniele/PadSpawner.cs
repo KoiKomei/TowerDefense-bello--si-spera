@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneController : MonoBehaviour {
+public class PadSpawner : MonoBehaviour {
 
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private float timeForSpawn;
@@ -10,16 +10,17 @@ public class SceneController : MonoBehaviour {
     private GameObject[] _enemy;
     private int contMax = 100; //numero massimo di nemici spawnabili (compreso respawn)
     int cont = 0;
+    public float startRotation;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         _enemy = new GameObject[enemyCount];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        
         StartCoroutine(Spawner(timeForSpawn));
 	}
 
@@ -33,7 +34,9 @@ public class SceneController : MonoBehaviour {
 
                if (_enemy[i] == null)
                {
-                    _enemy[i] = Instantiate(enemyPrefab) as GameObject;
+                    GameObject e = Instantiate(enemyPrefab) as GameObject;
+                    e.transform.Rotate(0, startRotation, 0);
+                    _enemy[i] = e;
                     _enemy[i].transform.position = new Vector3(this.transform.position.x, 1f, this.transform.position.z);
                     cont++;
                 

@@ -8,7 +8,6 @@ public class WanderingAI : MonoBehaviour,IEnemy {
     public float obstacleRange = 5.0f;
 	private bool rand = false;
 	public float ArrivalTime = 3;
-	public float startRotation = 90;
 
 
     [SerializeField] private GameObject fireballPrefab;
@@ -20,7 +19,6 @@ public class WanderingAI : MonoBehaviour,IEnemy {
 	void Start () {
 
         _alive = true;
-		transform.Rotate(0, startRotation, 0);
 		StartCoroutine(WaitForRand(ArrivalTime));
 	}
 

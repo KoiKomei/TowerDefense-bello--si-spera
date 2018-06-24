@@ -14,16 +14,19 @@ public class TriggerStartArea2 : MonoBehaviour {
     private int cont = 0;
     public GameObject payload;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-        runMessage.text = "YOU HAVE TO RESIST THE WAVES TO MOVE THE TRUCK";
-        yield return new WaitForSeconds(3);
-        runMessage.text = "";
-        payload.GetComponent<Payload>().enabled = false;
-        if (cont == 0)
+        if (c.tag == "Human")
         {
-            levelStart = true;
-            cont++;
+            runMessage.text = "YOU HAVE TO RESIST THE WAVES TO MOVE THE TRUCK";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
+            payload.GetComponent<Payload>().enabled = false;
+            if (cont == 0)
+            {
+                levelStart = true;
+                cont++;
+            }
         }
     }
 

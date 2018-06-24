@@ -11,27 +11,27 @@ public class TriggerEndArea3 : MonoBehaviour {
     public GameObject Portal2;
 
     private float movementDown = -0.1f;
-    private bool levelComplete = false;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-
-        if (Portal1.GetComponent<PortalSpawner>().GetWave()<3)
+        if (c.tag == "Human")
         {
-            runMessage.text = "YOU HAVE TO RESIST THE WAVES";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
+            if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
+            {
+                runMessage.text = "YOU HAVE TO RESIST THE WAVES";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
 
-        }
-        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
-        {
-            yield return new WaitForSeconds(25);
-            levelComplete = true;
-            Collider.GetComponent<BoxCollider>().enabled = false;
-            runMessage.text = "GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
-            GoDown();
+            }
+            if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
+            {
+                yield return new WaitForSeconds(25);
+                Collider.GetComponent<BoxCollider>().enabled = false;
+                runMessage.text = "GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
+                GoDown();
+            }
         }
 
     }

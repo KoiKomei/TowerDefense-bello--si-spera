@@ -17,28 +17,28 @@ public class TriggerEndArea1 : MonoBehaviour {
     public GameObject payload;
 
     private float movementDown = -0.1f;
-    private bool levelComplete = false;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-
-        if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
+        if (c.tag == "Human")
         {
-            runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
+            if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
+            {
+                runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
 
-        }
-        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
-        {
-            yield return new WaitForSeconds(25);
-            levelComplete = true;
-            Collider.GetComponent<BoxCollider>().enabled = false;
-            payload.GetComponent<Payload>().enabled = true;
-            runMessage.text = "         BRING THE TRUCK TO THE EXPLOSION ZONE";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
-            GoDown();
+            }
+            if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
+            {
+                yield return new WaitForSeconds(25);
+                Collider.GetComponent<BoxCollider>().enabled = false;
+                payload.GetComponent<Payload>().enabled = true;
+                runMessage.text = "         BRING THE TRUCK TO THE EXPLOSION ZONE";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
+                GoDown();
+            }
         }
 
     }

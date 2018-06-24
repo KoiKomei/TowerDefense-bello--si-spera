@@ -13,14 +13,18 @@ public class TriggerStartArea3 : MonoBehaviour {
     private bool levelStart = false;
     private int cont = 0;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-        runMessage.text = "YOU HAVE TO RESIST THE WAVES";
-        yield return new WaitForSeconds(3);
-        runMessage.text = "";
-        if (cont==0) {
-            levelStart = true;
-            cont++;
+        if (c.tag == "Human")
+        {
+            runMessage.text = "YOU HAVE TO RESIST THE WAVES";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
+            if (cont == 0)
+            {
+                levelStart = true;
+                cont++;
+            }
         }
     }
 

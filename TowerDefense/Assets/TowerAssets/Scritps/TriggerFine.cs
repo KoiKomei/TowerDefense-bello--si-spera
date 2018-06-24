@@ -15,20 +15,20 @@ public class TriggerFine : MonoBehaviour
         explosionEffect.transform.position = payload.transform.position;
     }
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-
-        runMessage.text = "          CONGRATULATIONS YOU HAVE SAVED THE EARTH";
-        yield return new WaitForSeconds(3);
-        runMessage.text = "          NOW RUN BEFORE THE TRUCK EXPLOSION";
-        yield return new WaitForSeconds(3);
+        if (c.tag== "Human") { 
+            runMessage.text = "          CONGRATULATIONS YOU HAVE SAVED THE EARTH";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "          NOW RUN BEFORE THE TRUCK EXPLOSION";
+            yield return new WaitForSeconds(3);
         
-        for(int i=60; i>0; i--){
-            runMessage.text = "          YOU HAVE "+i+" SECONDS TO GO BACK";
-            yield return new WaitForSeconds(1);
+            for(int i=60; i>0; i--){
+                runMessage.text = "          YOU HAVE "+i+" SECONDS TO GO BACK";
+                yield return new WaitForSeconds(1);
+            }
+            Destroy();
         }
-        Destroy();
-
     }
 
     private void Destroy()
