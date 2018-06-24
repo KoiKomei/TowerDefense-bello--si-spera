@@ -22,7 +22,7 @@ public class TriggerStartArea1 : MonoBehaviour {
     {
         if (c.CompareTag("Human"))
         {
-            runMessage.text = "BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
+            runMessage.text = "PORTA IL CARICO AL CENTRO DEL PARCO E PROTEGGILO DAI NEMICI";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
             if (payload.GetComponent<Payload>().transform.position.x == 395 && payload.GetComponent<Payload>().transform.position.z == -92)

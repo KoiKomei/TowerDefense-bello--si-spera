@@ -19,7 +19,7 @@ public class TriggerStartArea3 : MonoBehaviour {
         {
             if (cont == 0)
             {
-                runMessage.text = "YOU HAVE TO RESIST THE WAVES";
+                runMessage.text = "RESISTI ALLE ONDATE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 levelStart = true;

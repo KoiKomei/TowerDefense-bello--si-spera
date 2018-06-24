@@ -21,7 +21,7 @@ public class TriggerStartArea2 : MonoBehaviour {
             if (cont == 0)
             {
                 payload.GetComponent<Payload>().enabled = false;
-                runMessage.text = "YOU HAVE TO RESIST THE WAVES TO MOVE THE TRUCK";
+                runMessage.text = "RESISTI ALLE ONDATE PER MUOVERE IL CARICO";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 levelStart = true;

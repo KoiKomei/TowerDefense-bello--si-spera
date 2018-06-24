@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour {
             {
                 Collider1.GetComponent<BoxCollider>().enabled = false;
                 payload.GetComponent<Payload>().enabled = true;
-                runMessage.text = "BRING THE TRUCK TO THE EXPLOSION ZONE";
+                runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 Destroy1();
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour {
             {
                 Collider2.GetComponent<BoxCollider>().enabled = false;
                 payload.GetComponent<Payload>().enabled = true;
-                runMessage.text = "BRING THE TRUCK TO THE PARK";
+                runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 Destroy2();
@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour {
             if (Portal3A.GetComponent<PortalSpawner>().GetWave() == 3)
             {
                 Collider3.GetComponent<BoxCollider>().enabled = false;
-                runMessage.text = "GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
+                runMessage.text = "VAI AVANTI PER PORTARE IL CARICO A DESTINAZIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 Destroy3();
@@ -78,14 +78,14 @@ public class GameController : MonoBehaviour {
 
         if (area == 5)
         {
-            runMessage.text = "CONGRATULATIONS YOU HAVE SAVED THE EARTH";
+            runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
             yield return new WaitForSeconds(3);
-            runMessage.text = "NOW RUN BEFORE THE TRUCK EXPLOSION";
+            runMessage.text = "SCAPPA PRIMA DELL'ESPLOSIONE DEL CARICO";
             yield return new WaitForSeconds(3);
 
             for (int i = 60; i > 0; i--)
             {
-                runMessage.text = "YOU HAVE " + i + " SECONDS TO GO BACK";
+                runMessage.text = " " + i + " ";
                 yield return new WaitForSeconds(1);
             }
             Destroy();
