@@ -16,7 +16,6 @@ public class TriggerEndArea2 : MonoBehaviour {
     {
         if (c.tag == "Human")
         {
-
             if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
             {
                 runMessage.text = "YOU HAVE TO RESIST THE WAVES";
@@ -26,7 +25,7 @@ public class TriggerEndArea2 : MonoBehaviour {
             }
             if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
             {
-                yield return new WaitForSeconds(25);
+                yield return new WaitForSeconds(15);
                 Collider.GetComponent<BoxCollider>().enabled = false;
                 payload.GetComponent<Payload>().enabled = true;
                 runMessage.text = "BRING THE TRUCK TO THE PARK";

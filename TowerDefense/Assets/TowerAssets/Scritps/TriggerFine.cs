@@ -17,7 +17,7 @@ public class TriggerFine : MonoBehaviour
 
     private IEnumerator OnTriggerEnter(Collider c)
     {
-        if (c.tag== "Human") { 
+        if (c.tag=="Human") { 
             runMessage.text = "          CONGRATULATIONS YOU HAVE SAVED THE EARTH";
             yield return new WaitForSeconds(3);
             runMessage.text = "          NOW RUN BEFORE THE TRUCK EXPLOSION";

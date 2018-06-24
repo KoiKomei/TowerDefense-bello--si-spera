@@ -18,10 +18,11 @@ public class TriggerStartArea2 : MonoBehaviour {
     {
         if (c.tag == "Human")
         {
+            payload.GetComponent<Payload>().enabled = false;
             runMessage.text = "YOU HAVE TO RESIST THE WAVES TO MOVE THE TRUCK";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
-            payload.GetComponent<Payload>().enabled = false;
+           
             if (cont == 0)
             {
                 levelStart = true;

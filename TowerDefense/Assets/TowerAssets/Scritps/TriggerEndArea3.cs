@@ -12,27 +12,25 @@ public class TriggerEndArea3 : MonoBehaviour {
 
     private float movementDown = -0.1f;
 
-    private IEnumerator OnTriggerEnter(Collider c)
+    private IEnumerator OnTriggerEnter()
     {
-        if (c.tag == "Human")
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
         {
-            if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
-            {
                 runMessage.text = "YOU HAVE TO RESIST THE WAVES";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
 
-            }
-            if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
-            {
-                yield return new WaitForSeconds(25);
+        }
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
+        {
+                yield return new WaitForSeconds(6);
                 Collider.GetComponent<BoxCollider>().enabled = false;
                 runMessage.text = "GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 GoDown();
-            }
         }
+        
 
     }
 
