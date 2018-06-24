@@ -15,13 +15,13 @@ public class TriggerStartArea3 : MonoBehaviour {
 
     private IEnumerator OnTriggerEnter(Collider c)
     {
-        if (c.tag == "Human")
+        if (c.CompareTag("Human"))
         {
-            runMessage.text = "YOU HAVE TO RESIST THE WAVES";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
             if (cont == 0)
             {
+                runMessage.text = "YOU HAVE TO RESIST THE WAVES";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
                 levelStart = true;
                 cont++;
             }
@@ -30,19 +30,21 @@ public class TriggerStartArea3 : MonoBehaviour {
 
     public void Update()
     {
-        if (levelStart && Portal1.transform.position.y < 4.5)
+        if (Portal1 != null)
         {
-            Portal1.transform.Translate(0, movementUp, 0);
+            if (levelStart && Portal1.transform.position.y < 4.5)
+            {
+                Portal1.transform.Translate(0, movementUp, 0);
+            }
+            if (levelStart && Portal2.transform.position.y < 4.5)
+            {
+                Portal2.transform.Translate(0, movementUp, 0);
+            }
+            if (Portal1.transform.position.y >= 4.5)
+            {
+                levelStart = false;
+            }
         }
-        if (levelStart && Portal2.transform.position.y < 4.5)
-        {
-            Portal2.transform.Translate(0, movementUp, 0);
-        }
-        if (Portal1.transform.position.y >= 4.5)
-        {
-            levelStart = false;
-        }
-
     }
 
 }
