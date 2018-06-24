@@ -18,34 +18,31 @@ public class TriggerEndArea3 : MonoBehaviour {
 
         if (Portal1.GetComponent<PortalSpawner>().GetWave()<3)
         {
-            runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
+            runMessage.text = "YOU HAVE TO RESIST THE WAVES";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
 
         }
         if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
         {
+            yield return new WaitForSeconds(25);
             levelComplete = true;
             Collider.GetComponent<BoxCollider>().enabled = false;
-            runMessage.text = "          GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
+            runMessage.text = "GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
+            GoDown();
         }
 
     }
 
-    public void Update()
+    private void GoDown()
     {
-        if (levelComplete && Portal1.transform.position.y > -10)
+        while(Portal1.transform.position.y > -10)
         {
             Portal1.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal2.transform.position.y > -10)
-        {
             Portal2.transform.Translate(0, movementDown, 0);
         }
-
-
     }
 
 }

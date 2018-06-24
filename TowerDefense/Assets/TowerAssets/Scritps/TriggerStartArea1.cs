@@ -15,17 +15,22 @@ public class TriggerStartArea1 : MonoBehaviour {
     public GameObject payload;
 
     private float movementUp = 0.1f;
+    private int cont = 0;
     private bool levelStart = false;
 
     private IEnumerator OnTriggerEnter()
     {
-        runMessage.text = "          BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
+        runMessage.text = "BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
         yield return new WaitForSeconds(3);
         runMessage.text = "";
-        levelStart = true;
         if (payload.GetComponent<Payload>().transform.position.x== 395 && payload.GetComponent<Payload>().transform.position.z == -92)
         {
             payload.GetComponent<Payload>().enabled = false;
+        }
+        if (cont == 0)
+        {
+            levelStart = true;
+            cont++;
         }
     }
 
@@ -48,6 +53,10 @@ public class TriggerStartArea1 : MonoBehaviour {
         {
             Portal4.transform.Translate(0, movementUp, 0);
             ParticlePortal4.transform.Translate(0, movementUp, 0);
+        }
+        if (Portal1.transform.position.y >= 4.5)
+        {
+            levelStart = false;
         }
 
 

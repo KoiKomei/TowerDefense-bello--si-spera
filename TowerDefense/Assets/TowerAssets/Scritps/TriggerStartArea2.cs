@@ -11,15 +11,20 @@ public class TriggerStartArea2 : MonoBehaviour {
 
     private float movementUp = 0.1f;
     private bool levelStart = false;
+    private int cont = 0;
     public GameObject payload;
 
     private IEnumerator OnTriggerEnter()
     {
-        runMessage.text = "          YOU HAVE TO CLEAN THE AREA TO MOVE THE TRUCK";
+        runMessage.text = "YOU HAVE TO RESIST THE WAVES TO MOVE THE TRUCK";
         yield return new WaitForSeconds(3);
         runMessage.text = "";
-        levelStart = true;
         payload.GetComponent<Payload>().enabled = false;
+        if (cont == 0)
+        {
+            levelStart = true;
+            cont++;
+        }
     }
 
     public void Update()
@@ -28,6 +33,10 @@ public class TriggerStartArea2 : MonoBehaviour {
         {
             Portal1.transform.Translate(0, movementUp, 0);
             ParticlePortal1.transform.Translate(0, movementUp, 0);
+        }
+        if (Portal1.transform.position.y >= 4.5)
+        {
+            levelStart = false;
         }
     }
 

@@ -11,13 +11,17 @@ public class TriggerStartArea3 : MonoBehaviour {
 
     private float movementUp = 0.1f;
     private bool levelStart = false;
+    private int cont = 0;
 
     private IEnumerator OnTriggerEnter()
     {
-        runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
+        runMessage.text = "YOU HAVE TO RESIST THE WAVES";
         yield return new WaitForSeconds(3);
         runMessage.text = "";
-        levelStart = true;
+        if (cont==0) {
+            levelStart = true;
+            cont++;
+        }
     }
 
     public void Update()
@@ -30,7 +34,10 @@ public class TriggerStartArea3 : MonoBehaviour {
         {
             Portal2.transform.Translate(0, movementUp, 0);
         }
-
+        if (Portal1.transform.position.y >= 4.5)
+        {
+            levelStart = false;
+        }
 
     }
 

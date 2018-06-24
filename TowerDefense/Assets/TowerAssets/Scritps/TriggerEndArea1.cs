@@ -31,39 +31,30 @@ public class TriggerEndArea1 : MonoBehaviour {
         }
         if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
         {
+            yield return new WaitForSeconds(25);
             levelComplete = true;
             Collider.GetComponent<BoxCollider>().enabled = false;
             payload.GetComponent<Payload>().enabled = true;
             runMessage.text = "         BRING THE TRUCK TO THE EXPLOSION ZONE";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
+            GoDown();
         }
-
-       
 
     }
-    
-    public void Update()
+
+    private void GoDown()
     {
-        if (levelComplete && Portal1.transform.position.y>-10) {
-            ParticlePortal1.transform.Translate(0, movementDown, 0);
+        while (Portal1.transform.position.y > -10)
+        {
             Portal1.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal2.transform.position.y > -10)
-        {
+            ParticlePortal1.transform.Translate(0, movementDown, 0);
             Portal2.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal3.transform.position.y > -10)
-        {
             Portal3.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal4.transform.position.y > -10)
-        {
             Portal4.transform.Translate(0, movementDown, 0);
             ParticlePortal4.transform.Translate(0, movementDown, 0);
         }
-
-
     }
+
 
 }
