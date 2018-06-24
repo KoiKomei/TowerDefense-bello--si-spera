@@ -45,7 +45,7 @@ public class TPSMovement2 : MonoBehaviour {
     private int maxAmmo;
     private int currentAmmo;
     private float reloadTime;
-    private static bool isReloading = false;
+    public static bool isReloading = false;
     private bool _shooting;
     private float fireRate;
     private float nextTimeToFire;
@@ -75,20 +75,22 @@ public class TPSMovement2 : MonoBehaviour {
 	void Update() {
 
         //Cambio Arma
-        if(weaponManager.changeWeapon) {
+        
+        if (weaponManager.changeWeapon)
+            {
 
-            Weapon weapon = weaponManager.getCurrentWeapon();
-            
-            fireRate = weapon.rateOfFire;
-            damage = weapon.damage;
-            impactForce = weapon.impact;
-            maxAmmo = weapon.capacity;
-            reloadTime = weapon.rechargeTime;
+                Weapon weapon = weaponManager.getCurrentWeapon();
 
-            currentAmmo = weapon.getCurrentAmmo();
-            shotSound = weaponManager.getShotSound();
+                fireRate = weapon.rateOfFire;
+                damage = weapon.damage;
+                impactForce = weapon.impact;
+                maxAmmo = weapon.capacity;
+                reloadTime = weapon.rechargeTime;
 
-        }
+                currentAmmo = weapon.getCurrentAmmo();
+                shotSound = weaponManager.getShotSound();
+
+            } 
 
         /*movement*/
 
@@ -199,7 +201,10 @@ public class TPSMovement2 : MonoBehaviour {
             if (isReloading) {           
                 return;
             }
-            if (weaponManager.getCurrentWeapon().getCurrentAmmo() <= 0 || Input.GetButtonDown("Reload")) {
+
+
+
+            if (weaponManager.getCurrentWeapon().getCurrentAmmo() <= 0 || Input.GetButtonDown("Reload") && currentAmmo<maxAmmo) {
                 if (Managers.Inventory.GetAmmoDict().ContainsKey(weaponManager.getCurrentAmmoType())){
                     if (Managers.Inventory.GetAmmoDict()[weaponManager.getCurrentAmmoType()] > 0) {
                         StartCoroutine(Reload());
@@ -272,6 +277,9 @@ public class TPSMovement2 : MonoBehaviour {
 
     IEnumerator Reload() {
         isReloading = true;
+        moveSpeed = noSprint;
+        _footStepSoundLength = 0.6f;
+        running = false;
         //Debug.Log("Reloading...");
 
         IKController.ikActive = false;

@@ -112,7 +112,7 @@ public class Turret : MonoBehaviour {
 
 	void Laser ()
 	{
-		//targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.GetComponent<EnemyBehaviour>().Hurt(1);
 		//targetEnemy.Slow(slowAmount);
 
 		if (!lineRenderer.enabled)

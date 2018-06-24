@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderingAI : MonoBehaviour {
+public class WanderingAI : MonoBehaviour,IEnemy {
 
     public float speed = 3.0f;
     public float obstacleRange = 5.0f;
+	private bool rand = false;
+	public float ArrivalTime = 5f;
+
 
     [SerializeField] private GameObject fireballPrefab;
     private GameObject _fireball;
@@ -16,6 +19,7 @@ public class WanderingAI : MonoBehaviour {
 	void Start () {
 
         _alive = true;
+		StartCoroutine(WaitForRand(ArrivalTime));
 	}
 
     public void SetAlive(bool alive)
@@ -37,7 +41,7 @@ public class WanderingAI : MonoBehaviour {
             {
                 GameObject hitObject = hit.transform.gameObject;
 
-                if (hitObject.GetComponent<PlayerCharacter>())
+                if (hitObject.GetComponent<TPSMovement2>())
                 {
                     if (_fireball == null)
                     {
@@ -47,7 +51,7 @@ public class WanderingAI : MonoBehaviour {
                     }
                 }
 
-                else if (hit.distance < obstacleRange)
+                else if (hit.distance < obstacleRange && rand)
                 {
                     float angle = Random.Range(-110, 110);
                     transform.Rotate(0, angle, 0);
@@ -56,4 +60,28 @@ public class WanderingAI : MonoBehaviour {
 
         }
     }
+
+	public void Hurt(int damage)
+	{
+		if(_alive)
+			Die();
+	}
+
+	public void Die()
+	{
+		_alive = false;
+		transform.Rotate(-75, 0, 0);
+		Destroy(this.gameObject, 1.5f);
+	}
+
+	public void Attack(GameObject target)
+	{
+		
+	}
+
+	IEnumerator WaitForRand(float time)
+	{
+		yield return new WaitForSeconds(time);
+		rand = true;
+	}
 }

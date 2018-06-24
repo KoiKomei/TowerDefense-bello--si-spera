@@ -14,7 +14,7 @@ public class Navigator : MonoBehaviour {
 
 	[SerializeField] private Transform[] Waypoints;
 	[SerializeField] private bool loop;
-	public float PlayerDetectionRadius;
+	public float PlayerDetectionRadius=5;
 	private float range;
 	public float WaypointRadius=10f;
 
@@ -63,7 +63,7 @@ public class Navigator : MonoBehaviour {
 		foreach (Collider c in colliders)
 		{
 			GameObject target = c.gameObject;
-			if (c.GetComponentInParent<TPSMovement>() != null)
+			if (c.GetComponentInParent<TPSMovement2>() != null)
 			{
 				found = true;
 				player = c;
@@ -115,9 +115,14 @@ public class Navigator : MonoBehaviour {
 		if(!loop && goingTo == Waypoints.Length - 1)
 		{
 			agent.autoBraking = true;
+            agent.radius = 0.3f;
 			return;
 		}
 		goingTo=(goingTo+1)%Waypoints.Length;
 		agent.destination = Waypoints[goingTo].position;
+	}
+	public void setWaypoints(Transform[] w)
+	{
+		Waypoints = w;
 	}
 }

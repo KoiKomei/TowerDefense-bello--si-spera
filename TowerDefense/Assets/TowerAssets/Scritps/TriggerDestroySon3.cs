@@ -7,8 +7,11 @@ public class TriggerDestroySon3 : MonoBehaviour
 {
     public TriggerDestroy trigger;
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider c)
     {
-        trigger.Destroy3();
+        if (c.tag == "Human")
+        {
+            trigger.Destroy3();
+        }
     }
 }

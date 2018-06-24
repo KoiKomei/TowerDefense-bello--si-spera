@@ -37,8 +37,6 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		animator.SetBool("Dead", true);
 		Destroy(this.gameObject,5);
 
-        this.transform.Rotate(-75, 0, 0);
-        Destroy(this.gameObject);
 
     }
 

@@ -73,7 +73,7 @@ public class Bullet : MonoBehaviour {
 
 		if (e != null)
 		{
-			e.TakeDamage(damage);
+            e.GetComponent<EnemyBehaviour>().Hurt(1);
 		}
 	}
 

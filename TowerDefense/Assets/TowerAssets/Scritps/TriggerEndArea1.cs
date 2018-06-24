@@ -5,67 +5,13 @@ using UnityEngine.UI;
 
 public class TriggerEndArea1 : MonoBehaviour {
 
-    // Use this for initialization
-    [SerializeField] public Text runMessage;
-    public GameObject Collider;
-    public GameObject Portal1;
-    public GameObject Portal2;
-    public GameObject Portal3;
-    public GameObject Portal4;
-    public GameObject ParticlePortal1;
-    public GameObject ParticlePortal4;
+    public GameObject GameController;
 
-    public int enemyKill = 0;
-
-    private float movementDown = -0.1f;
-    private bool levelComplete = false;
-
-    private IEnumerator OnTriggerEnter()
+    private void OnTriggerEnter(Collider c)
     {
-        
-        if (enemyKill<50) {
-            runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
-
-        }
-        if(enemyKill >= 50)
+        if (c.CompareTag("Human"))
         {
-            levelComplete = true;
-            Collider.GetComponent<BoxCollider>().enabled = false;
+            GameController.GetComponent<GameController>().SetArea(2);
         }
-
-       
-
     }
-
-    public void EnemyKilled()
-    {
-        enemyKill++;
-    }
-
-
-    public void Update()
-    {
-        if (levelComplete && Portal1.transform.position.y>-10) {
-            ParticlePortal1.transform.Translate(0, movementDown, 0);
-            Portal1.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal2.transform.position.y > -10)
-        {
-            Portal2.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal3.transform.position.y > -10)
-        {
-            Portal3.transform.Translate(0, movementDown, 0);
-        }
-        if (levelComplete && Portal4.transform.position.y > -10)
-        {
-            Portal4.transform.Translate(0, movementDown, 0);
-            ParticlePortal4.transform.Translate(0, movementDown, 0);
-        }
-
-
-    }
-
 }
