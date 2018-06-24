@@ -14,7 +14,7 @@ public class TriggerStartArea3 : MonoBehaviour {
 
     private IEnumerator OnTriggerEnter()
     {
-        runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
+        runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
         yield return new WaitForSeconds(3);
         runMessage.text = "";
         levelStart = true;

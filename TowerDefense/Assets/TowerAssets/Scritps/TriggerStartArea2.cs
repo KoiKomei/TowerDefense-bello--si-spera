@@ -6,21 +6,20 @@ using UnityEngine.UI;
 public class TriggerStartArea2 : MonoBehaviour {
 
     [SerializeField] public Text runMessage;
-    public GameObject Collider;
     public GameObject Portal1;
     public GameObject ParticlePortal1;
 
     private float movementUp = 0.1f;
     private bool levelStart = false;
+    public GameObject payload;
 
     private IEnumerator OnTriggerEnter()
     {
-        runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
+        runMessage.text = "          YOU HAVE TO CLEAN THE AREA TO MOVE THE TRUCK";
         yield return new WaitForSeconds(3);
         runMessage.text = "";
         levelStart = true;
-        Collider.GetComponent<BoxCollider>().enabled = true;
-
+        payload.GetComponent<Payload>().enabled = false;
     }
 
     public void Update()

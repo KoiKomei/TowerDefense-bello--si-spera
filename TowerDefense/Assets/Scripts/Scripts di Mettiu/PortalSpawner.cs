@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 public class PortalSpawner : MonoBehaviour {
 
 	[SerializeField] private Transform[] Waypoints;
 	[SerializeField] private GameObject[] enemyPrefab;
 	[SerializeField] private int[] nEnemyPerType;
+    [SerializeField] public Text runMessage;
 
-	public int Waves=3;
+
+    public int Waves=3;
 	public float SpawnInterval = 1;
 
 	private int[] enemies;
@@ -25,9 +29,10 @@ public class PortalSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!onGoing && wave<=Waves)
+		if (!onGoing && wave<=Waves && this.transform.position.y > 4)
 		{
-			int nEnemies = 0;
+            runMessage.text = "WAVE: "+wave;
+            int nEnemies = 0;
 			for (int i = 0; i < nEnemyPerType.Length; i++)
 			{
 				nEnemies += nEnemyPerType[i];
@@ -46,12 +51,13 @@ public class PortalSpawner : MonoBehaviour {
 			onGoing = true;
 			for(int i=0;i<nEnemyPerType.Length;i++)
 			{
-				nEnemyPerType[i] += 10;
+				nEnemyPerType[i] += 1;
 			}
 			StartCoroutine(SpawnEnemies(SpawnInterval));
-			Waves++;
+			wave++;
 		}
-	}
+        EndWaves();
+    }
 
 	private void shuffle(int[] a, int times)
 	{
@@ -84,8 +90,20 @@ public class PortalSpawner : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(interval);
 		}
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(15);
 		onGoing = false;
 
 	}
+
+    IEnumerator EndWaves()
+    {
+        runMessage.text = "GO AHEAD";
+        yield return new WaitForSeconds(2);
+        runMessage.text = "";
+    }
+
+        public int GetWave()
+    {
+        return wave;
+    }
 }

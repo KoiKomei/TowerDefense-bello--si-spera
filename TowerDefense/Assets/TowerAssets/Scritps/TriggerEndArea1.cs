@@ -14,37 +14,35 @@ public class TriggerEndArea1 : MonoBehaviour {
     public GameObject Portal4;
     public GameObject ParticlePortal1;
     public GameObject ParticlePortal4;
-
-    public int enemyKill = 0;
+    public GameObject payload;
 
     private float movementDown = -0.1f;
     private bool levelComplete = false;
 
     private IEnumerator OnTriggerEnter()
     {
-        
-        if (enemyKill<50) {
-            runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
+
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
+        {
+            runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
 
         }
-        if(enemyKill >= 50)
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
         {
             levelComplete = true;
             Collider.GetComponent<BoxCollider>().enabled = false;
+            payload.GetComponent<Payload>().enabled = true;
+            runMessage.text = "         BRING THE TRUCK TO THE EXPLOSION ZONE";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
         }
 
        
 
     }
-
-    public void EnemyKilled()
-    {
-        enemyKill++;
-    }
-
-
+    
     public void Update()
     {
         if (levelComplete && Portal1.transform.position.y>-10) {

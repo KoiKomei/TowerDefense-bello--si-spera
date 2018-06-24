@@ -12,16 +12,21 @@ public class TriggerStartArea1 : MonoBehaviour {
     public GameObject Portal4;
     public GameObject ParticlePortal1;
     public GameObject ParticlePortal4;
+    public GameObject payload;
 
     private float movementUp = 0.1f;
     private bool levelStart = false;
 
     private IEnumerator OnTriggerEnter()
     {
-        runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
+        runMessage.text = "          BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
         yield return new WaitForSeconds(3);
         runMessage.text = "";
         levelStart = true;
+        if (payload.GetComponent<Payload>().transform.position.x== 395 && payload.GetComponent<Payload>().transform.position.z == -92)
+        {
+            payload.GetComponent<Payload>().enabled = false;
+        }
     }
 
     public void Update()

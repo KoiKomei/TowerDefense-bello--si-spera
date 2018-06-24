@@ -7,41 +7,35 @@ public class TriggerEndArea2 : MonoBehaviour {
 
     [SerializeField] public Text runMessage;
     public GameObject Collider;
-    public GameObject Collider2;
     public GameObject Portal1;
     public GameObject ParticlePortal1;
-
-    public int enemyKill = 0;
-
     private float movementDown = -0.1f;
     private bool levelComplete = false;
+    public GameObject payload;
 
     private IEnumerator OnTriggerEnter()
     {
 
-        if (enemyKill < 50)
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() < 3)
         {
-            runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
+            runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
 
         }
-        if (enemyKill >= 50)
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
         {
             levelComplete = true;
             Collider.GetComponent<BoxCollider>().enabled = false;
-            Collider2.GetComponent<BoxCollider>().enabled = false;
+            payload.GetComponent<Payload>().enabled = true;
+            runMessage.text = "          BRING THE TRUCK TO THE PARK";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
         }
 
 
 
     }
-
-    public void EnemyKilled()
-    {
-        enemyKill++;
-    }
-
 
     public void Update()
     {

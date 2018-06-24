@@ -10,36 +10,29 @@ public class TriggerEndArea3 : MonoBehaviour {
     public GameObject Portal1;
     public GameObject Portal2;
 
-    public int enemyKill = 0;
-
     private float movementDown = -0.1f;
     private bool levelComplete = false;
 
     private IEnumerator OnTriggerEnter()
     {
 
-        if (enemyKill < 50)
+        if (Portal1.GetComponent<PortalSpawner>().GetWave()<3)
         {
-            runMessage.text = "          YOU HAVE TO CLEAN THE AREA";
+            runMessage.text = "          YOU HAVE TO RESIST THE WAVES";
             yield return new WaitForSeconds(3);
             runMessage.text = "";
 
         }
-        if (enemyKill >= 50)
+        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
         {
             levelComplete = true;
             Collider.GetComponent<BoxCollider>().enabled = false;
+            runMessage.text = "          GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
         }
 
-
-
     }
-
-    public void EnemyKilled()
-    {
-        enemyKill++;
-    }
-
 
     public void Update()
     {
