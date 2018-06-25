@@ -92,18 +92,26 @@ public class PortalSpawner : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(interval);
 		}
-        if (enemyObject.Count == 0)
-        {    
+
+        yield return new WaitForSeconds(15);
+       // if (enemyObject.Count == 0)
+       // {    
             onGoing = false;
             wave++;
           
-        }
+       // }
         if (wave > Waves)
         {
             runMessage.text = "";
         }
 
-    }  
+    }
+
+    public void GetEnemies(GameObject enemy)
+    {
+        enemyObject.Remove(enemy);
+        Debug.Log("enemy Removed");
+    }
 
     public int GetWave()
     {

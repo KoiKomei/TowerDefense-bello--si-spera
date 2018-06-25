@@ -8,6 +8,7 @@ public class TriggerStartArea3 : MonoBehaviour {
     [SerializeField] public Text runMessage;
     public GameObject Portal1;
     public GameObject Portal2;
+    public Collider collider;
 
     private float movementUp = 0.1f;
     private bool levelStart = false;
@@ -19,6 +20,7 @@ public class TriggerStartArea3 : MonoBehaviour {
         {
             if (cont == 0)
             {
+                collider.GetComponent<BoxCollider>().enabled = true;
                 runMessage.text = "RESISTI ALLE ONDATE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";

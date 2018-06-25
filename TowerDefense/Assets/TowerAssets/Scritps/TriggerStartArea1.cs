@@ -13,6 +13,7 @@ public class TriggerStartArea1 : MonoBehaviour {
     public GameObject ParticlePortal1;
     public GameObject ParticlePortal4;
     public GameObject payload;
+    public Collider collider;
 
     private float movementUp = 0.1f;
     private int cont = 0;
@@ -22,15 +23,16 @@ public class TriggerStartArea1 : MonoBehaviour {
     {
         if (c.CompareTag("Human"))
         {
-            runMessage.text = "PORTA IL CARICO AL CENTRO DEL PARCO E PROTEGGILO DAI NEMICI";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
-            if (payload.GetComponent<Payload>().transform.position.x == 395 && payload.GetComponent<Payload>().transform.position.z == -92)
-            {
-                payload.GetComponent<Payload>().enabled = false;
-            }
             if (cont == 0)
             {
+                collider.GetComponent<BoxCollider>().enabled = true;
+                runMessage.text = "PORTA IL CARICO AL CENTRO DEL PARCO E PROTEGGILO DAI NEMICI";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
+                if (payload.GetComponent<Payload>().transform.position.x == 395 && payload.GetComponent<Payload>().transform.position.z == -92)
+                {
+                    payload.GetComponent<Payload>().enabled = false;
+                }
                 levelStart = true;
                 cont++;
             }

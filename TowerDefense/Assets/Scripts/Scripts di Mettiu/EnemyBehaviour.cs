@@ -24,20 +24,14 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 	public void Attack(GameObject target)
 	{
-	
-
 		StartCoroutine(WaitAndAttack(target));
-
-
 	}
 
 	public void Die()
 	{
 		agent.isStopped = true;
 		animator.SetBool("Dead", true);
-		Destroy(this.gameObject,5);
-
-
+        Destroy(this.gameObject,5);
     }
 
 	public void Hurt(int damage)
