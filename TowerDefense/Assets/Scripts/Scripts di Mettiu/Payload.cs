@@ -3,25 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
 public class Payload : MonoBehaviour {
 
-	private NavMeshAgent agent;
+    public int hp;
+    private NavMeshAgent agent;
 	private float maxHealth;
 	private float Health;
+    private int healthPackValue;
+    private int barValueDamage;
+    private Image healthBarBackground;
 
-	[SerializeField] private Transform[] Waypoints;
+    [SerializeField] private Transform[] Waypoints;
 	public float DetectionRadius;
 	public int StoppingNumberOfEnemies = 3;
 	public float WaypointRadius = 10f;
 
 	private int goingTo;
 
-	// Use this for initialization
-	void Start () {
-		Assert.IsNotNull(Waypoints);
+    [SerializeField] private Slider healthBarPayload;
+
+    // Use this for initialization
+    void Start () {
+
+
+        hp = Managers.Player.health;
+        healthBarPayload.maxValue = Managers.Payload.maxHealth;
+        healthPackValue = Managers.Payload.healthPackValue;
+
+        healthBarBackground = healthBarPayload.GetComponentInChildren<Image>();
+
+        Assert.IsNotNull(Waypoints);
 		Assert.AreNotEqual(0, Waypoints.Length);
 
 		agent = GetComponent<NavMeshAgent>();

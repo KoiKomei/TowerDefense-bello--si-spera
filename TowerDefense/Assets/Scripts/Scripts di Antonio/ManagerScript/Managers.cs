@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerManager))]
+[RequireComponent(typeof(PayloadManager))]
 [RequireComponent(typeof(InventoryManager))]
 [RequireComponent(typeof(WeaponManager))]
 [RequireComponent(typeof(AudioManager))]
@@ -11,6 +12,7 @@ public class Managers : MonoBehaviour {
 
     public static AudioManager Audio { get; private set; } 
     public static PlayerManager Player { get; private set; }
+    public static PayloadManager Payload { get; private set; }
     public static InventoryManager Inventory { get; private set; }
     public static WeaponManager Weapon { get; private set; }
     private List<IGameManager> startSequence;
@@ -28,6 +30,7 @@ public class Managers : MonoBehaviour {
     void Awake() {
 
         Player = GetComponent<PlayerManager>();
+        Payload = GetComponent<PayloadManager>();
         Inventory = GetComponent<InventoryManager>();
         Weapon = GetComponent <WeaponManager>();
         Audio = GetComponent<AudioManager>();
@@ -35,6 +38,7 @@ public class Managers : MonoBehaviour {
         startSequence = new List<IGameManager>();
 
         startSequence.Add(Player);
+        startSequence.Add(Payload);
         startSequence.Add(Inventory);
         startSequence.Add(Weapon);
         startSequence.Add(Audio);

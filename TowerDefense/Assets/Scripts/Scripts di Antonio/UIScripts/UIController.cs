@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour {
     [SerializeField] private InventoryPopup inventoryPopup;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Text healthLabel;
+    [SerializeField] private Slider payloadHealthBar;
+    [SerializeField] private Text payloadHealthLabel;
 
     private bool isSettingsPopupOpen = false;
     private bool isInventoryPopupOpen = false;
@@ -24,6 +26,7 @@ public class UIController : MonoBehaviour {
     void Update()
     {
         healthLabel.text = healthBar.value.ToString();
+        payloadHealthLabel.text = payloadHealthBar.value.ToString();
         manageSettingsPopup();
     }
     
