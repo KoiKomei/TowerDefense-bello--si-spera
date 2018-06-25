@@ -6,7 +6,7 @@ public class Turret : MonoBehaviour {
     public GameObject prefab;
 
     private Transform target;
-	private Enemy targetEnemy;
+	private EnemyBehaviour targetEnemy;
 
 	[Header("General")]
 
@@ -59,7 +59,7 @@ public class Turret : MonoBehaviour {
 		if (nearestEnemy != null && shortestDistance <= range)
 		{
 			target = nearestEnemy.transform;
-			targetEnemy = nearestEnemy.GetComponent<Enemy>();
+			targetEnemy = nearestEnemy.GetComponent<EnemyBehaviour>();
 		} else
 		{
 			target = null;
@@ -112,8 +112,7 @@ public class Turret : MonoBehaviour {
 
 	void Laser ()
 	{
-        targetEnemy.GetComponent<EnemyBehaviour>().Hurt(1);
-		//targetEnemy.Slow(slowAmount);
+        targetEnemy.SendMessage("Hurt", 1, SendMessageOptions.DontRequireReceiver);
 
 		if (!lineRenderer.enabled)
 		{

@@ -266,7 +266,7 @@ public class TPSMovement2 : MonoBehaviour {
 				//Debug.Log(hit.transform.name);
             }
 
-        Managers.Audio.PlaySound(shotSound);
+        _soundSource.PlayOneShot(shotSound);
 
         if (hit.rigidbody != null) {
             hit.rigidbody.AddForce(-hit.normal * impactForce);

@@ -82,6 +82,7 @@ public class PortalSpawner : MonoBehaviour {
 				enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 				enemy.GetComponent<NavMeshAgent>().enabled = false;
 				enemy.GetComponent<NavMeshAgent>().radius = 2;
+				enemy.GetComponent<NavMeshAgent>().baseOffset=-0.2f;
 				enemy.transform.position = new Vector3(this.transform.position.x + 1f, 1f, this.transform.position.z + 1f);
 				enemy.GetComponent<Navigator>().enabled = true;
 				enemy.GetComponent<NavMeshAgent>().enabled = true;
