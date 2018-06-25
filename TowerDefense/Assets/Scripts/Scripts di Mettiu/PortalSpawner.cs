@@ -22,16 +22,15 @@ public class PortalSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		wave = 0;
+		wave = 1;
 		
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!onGoing && wave<Waves && this.transform.position.y > 4)
+		if (!onGoing && wave<=Waves && this.transform.position.y > 4)
 		{
-            wave++;
             runMessage.text = "WAVE: " + wave;
             int nEnemies = 0;
 			for (int i = 0; i < nEnemyPerType.Length; i++)
@@ -91,8 +90,14 @@ public class PortalSpawner : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(15);
 		onGoing = false;
+        wave++;
 
-	}  
+        if (wave > Waves)
+        {
+            runMessage.text = "";
+        }
+
+    }  
 
     public int GetWave()
     {
