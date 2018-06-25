@@ -37,41 +37,41 @@ public class GameController : MonoBehaviour {
     {
         if (area == 2)
         {
-            if (Portal1A.GetComponent<PortalSpawner>().GetWave() == 3)
+            if (Portal1A.GetComponent<PortalSpawner>().GetWave() == 4)
             {
+                Destroy1();
                 Collider1.GetComponent<BoxCollider>().enabled = false;
                 payload.GetComponent<Payload>().enabled = true;
                 runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
-                Destroy1();
                 area = 0;
             }
         }
 
         if (area == 3)
         {
-            if (Portal2.GetComponent<PortalSpawner>().GetWave() == 3)
+            if (Portal2.GetComponent<PortalSpawner>().GetWave() == 4)
             {
+                Destroy2();
                 Collider2.GetComponent<BoxCollider>().enabled = false;
                 payload.GetComponent<Payload>().enabled = true;
                 runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
-                Destroy2();
                 area = 0;
             }
         }
 
         if (area == 4)
         {
-            if (Portal3A.GetComponent<PortalSpawner>().GetWave() == 3)
+            if (Portal3A.GetComponent<PortalSpawner>().GetWave() == 4)
             {
+                Destroy3();
                 Collider3.GetComponent<BoxCollider>().enabled = false;
                 runMessage.text = "VAI AVANTI PER PORTARE IL CARICO A DESTINAZIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
-                Destroy3();
                 area = 0;
             }
         }
@@ -110,9 +110,8 @@ public class GameController : MonoBehaviour {
         Destroy(effect, 5f);
     }
 
-    private IEnumerator Destroy1()
+    private void Destroy1()
     {
-        yield return new WaitForSeconds(22);
         Destroy(Portal1A);
         Destroy(ParticlePortal1A);
         Destroy(Portal1B);
@@ -121,16 +120,14 @@ public class GameController : MonoBehaviour {
         Destroy(ParticlePortal1D);
     }
 
-    private IEnumerator Destroy2()
+    private void Destroy2()
     {
-        yield return new WaitForSeconds(22);
         Destroy(Portal2);
         Destroy(ParticlePortal2);
     }
 
-    private IEnumerator Destroy3()
+    private void Destroy3()
     {
-        yield return new WaitForSeconds(22);
         Destroy(Portal3A);
         Destroy(Portal3B);
     }
