@@ -77,6 +77,7 @@ public class PortalSpawner : MonoBehaviour {
 			if (this.transform.position.y > 4)
 			{
 				GameObject enemy = Instantiate(enemyPrefab[i]);
+				enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
 				enemy.GetComponent<Navigator>().enabled = false;
 				enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 				enemy.GetComponent<NavMeshAgent>().enabled = false;

@@ -87,6 +87,7 @@ public class Navigator : MonoBehaviour {
 		{
 			agent.stoppingDistance = range;
 			agent.autoBraking = true;
+			agent.radius = 0.3f;
 
 			if (agent.remainingDistance <= range && !GetComponent<EnemyBehaviour>().isAttacking())
 			{
@@ -104,6 +105,7 @@ public class Navigator : MonoBehaviour {
 		{
 			agent.stoppingDistance = 0;
 			agent.autoBraking = true;
+			agent.radius = 2f;
 		}
 		//Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
 		//Debug.Log(agent.velocity.magnitude);
@@ -115,7 +117,7 @@ public class Navigator : MonoBehaviour {
 		if(!loop && goingTo == Waypoints.Length - 1)
 		{
 			agent.autoBraking = true;
-            agent.radius = 0.3f;
+            
 			return;
 		}
 		goingTo=(goingTo+1)%Waypoints.Length;
