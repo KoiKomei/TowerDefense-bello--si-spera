@@ -31,7 +31,7 @@ public class PortalSpawner : MonoBehaviour {
 	void Update () {
 		if (!onGoing && wave<=Waves && this.transform.position.y > 4)
 		{
-            runMessage.text = "WAVE: "+wave;
+            runMessage.text = "WAVE: " + wave;
             int nEnemies = 0;
 			for (int i = 0; i < nEnemyPerType.Length; i++)
 			{
@@ -53,10 +53,8 @@ public class PortalSpawner : MonoBehaviour {
 			{
 				nEnemyPerType[i] += 1;
 			}
-			StartCoroutine(SpawnEnemies(SpawnInterval));
-			wave++;
-		}
-        EndWaves();
+			StartCoroutine(SpawnEnemies(SpawnInterval));			
+        }
     }
 
 	private void shuffle(int[] a, int times)
@@ -92,17 +90,16 @@ public class PortalSpawner : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(15);
 		onGoing = false;
+        wave++;
 
-	}
+        if (wave > Waves)
+        {
+            runMessage.text = "";
+        }
 
-    IEnumerator EndWaves()
-    {
-        runMessage.text = "GO AHEAD";
-        yield return new WaitForSeconds(2);
-        runMessage.text = "";
-    }
+    }  
 
-        public int GetWave()
+    public int GetWave()
     {
         return wave;
     }

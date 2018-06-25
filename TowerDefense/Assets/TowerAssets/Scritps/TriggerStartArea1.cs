@@ -18,47 +18,52 @@ public class TriggerStartArea1 : MonoBehaviour {
     private int cont = 0;
     private bool levelStart = false;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-        runMessage.text = "BRING THE TRUCK TO THE CENTER OF THE PARK AND PROTECT IT FROM ENEMIES";
-        yield return new WaitForSeconds(3);
-        runMessage.text = "";
-        if (payload.GetComponent<Payload>().transform.position.x== 395 && payload.GetComponent<Payload>().transform.position.z == -92)
+        if (c.CompareTag("Human"))
         {
-            payload.GetComponent<Payload>().enabled = false;
-        }
-        if (cont == 0)
-        {
-            levelStart = true;
-            cont++;
+            runMessage.text = "PORTA IL CARICO AL CENTRO DEL PARCO E PROTEGGILO DAI NEMICI";
+            yield return new WaitForSeconds(3);
+            runMessage.text = "";
+            if (payload.GetComponent<Payload>().transform.position.x == 395 && payload.GetComponent<Payload>().transform.position.z == -92)
+            {
+                payload.GetComponent<Payload>().enabled = false;
+            }
+            if (cont == 0)
+            {
+                levelStart = true;
+                cont++;
+            }
         }
     }
 
     public void Update()
     {
-        if (levelStart && Portal1.transform.position.y < 4.5)
+        if (Portal1 != null)
         {
-            ParticlePortal1.transform.Translate(0, movementUp, 0);
-            Portal1.transform.Translate(0, movementUp, 0);
+            if (levelStart && Portal1.transform.position.y < 4.5)
+            {
+                ParticlePortal1.transform.Translate(0, movementUp, 0);
+                Portal1.transform.Translate(0, movementUp, 0);
+            }
+            if (levelStart && Portal2.transform.position.y < 4.5)
+            {
+                Portal2.transform.Translate(0, movementUp, 0);
+            }
+            if (levelStart && Portal3.transform.position.y < 4.5)
+            {
+                Portal3.transform.Translate(0, movementUp, 0);
+            }
+            if (levelStart && Portal4.transform.position.y < 4.5)
+            {
+                Portal4.transform.Translate(0, movementUp, 0);
+                ParticlePortal4.transform.Translate(0, movementUp, 0);
+            }
+            if (Portal1.transform.position.y >= 4.5)
+            {
+                levelStart = false;
+            }
         }
-        if (levelStart && Portal2.transform.position.y < 4.5)
-        {
-            Portal2.transform.Translate(0, movementUp, 0);
-        }
-        if (levelStart && Portal3.transform.position.y < 4.5)
-        {
-            Portal3.transform.Translate(0, movementUp, 0);
-        }
-        if (levelStart && Portal4.transform.position.y < 4.5)
-        {
-            Portal4.transform.Translate(0, movementUp, 0);
-            ParticlePortal4.transform.Translate(0, movementUp, 0);
-        }
-        if (Portal1.transform.position.y >= 4.5)
-        {
-            levelStart = false;
-        }
-
 
     }
 

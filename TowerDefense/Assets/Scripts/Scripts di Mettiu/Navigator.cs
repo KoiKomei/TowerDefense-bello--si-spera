@@ -115,6 +115,7 @@ public class Navigator : MonoBehaviour {
 		if(!loop && goingTo == Waypoints.Length - 1)
 		{
 			agent.autoBraking = true;
+            agent.radius = 0.3f;
 			return;
 		}
 		goingTo=(goingTo+1)%Waypoints.Length;

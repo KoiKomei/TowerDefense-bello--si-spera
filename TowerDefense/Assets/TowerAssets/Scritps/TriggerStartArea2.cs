@@ -14,29 +14,35 @@ public class TriggerStartArea2 : MonoBehaviour {
     private int cont = 0;
     public GameObject payload;
 
-    private IEnumerator OnTriggerEnter()
+    private IEnumerator OnTriggerEnter(Collider c)
     {
-        runMessage.text = "YOU HAVE TO RESIST THE WAVES TO MOVE THE TRUCK";
-        yield return new WaitForSeconds(3);
-        runMessage.text = "";
-        payload.GetComponent<Payload>().enabled = false;
-        if (cont == 0)
+        if (c.CompareTag("Human"))
         {
-            levelStart = true;
-            cont++;
+            if (cont == 0)
+            {
+                payload.GetComponent<Payload>().enabled = false;
+                runMessage.text = "RESISTI ALLE ONDATE PER MUOVERE IL CARICO";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "";
+                levelStart = true;
+                cont++;
+            }
         }
     }
 
     public void Update()
     {
-        if (levelStart && Portal1.transform.position.y < 4.5)
-        {
-            Portal1.transform.Translate(0, movementUp, 0);
-            ParticlePortal1.transform.Translate(0, movementUp, 0);
-        }
-        if (Portal1.transform.position.y >= 4.5)
-        {
-            levelStart = false;
+        if(Portal1!=null)
+        { 
+            if (levelStart && Portal1.transform.position.y < 4.5)
+            {
+                Portal1.transform.Translate(0, movementUp, 0);
+                ParticlePortal1.transform.Translate(0, movementUp, 0);
+            }
+            if (Portal1.transform.position.y >= 4.5)
+            {
+                levelStart = false;
+            }
         }
     }
 

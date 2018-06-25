@@ -50,12 +50,16 @@ public class TriggerDestroy : MonoBehaviour {
 
     private bool passed = false;
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider c)
     {
-        if (passed) {
-            Destroy2();
+        if (c.tag == "Human")
+        {
+            if (passed) {
+                Destroy2();
+            }
+            passed = true;
         }
-        passed = true;
+        
     }
 
    

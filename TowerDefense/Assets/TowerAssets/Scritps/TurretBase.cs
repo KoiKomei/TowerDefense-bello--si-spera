@@ -45,9 +45,9 @@ public class TurretBase : MonoBehaviour {
     {
         
         turretNumber = triggerController.GetNumber();
-        if (!builded && turretNumber>0)
+        if (!builded && turretNumber>0 && selected)
         {
-            if (Input.GetKeyDown("q") && selected)
+            if (Input.GetKeyDown("q"))
             {
                 Destroy(turretGhost);
                 if (type == 1)
@@ -77,7 +77,7 @@ public class TurretBase : MonoBehaviour {
                 
 
             }
-            if (Input.GetKeyDown("f") && selected)
+            if (Input.GetKeyDown("f"))
             {
                 if (turretNumber > 0)
                 {

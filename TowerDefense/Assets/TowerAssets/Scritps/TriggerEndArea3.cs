@@ -5,44 +5,13 @@ using UnityEngine.UI;
 
 public class TriggerEndArea3 : MonoBehaviour {
 
-    [SerializeField] public Text runMessage;
-    public GameObject Collider;
-    public GameObject Portal1;
-    public GameObject Portal2;
+    public GameObject GameController;
 
-    private float movementDown = -0.1f;
-    private bool levelComplete = false;
-
-    private IEnumerator OnTriggerEnter()
+    private void OnTriggerEnter(Collider c)
     {
-
-        if (Portal1.GetComponent<PortalSpawner>().GetWave()<3)
+        if (c.CompareTag("Human"))
         {
-            runMessage.text = "YOU HAVE TO RESIST THE WAVES";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
-
-        }
-        if (Portal1.GetComponent<PortalSpawner>().GetWave() == 3)
-        {
-            yield return new WaitForSeconds(25);
-            levelComplete = true;
-            Collider.GetComponent<BoxCollider>().enabled = false;
-            runMessage.text = "GO HAEAD TO TAKE THE EXPLOSIVE TRUCK";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "";
-            GoDown();
-        }
-
-    }
-
-    private void GoDown()
-    {
-        while(Portal1.transform.position.y > -10)
-        {
-            Portal1.transform.Translate(0, movementDown, 0);
-            Portal2.transform.Translate(0, movementDown, 0);
+            GameController.GetComponent<GameController>().SetArea(4);
         }
     }
-
 }
