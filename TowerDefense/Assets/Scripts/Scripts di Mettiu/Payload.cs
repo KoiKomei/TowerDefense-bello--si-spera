@@ -9,6 +9,8 @@ using UnityEngine.Assertions;
 public class Payload : MonoBehaviour {
 
 	private NavMeshAgent agent;
+	private float maxHealth;
+	private float Health;
 
 	[SerializeField] private Transform[] Waypoints;
 	public float DetectionRadius;
@@ -77,5 +79,19 @@ public class Payload : MonoBehaviour {
 		}
 		goingTo = (goingTo + 1) % Waypoints.Length;
 		agent.destination = Waypoints[goingTo].position;
+	}
+
+	public void Hurt(int damage)
+	{
+		Health -= damage;
+		if (Health <= 0)
+		{
+			lose();
+		}
+	}
+
+	private void lose()
+	{
+
 	}
 }

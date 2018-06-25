@@ -21,7 +21,7 @@ public class PlayerCharacter : MonoBehaviour {
         hp = Managers.Player.health;
         healthBar.maxValue = Managers.Player.maxHealth;
         healthPackValue = Managers.Player.healthPackValue;
-        barValueDamage = Managers.Player.barValueDamage;
+        //barValueDamage = Managers.Player.barValueDamage;
 
         healthBarBackground = healthBar.GetComponentInChildren<Image>();   
 
@@ -57,7 +57,8 @@ public class PlayerCharacter : MonoBehaviour {
     public void Hurt(int damage){
         damaged = true;
         hp -= damage;
-        healthBar.value -= barValueDamage;
+        healthBar.value -= damage;
+		Debug.Log("ouch");
     }
 
     public void Death() {
