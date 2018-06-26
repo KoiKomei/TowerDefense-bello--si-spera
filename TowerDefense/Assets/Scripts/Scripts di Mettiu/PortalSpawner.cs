@@ -12,7 +12,6 @@ public class PortalSpawner : MonoBehaviour {
 	[SerializeField] private int[] nEnemyPerType;
     [SerializeField] public Text runMessage;
 
-
     public int Waves=3;
 	public float SpawnInterval = 1;
 
@@ -20,7 +19,9 @@ public class PortalSpawner : MonoBehaviour {
     private List<GameObject> enemyObject;
 
     private bool onGoing=false;
-	private int wave;
+    private bool areaStarted = false;
+    private int wave;
+
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,8 @@ public class PortalSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!onGoing && wave<=Waves && this.transform.position.y > 4)
+        
+        if (!onGoing && wave<=Waves && this.transform.position.y > 4)
 		{
             runMessage.text = "WAVE: " + wave;
             int nEnemies = 0;
@@ -39,7 +41,7 @@ public class PortalSpawner : MonoBehaviour {
 				nEnemies += nEnemyPerType[i];
 			}
 			enemies = new int[nEnemies];
-			int index = 0;
+            int index = 0;
 			for (int i = 0; i < nEnemyPerType.Length; i++)
 			{
 				for (int j = 0; j < nEnemyPerType[i]; j++)
@@ -56,6 +58,7 @@ public class PortalSpawner : MonoBehaviour {
 			}
 			StartCoroutine(SpawnEnemies(SpawnInterval));			
         }
+
     }
 
 	private void shuffle(int[] a, int times)
@@ -79,7 +82,8 @@ public class PortalSpawner : MonoBehaviour {
 			{
                 GameObject enemy = Instantiate(enemyPrefab[i]);
                 enemyObject.Add(enemy);
-				enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
+                areaStarted = true;
+                enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
 				enemy.GetComponent<Navigator>().enabled = false;
 				enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 				enemy.GetComponent<NavMeshAgent>().enabled = false;
@@ -92,14 +96,6 @@ public class PortalSpawner : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(interval);
 		}
-
-        yield return new WaitForSeconds(15);
-       // if (enemyObject.Count == 0)
-       // {    
-            onGoing = false;
-            wave++;
-          
-       // }
         if (wave > Waves)
         {
             runMessage.text = "";
@@ -107,14 +103,34 @@ public class PortalSpawner : MonoBehaviour {
 
     }
 
-    public void GetEnemies(GameObject enemy)
+    public List<GameObject> GetEnemies()
     {
-        enemyObject.Remove(enemy);
-        Debug.Log("enemy Removed");
+        return enemyObject;
     }
 
     public int GetWave()
     {
         return wave;
     }
+
+    public void SetWave(int w)
+    {
+        wave = w;
+    }
+
+    public void SetOnGoingFalse()
+    {
+        onGoing=false;
+    }
+
+    public void SetStart(bool val)
+    {
+        areaStarted = val;
+    }
+
+    public bool GetStart()
+    {
+        return areaStarted;
+    }
+
 }

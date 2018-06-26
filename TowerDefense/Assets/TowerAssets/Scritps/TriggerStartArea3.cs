@@ -18,9 +18,9 @@ public class TriggerStartArea3 : MonoBehaviour {
     {
         if (c.CompareTag("Human"))
         {
+            collider.GetComponent<BoxCollider>().enabled = true;
             if (cont == 0)
             {
-                collider.GetComponent<BoxCollider>().enabled = true;
                 runMessage.text = "RESISTI ALLE ONDATE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
