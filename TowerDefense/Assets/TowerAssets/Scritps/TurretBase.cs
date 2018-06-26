@@ -35,8 +35,8 @@ public class TurretBase : MonoBehaviour {
         builded = false;
         type = 1;
         selected = false;
-        triggerController.SetNumber(5);
-        turretNumber = triggerController.GetNumber();
+        triggerController.GetComponent<TriggerDestroy>().SetNumber(5);
+        turretNumber = triggerController.GetComponent<TriggerDestroy>().GetNumber();
     }
 
 
@@ -44,7 +44,7 @@ public class TurretBase : MonoBehaviour {
     void Update()
     {
         
-        turretNumber = triggerController.GetNumber();
+        turretNumber = triggerController.GetComponent<TriggerDestroy>().GetNumber();
         if (!builded && turretNumber>0 && selected)
         {
             if (Input.GetKeyDown("q"))
@@ -154,7 +154,7 @@ public class TurretBase : MonoBehaviour {
         }
         Debug.Log("Turret build!");
         turretNumber --;
-        triggerController.SetNumber(turretNumber);
+        triggerController.GetComponent<TriggerDestroy>().SetNumber(turretNumber);
     }
 
 
@@ -166,7 +166,7 @@ public class TurretBase : MonoBehaviour {
             GameObject effect = (GameObject)Instantiate(destroyEffect, transform.position, transform.rotation);
             Destroy(effect, 5f);
             builded = false;
-            triggerController.SetNumber(5);
+            triggerController.GetComponent<TriggerDestroy>().SetNumber(5);
         }
     }
     

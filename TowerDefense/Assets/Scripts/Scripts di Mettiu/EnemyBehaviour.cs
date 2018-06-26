@@ -94,7 +94,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 		yield return new WaitForSeconds(atkClip.length-1.5f);
 		target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
-		Debug.Log(this.name+" Attacked " +target.name);
+		//Debug.Log(this.name+" Attacked " +target.name);
 		yield return new WaitForSeconds(1f);
 
 		attacking = false;

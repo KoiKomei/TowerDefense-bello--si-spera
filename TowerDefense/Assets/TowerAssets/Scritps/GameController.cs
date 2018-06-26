@@ -25,6 +25,9 @@ public class GameController : MonoBehaviour {
     public GameObject payload;
     public GameObject explosionEffect;
 
+
+    private int enemyToDestroy = 0;
+    private int enemyDestroyed = 0;
     private int area = 1;
 
     public void Update() {
@@ -98,6 +101,11 @@ public class GameController : MonoBehaviour {
         area = i;
     }
 
+    public int GetArea()
+    {
+        return area;
+    }
+
     private void Start()
     {
         explosionEffect.transform.position = payload.transform.position;
@@ -132,4 +140,29 @@ public class GameController : MonoBehaviour {
         Destroy(Portal3B);
     }
 
+
+
+    private void checkEndWave()
+    {
+        /*
+        foreach (GameObject i in enemyObject)
+        {
+            if (i.GetComponent<EnemyBehaviour>() && i == null)
+            {
+                enemyDestroyed++;
+            }
+        }
+        Debug.Log(enemyDestroyed);
+        if (enemyDestroyed == enemyToDestroy)
+        {
+            onGoing = false;
+            wave++;
+            enemyDestroyed = 0;
+            Debug.Log("nextWAVE");
+        }
+
+        
+
+        */
+    }
 }
