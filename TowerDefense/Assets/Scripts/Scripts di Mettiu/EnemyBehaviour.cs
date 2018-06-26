@@ -17,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	public float AttackFrequency = 1f;
 	private float Speed;
 	public float AttackRange = 5;
-
+    public bool isDead = false;
 	private float maXHealthBar;
 	private bool attacking = false;
 	[SerializeField] private RectTransform HealthBar;
@@ -31,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	{
 		agent.isStopped = true;
 		animator.SetBool("Dead", true);
+        GetComponentInChildren<EnemyCursor>().gameObject.SetActive(false);
         Destroy(this.gameObject,5);
     }
 
@@ -39,8 +40,9 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		Health -= damage;
 		Health = Mathf.Clamp(Health, 0, MaxHealth);
 		HealthBar.sizeDelta = new Vector2((maXHealthBar * Health) / MaxHealth, HealthBar.sizeDelta.y);
-		if (Health <= 0)
+		if (Health <= 0 && !isDead)
 		{
+            isDead = true;
 			Die();
 		}
 	}
