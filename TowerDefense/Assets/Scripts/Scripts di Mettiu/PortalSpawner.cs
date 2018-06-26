@@ -16,7 +16,7 @@ public class PortalSpawner : MonoBehaviour {
 	public float SpawnInterval = 1;
 
 	private int[] enemies;
-    private List<GameObject> enemyObject;
+    public GameController gc;
 
     private bool onGoing=false;
     private bool areaStarted = false;
@@ -26,7 +26,6 @@ public class PortalSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		wave = 1;
-        enemyObject = new List<GameObject>();
     }
 	
 	// Update is called once per frame
@@ -81,7 +80,6 @@ public class PortalSpawner : MonoBehaviour {
 			if (this.transform.position.y > 4)
 			{
                 GameObject enemy = Instantiate(enemyPrefab[i]);
-                enemyObject.Add(enemy);
                 areaStarted = true;
                 enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
 				enemy.GetComponent<Navigator>().enabled = false;
@@ -96,6 +94,9 @@ public class PortalSpawner : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(interval);
 		}
+        yield return new WaitForSeconds(15);
+        onGoing = false;
+        wave++;
         if (wave > Waves)
         {
             runMessage.text = "";
@@ -103,10 +104,6 @@ public class PortalSpawner : MonoBehaviour {
 
     }
 
-    public List<GameObject> GetEnemies()
-    {
-        return enemyObject;
-    }
 
     public int GetWave()
     {
@@ -122,7 +119,7 @@ public class PortalSpawner : MonoBehaviour {
     {
         onGoing=false;
     }
-
+    
     public void SetStart(bool val)
     {
         areaStarted = val;

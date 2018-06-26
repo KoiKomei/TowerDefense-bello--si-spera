@@ -54,10 +54,7 @@ public class TriggerDestroy : MonoBehaviour {
     {
         if (c.tag == "Human")
         {
-            if (passed) {
-                Destroy2();
-            }
-            passed = true;
+            Destroy2();
         }
         
     }
