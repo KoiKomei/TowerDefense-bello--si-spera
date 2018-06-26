@@ -11,7 +11,7 @@ public class TriggerEndArea2 : MonoBehaviour {
     {
         if (c.CompareTag("Human"))
         {
-            GameController.GetComponent<GameController>().SetArea(3);
+            GameController.GetComponent<GameController>().SetArea(1);
         }
     }
 }

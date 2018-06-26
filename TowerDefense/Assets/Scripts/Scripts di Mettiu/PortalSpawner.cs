@@ -19,7 +19,8 @@ public class PortalSpawner : MonoBehaviour {
     private List<GameObject> enemyObject;
 
     private bool onGoing=false;
-	private int wave;
+    private bool areaStarted = false;
+    private int wave;
 
 
 	// Use this for initialization
@@ -81,7 +82,8 @@ public class PortalSpawner : MonoBehaviour {
 			{
                 GameObject enemy = Instantiate(enemyPrefab[i]);
                 enemyObject.Add(enemy);
-				enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
+                areaStarted = true;
+                enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
 				enemy.GetComponent<Navigator>().enabled = false;
 				enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 				enemy.GetComponent<NavMeshAgent>().enabled = false;
@@ -101,14 +103,34 @@ public class PortalSpawner : MonoBehaviour {
 
     }
 
-    public void GetEnemies(GameObject enemy)
+    public List<GameObject> GetEnemies()
     {
-        enemyObject.Remove(enemy);
-        Debug.Log("enemy Removed");
+        return enemyObject;
     }
 
     public int GetWave()
     {
         return wave;
     }
+
+    public void SetWave(int w)
+    {
+        wave = w;
+    }
+
+    public void SetOnGoingFalse()
+    {
+        onGoing=false;
+    }
+
+    public void SetStart(bool val)
+    {
+        areaStarted = val;
+    }
+
+    public bool GetStart()
+    {
+        return areaStarted;
+    }
+
 }

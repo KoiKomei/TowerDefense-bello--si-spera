@@ -25,15 +25,17 @@ public class GameController : MonoBehaviour {
     public GameObject payload;
     public GameObject explosionEffect;
 
+    private bool nextWaveA3 = false;
+    private bool nextWaveA2 = false;
+    private bool nextWaveA1 = false;
 
-    private int enemyToDestroy = 0;
-    private int enemyDestroyed = 0;
-    private int area = 1;
-
+    private int area = 0;
+     
     public void Update() {
+        Debug.Log(area);
 
         StartCoroutine(GameManager());
-
+        checkEndWave();
     }
 
     IEnumerator GameManager()
@@ -144,25 +146,160 @@ public class GameController : MonoBehaviour {
 
     private void checkEndWave()
     {
-        /*
-        foreach (GameObject i in enemyObject)
+        int enemyToDestroy;
+        int enemyDestroyed;
+
+        if (area == 1)
         {
-            if (i.GetComponent<EnemyBehaviour>() && i == null)
-            {
-                enemyDestroyed++;
-            }
-        }
-        Debug.Log(enemyDestroyed);
-        if (enemyDestroyed == enemyToDestroy)
-        {
-            onGoing = false;
-            wave++;
+
+            enemyToDestroy = Portal1A.GetComponent<PortalSpawner>().GetEnemies().Count*4;
             enemyDestroyed = 0;
-            Debug.Log("nextWAVE");
+
+            foreach (GameObject i in Portal1A.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+            foreach (GameObject i in Portal1B.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+            foreach (GameObject i in Portal1C.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+            foreach (GameObject i in Portal1D.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+
+            if (enemyDestroyed == enemyToDestroy)
+            {
+                nextWaveA1 = true;
+                Debug.Log("nextWAVE");
+                enemyDestroyed = 0;
+
+                Portal1A.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveA = Portal1A.GetComponent<PortalSpawner>().GetWave();
+                waveA++;
+                Portal1A.GetComponent<PortalSpawner>().SetWave(waveA);
+
+                Portal1B.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveB = Portal1B.GetComponent<PortalSpawner>().GetWave();
+                waveB++;
+                Portal1B.GetComponent<PortalSpawner>().SetWave(waveB);
+
+                Portal1C.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveC = Portal1C.GetComponent<PortalSpawner>().GetWave();
+                waveC++;
+                Portal1C.GetComponent<PortalSpawner>().SetWave(waveC);
+
+                Portal1D.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveD = Portal1D.GetComponent<PortalSpawner>().GetWave();
+                waveD++;
+                Portal1D.GetComponent<PortalSpawner>().SetWave(waveD);
+                
+            }
+
         }
 
-        
+        if (area == 2)
+        {
 
-        */
+            enemyToDestroy = Portal2.GetComponent<PortalSpawner>().GetEnemies().Count * 4;
+            enemyDestroyed = 0;
+
+            foreach (GameObject i in Portal2.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+
+            if (enemyDestroyed == enemyToDestroy)
+            {
+                nextWaveA2 = true;
+                Debug.Log("nextWAVE");
+                enemyDestroyed = 0;
+
+                Portal2.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveA = Portal2.GetComponent<PortalSpawner>().GetWave();
+                waveA++;
+                Portal2.GetComponent<PortalSpawner>().SetWave(waveA);
+            }
+
+        }
+
+        if (area == 3)
+        {
+
+            enemyToDestroy = Portal3A.GetComponent<PortalSpawner>().GetEnemies().Count * 4;
+            enemyDestroyed = 0;
+
+            foreach (GameObject i in Portal3A.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+            foreach (GameObject i in Portal3B.GetComponent<PortalSpawner>().GetEnemies())
+            {
+                if (i.GetComponent<EnemyBehaviour>() && i == null)
+                {
+                    enemyDestroyed++;
+                }
+            }
+
+            if (enemyDestroyed == enemyToDestroy)
+            {
+                nextWaveA3 = true;
+                Debug.Log("nextWAVE");
+                enemyDestroyed = 0;
+
+                Portal3A.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveA = Portal3A.GetComponent<PortalSpawner>().GetWave();
+                waveA++;
+                Portal3A.GetComponent<PortalSpawner>().SetWave(waveA);
+
+                Portal3B.GetComponent<PortalSpawner>().SetOnGoingFalse();
+                int waveB = Portal3B.GetComponent<PortalSpawner>().GetWave();
+                waveB++;
+                Portal3B.GetComponent<PortalSpawner>().SetWave(waveB);
+            }
+
+        }
+
+        if (Portal1A.GetComponent<PortalSpawner>().GetStart())
+        {
+            area = 1;
+            Portal3A.GetComponent<PortalSpawner>().SetStart(false);
+            Debug.Log("AREA 1 STARTED");
+        }
+        if (Portal2.GetComponent<PortalSpawner>().GetStart())
+        {
+            area = 2;
+            Portal3A.GetComponent<PortalSpawner>().SetStart(false);
+            Debug.Log("AREA 2 STARTED");
+        }
+        if (Portal3A.GetComponent<PortalSpawner>().GetStart())
+        {
+            area = 3;
+            Portal3A.GetComponent<PortalSpawner>().SetStart(false);
+            Debug.Log("AREA 3 STARTED");
+        }
+
     }
 }
