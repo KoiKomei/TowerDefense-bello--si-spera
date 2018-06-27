@@ -100,6 +100,7 @@ public class Navigator : MonoBehaviour {
 					GetComponent<EnemyBehaviour>().Attack(Waypoints[Waypoints.Length-1].gameObject);
 				}
 			}
+
 		}
 		else
 		{
