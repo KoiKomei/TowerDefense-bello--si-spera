@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
     private int area = 0;
      
     public void Update() {
-        Debug.Log(area);
+        //Debug.Log(area);
 
         StartCoroutine(GameManager());
     }

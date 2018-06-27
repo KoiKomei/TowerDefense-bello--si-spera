@@ -43,14 +43,16 @@ public class Navigator : MonoBehaviour {
 
 
 
+
 		if (!agent.pathPending && agent.remainingDistance < WaypointRadius)
 		{
 
 			foreach(Transform t in Waypoints)
 			{
-				if (agent.destination.x==t.position.x && agent.destination.z==t.position.z)
+				if (agent.destination.x==t.position.x && agent.destination.z==t.position.z && goingTo!= Waypoints.Length - 1)
 				{
 					GoToNext();
+					
 					break;
 				}
 			}
@@ -60,6 +62,14 @@ public class Navigator : MonoBehaviour {
 		//Debug.Log(colliders.Length);
 		
 		Collider player = null;
+		if (GetComponent<EnemyBehaviour>().isAttacking())
+		{
+			agent.isStopped = true;
+		}
+		else
+		{
+			agent.isStopped = false;
+		}
 		foreach (Collider c in colliders)
 		{
 			GameObject target = c.gameObject;
@@ -85,12 +95,15 @@ public class Navigator : MonoBehaviour {
 
 		if (found || (!loop && goingTo == Waypoints.Length - 1))
 		{
+			
 			agent.stoppingDistance = range;
 			agent.autoBraking = true;
 			agent.radius = 0.3f;
 
-			if (agent.remainingDistance <= range && !GetComponent<EnemyBehaviour>().isAttacking())
+			
+			if ((agent.remainingDistance <= range) && !GetComponent<EnemyBehaviour>().isAttacking())
 			{
+				
 				if (found)
 				{
 					GetComponent<EnemyBehaviour>().Attack(player.gameObject);
@@ -100,6 +113,25 @@ public class Navigator : MonoBehaviour {
 					GetComponent<EnemyBehaviour>().Attack(Waypoints[Waypoints.Length-1].gameObject);
 				}
 			}
+			if (!found && goingTo == Waypoints.Length - 1 && Waypoints[Waypoints.Length - 1].gameObject.GetComponent<Payload>() != null)
+			{
+				Ray ray = new Ray(transform.position, transform.forward);
+				RaycastHit hit;
+
+				if (Physics.Raycast(ray, out hit))
+				{
+					
+					GameObject hitObject = hit.transform.gameObject;
+
+					if (hitObject.GetComponent<Payload>() && hit.distance<=range && !GetComponent<EnemyBehaviour>().isAttacking())
+					{
+						GetComponent<EnemyBehaviour>().Attack(Waypoints[Waypoints.Length - 1].gameObject);
+						agent.destination = new Vector3(hit.point.x,agent.destination.y, hit.point.z);
+						
+					}
+					
+				}
+			}
 
 		}
 		else
@@ -107,6 +139,7 @@ public class Navigator : MonoBehaviour {
 			agent.stoppingDistance = 0;
 			agent.autoBraking = true;
 			agent.radius = 2f;
+			//payloadFound = false;
 		}
 		//Debug.Log("go to: " + goingTo + " x: " + agent.destination.x + " z: " + agent.destination.z);
 		//Debug.Log(agent.velocity.magnitude);
