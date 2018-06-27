@@ -20,7 +20,7 @@ public class Turret : MonoBehaviour {
 	[Header("Use Laser")]
 	public bool useLaser = false;
 
-	public int damageOverTime = 30;
+	public int damageOverTime = 1;
 	public float slowAmount = .5f;
 
 	public LineRenderer lineRenderer;
@@ -56,7 +56,7 @@ public class Turret : MonoBehaviour {
 			}
 		}
 
-		if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range && !nearestEnemy.GetComponent<EnemyBehaviour>().isDead)
 		{
 			target = nearestEnemy.transform;
 			targetEnemy = nearestEnemy.GetComponent<EnemyBehaviour>();

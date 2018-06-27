@@ -99,7 +99,8 @@ public class Payload : MonoBehaviour {
 	public void Hurt(int damage)
 	{
 		Health -= damage;
-		if (Health <= 0)
+        healthBarPayload.value -= damage;
+        if (Health <= 0)
 		{
 			lose();
 		}

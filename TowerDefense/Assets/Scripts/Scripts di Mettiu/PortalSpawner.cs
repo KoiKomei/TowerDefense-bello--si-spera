@@ -11,6 +11,7 @@ public class PortalSpawner : MonoBehaviour {
 	[SerializeField] private GameObject[] enemyPrefab;
 	[SerializeField] private int[] nEnemyPerType;
     [SerializeField] public Text runMessage;
+    [SerializeField] public GameObject enemyHealtBar;
 
     public int Waves=3;
 	public float SpawnInterval = 1;

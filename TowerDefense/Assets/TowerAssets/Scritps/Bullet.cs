@@ -69,7 +69,7 @@ public class Bullet : MonoBehaviour {
 
 	void Damage (Transform enemy)
 	{
-		enemy.SendMessage("Hurt", damage, SendMessageOptions.DontRequireReceiver);
+		enemy.SendMessage("Hurt", 2, SendMessageOptions.DontRequireReceiver);
 	}
 
 	void OnDrawGizmosSelected ()

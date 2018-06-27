@@ -11,7 +11,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	private Animator animator;
 	private AnimationClip atkClip;
 
-    public int MaxHealth = 10;
+    public int MaxHealth = 25;
 	private int Health;
 	public int AttackDamage = 1;
 	public float AttackFrequency = 1f;

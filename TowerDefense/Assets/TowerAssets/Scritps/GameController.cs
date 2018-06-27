@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour {
                 runMessage.text = " " + i + " ";
                 yield return new WaitForSeconds(1);
             }
+            runMessage.text = "HAI SALVATO LA TERRA";
             Destroy();
             area = 0;
         }

@@ -26,17 +26,18 @@ public class TriggerStartArea1 : MonoBehaviour {
             if (cont == 0)
             {
                 collider.GetComponent<BoxCollider>().enabled = true;
-                runMessage.text = "PORTA IL CARICO AL CENTRO DEL PARCO E PROTEGGILO DAI NEMICI";
+                runMessage.text = "PROTEGGI IL CARICO DAI NEMICI";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
-                if (payload.GetComponent<Payload>().transform.position.x < 240 && payload.GetComponent<Payload>().transform.position.x > 230 && payload.GetComponent<Payload>().transform.position.z < -20 && payload.GetComponent<Payload>().transform.position.z >-30)
-                {
-                    payload.GetComponent<Payload>().enabled = false;
-                }
                 levelStart = true;
                 cont++;
             }
         }
+        if (c.GetComponent<Payload>() != null)
+        {
+            payload.GetComponent<Payload>().enabled = false;
+        }
+
     }
 
     public void Update()
