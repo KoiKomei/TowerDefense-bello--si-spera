@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class TriggerStartArea1 : MonoBehaviour {
@@ -14,6 +15,7 @@ public class TriggerStartArea1 : MonoBehaviour {
     public GameObject ParticlePortal4;
     public GameObject payload;
     public Collider collider;
+	public float range = 5;
 
     private float movementUp = 0.1f;
     private int cont = 0;
@@ -33,10 +35,7 @@ public class TriggerStartArea1 : MonoBehaviour {
                 cont++;
             }
         }
-        if (c.GetComponent<Payload>() != null)
-        {
-            payload.GetComponent<Payload>().enabled = false;
-        }
+        
 
     }
 
@@ -68,6 +67,19 @@ public class TriggerStartArea1 : MonoBehaviour {
             }
         }
 
-    }
+		Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+
+		foreach (Collider c in colliders)
+		{
+			GameObject target = c.gameObject;
+			if (c.GetComponentInParent<Payload>() != null)
+			{
+				c.GetComponentInParent<Payload>().enabled = false;
+				c.GetComponentInParent<NavMeshAgent>().isStopped = true;
+				break;
+			}
+		}
+
+	}
 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
@@ -11,7 +12,7 @@ public class GameController : MonoBehaviour {
     public GameObject Collider2;
     public GameObject Collider3;
 
-    public GameObject Portal3A;
+	public GameObject Portal3A;
     public GameObject Portal3B;
     public GameObject Portal2;
     public GameObject ParticlePortal2;
@@ -45,7 +46,8 @@ public class GameController : MonoBehaviour {
                 Destroy1();
                 Collider1.GetComponent<BoxCollider>().enabled = false;
                 payload.GetComponent<Payload>().enabled = true;
-                runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
+				payload.GetComponent<NavMeshAgent>().isStopped = false;
+				runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "";
             }
@@ -53,7 +55,7 @@ public class GameController : MonoBehaviour {
 
         if (area == 1)
         {
-            if (Portal2.GetComponent<PortalSpawner>().GetWave() == 4)
+            if (Portal2.GetComponent<PortalSpawner>().GetWave()>3)
             {
                 area = 0;
                 Destroy(postoDiBlocco);

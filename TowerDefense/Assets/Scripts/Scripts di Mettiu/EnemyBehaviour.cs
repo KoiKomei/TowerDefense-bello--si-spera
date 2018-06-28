@@ -31,7 +31,8 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	{
 		agent.isStopped = true;
 		animator.SetBool("Dead", true);
-        GetComponentInChildren<EnemyCursor>().gameObject.SetActive(false);
+		GetComponentInChildren<Navigator>().enabled = false;
+		GetComponentInChildren<EnemyCursor>().gameObject.SetActive(false);
         Destroy(this.gameObject,5);
     }
 

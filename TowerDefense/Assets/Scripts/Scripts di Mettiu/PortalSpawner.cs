@@ -11,22 +11,25 @@ public class PortalSpawner : MonoBehaviour {
 	[SerializeField] private GameObject[] enemyPrefab;
 	[SerializeField] private int[] nEnemyPerType;
     [SerializeField] public Text runMessage;
-    [SerializeField] public GameObject enemyHealtBar;
+    [SerializeField] private GameObject camera;
 
     public int Waves=3;
 	public float SpawnInterval = 1;
 
+	
 	private int[] enemies;
     public GameController gc;
 
     private bool onGoing=false;
     private bool areaStarted = false;
-    private int wave;
+	private List<GameObject> list;
+	private int wave;
 
 
 	// Use this for initialization
 	void Start () {
 		wave = 1;
+		list=GetComponentInParent<WaveController>().getList();
     }
 	
 	// Update is called once per frame
@@ -51,7 +54,7 @@ public class PortalSpawner : MonoBehaviour {
 				}
 			}
 			shuffle(enemies, 10);
-			onGoing = true;
+			
 			for(int i=0;i<nEnemyPerType.Length;i++)
 			{
 				nEnemyPerType[i] += 1;
@@ -77,28 +80,100 @@ public class PortalSpawner : MonoBehaviour {
 
 	IEnumerator SpawnEnemies(float interval)
 	{
+		int j = 0;
         foreach (int i in enemies) {
 			if (this.transform.position.y > 4)
 			{
-                GameObject enemy = Instantiate(enemyPrefab[i]);
-                areaStarted = true;
-                enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
-				enemy.GetComponent<Navigator>().enabled = false;
-				enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
-				enemy.GetComponent<NavMeshAgent>().enabled = false;
-				enemy.GetComponent<NavMeshAgent>().radius = 2;
-				enemy.GetComponent<NavMeshAgent>().baseOffset=0.1f;
-				enemy.transform.position = new Vector3(this.transform.position.x + 1f, 1f, this.transform.position.z + 1f);
-				enemy.GetComponent<Navigator>().enabled = true;
-				enemy.GetComponent<NavMeshAgent>().enabled = true;
-				enemy.GetComponent<Navigator>().setWaypoints(Waypoints);
+				if (enemies[i]==0) { 
+					GameObject enemy = Instantiate(enemyPrefab[i]);
+					j++;
+					areaStarted = true;
+					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 10;
+					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
+					enemy.GetComponent<EnemyBehaviour>().AttackRange = 5;
+					enemy.GetComponent<Navigator>().enabled = false;
+					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
+					enemy.GetComponent<NavMeshAgent>().enabled = false;
+					enemy.GetComponent<NavMeshAgent>().radius = 2;
+					enemy.GetComponent<NavMeshAgent>().baseOffset=0.1f;
+					enemy.GetComponentInChildren<LookAt>().Player = camera.transform;
+					if (j % 2 == 0)
+					{
+						enemy.transform.position = new Vector3(this.transform.position.x + 1f, 1f, this.transform.position.z + 1f);
+					}
+					else
+					{
+						enemy.transform.position = new Vector3(this.transform.position.x - 1f, 1f, this.transform.position.z - 1f);
+					}
+					enemy.GetComponent<Navigator>().enabled = true;
+					enemy.GetComponent<NavMeshAgent>().enabled = true;
+					enemy.GetComponent<Navigator>().setWaypoints(Waypoints);
+
+					list.Add(enemy);
+					onGoing = true;
+				}
+				if (enemies[i] == 1)
+				{
+					GameObject enemy = Instantiate(enemyPrefab[i]);
+					j++;
+					areaStarted = true;
+					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 25;
+					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 2;
+					enemy.GetComponent<EnemyBehaviour>().AttackRange = 1;
+					enemy.GetComponent<Navigator>().enabled = false;
+					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
+					enemy.GetComponent<NavMeshAgent>().enabled = false;
+					enemy.GetComponent<NavMeshAgent>().radius = 2;
+					enemy.GetComponent<NavMeshAgent>().baseOffset = 0.1f;
+					enemy.GetComponentInChildren<LookAt>().Player = camera.transform;
+					if (j % 2 == 0)
+					{
+						enemy.transform.position = new Vector3(this.transform.position.x + 1f, 1f, this.transform.position.z + 1f);
+					}
+					else
+					{
+						enemy.transform.position = new Vector3(this.transform.position.x - 1f, 1f, this.transform.position.z - 1f);
+					}
+					enemy.GetComponent<Navigator>().enabled = true;
+					enemy.GetComponent<NavMeshAgent>().enabled = true;
+					enemy.GetComponent<Navigator>().setWaypoints(Waypoints);
+
+					list.Add(enemy);
+					onGoing = true;
+				}
+				if (enemies[i] == 2)
+				{
+					GameObject enemy = Instantiate(enemyPrefab[i]);
+					j++;
+					areaStarted = true;
+					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 40;
+					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 5;
+					enemy.GetComponent<EnemyBehaviour>().AttackRange = 1;
+					enemy.GetComponent<Navigator>().enabled = false;
+					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 0;
+					enemy.GetComponent<NavMeshAgent>().enabled = false;
+					enemy.GetComponent<NavMeshAgent>().radius = 2;
+					enemy.GetComponent<NavMeshAgent>().baseOffset = 0.1f;
+					enemy.GetComponentInChildren<LookAt>().Player = camera.transform;
+					if (j % 2 == 0)
+					{
+						enemy.transform.position = new Vector3(this.transform.position.x + 1f, 1f, this.transform.position.z + 1f);
+					}
+					else
+					{
+						enemy.transform.position = new Vector3(this.transform.position.x - 1f, 1f, this.transform.position.z - 1f);
+					}
+					enemy.GetComponent<Navigator>().enabled = true;
+					enemy.GetComponent<NavMeshAgent>().enabled = true;
+					enemy.GetComponent<Navigator>().setWaypoints(Waypoints);
+
+					list.Add(enemy);
+					onGoing = true;
+				}
 			}
 			yield return new WaitForSeconds(interval);
 		}
-        yield return new WaitForSeconds(15);
-        onGoing = false;
-        wave++;
-        if (wave > Waves)
+        if (wave >= Waves)
         {
             runMessage.text = "";
         }
@@ -120,6 +195,11 @@ public class PortalSpawner : MonoBehaviour {
     {
         onGoing=false;
     }
+
+	public bool getOnGoing()
+	{
+		return onGoing;
+	}
     
     public void SetStart(bool val)
     {

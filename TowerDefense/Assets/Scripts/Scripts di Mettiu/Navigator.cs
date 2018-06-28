@@ -41,7 +41,7 @@ public class Navigator : MonoBehaviour {
 		bool found = false;
 
 
-
+		
 
 
 		if (!agent.pathPending && agent.remainingDistance < WaypointRadius)
