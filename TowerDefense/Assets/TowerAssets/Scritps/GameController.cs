@@ -83,19 +83,16 @@ public class GameController : MonoBehaviour {
 
         if (area == 5)
         {
-            runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
-            yield return new WaitForSeconds(3);
-            runMessage.text = "SCAPPA PRIMA DELL'ESPLOSIONE DEL CARICO";
-            yield return new WaitForSeconds(3);
 
-            for (int i = 60; i > 0; i--)
+            if (payload.GetComponent<Payload>().GetArrived())
             {
-                runMessage.text = " " + i + " ";
-                yield return new WaitForSeconds(1);
+                runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
+                yield return new WaitForSeconds(3);
+                runMessage.text = "HAI SALVATO LA TERRA";
+                yield return new WaitForSeconds(2);
+                Destroy();
+                area = 0;
             }
-            runMessage.text = "HAI SALVATO LA TERRA";
-            Destroy();
-            area = 0;
         }
     }
 
