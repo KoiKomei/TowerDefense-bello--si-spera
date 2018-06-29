@@ -19,7 +19,7 @@ public class Fireball : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 		
-        TPSMovement player = other.GetComponent<TPSMovement>();
+        TPSMovement2 player = other.GetComponent<TPSMovement2>();
         if (player != null) {
 			Debug.Log(12345);
 			player.SendMessage("Hurt", damage, SendMessageOptions.DontRequireReceiver);
