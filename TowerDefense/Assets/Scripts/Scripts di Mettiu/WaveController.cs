@@ -6,14 +6,18 @@ public class WaveController : MonoBehaviour {
 
 	[SerializeField] private PortalSpawner[] portals;
 
-	private List<GameObject> list;
+	private ArrayList list;
 
 
 	public GameObject Fontain;
 
 	// Use this for initialization
+	private void Awake()
+	{
+		list = new ArrayList();
+	}
 	void Start () {
-		list = new List<GameObject>();
+		
 	}
 
 	// Update is called once per frame
@@ -47,7 +51,7 @@ public class WaveController : MonoBehaviour {
 		}
 	}
 
-	public List<GameObject> getList()
+	public ArrayList getList()
 	{
 		return list;
 	}

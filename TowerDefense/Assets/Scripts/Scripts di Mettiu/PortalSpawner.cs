@@ -22,9 +22,8 @@ public class PortalSpawner : MonoBehaviour {
 
     private bool onGoing=false;
     private bool areaStarted = false;
-	private List<GameObject> list;
+	private ArrayList list;
 	private int wave;
-
 
 	// Use this for initialization
 	void Start () {
@@ -59,8 +58,10 @@ public class PortalSpawner : MonoBehaviour {
 			{
 				nEnemyPerType[i] += 1;
 			}
-			StartCoroutine(SpawnEnemies(SpawnInterval));			
-        }
+
+			
+			StartCoroutine(SpawnEnemies(SpawnInterval));
+		}
 
     }
 
