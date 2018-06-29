@@ -23,6 +23,8 @@ public class Payload : MonoBehaviour {
 	public float WaypointRadius = 10f;
 
 	private int goingTo;
+    private bool arrived = false;
+    private int cont=0;
 
     [SerializeField] private Slider healthBarPayload;
 
@@ -81,9 +83,17 @@ public class Payload : MonoBehaviour {
 		{
 					GoToNext();
 
-		}
+        }
+        if (agent.remainingDistance < 5 && goingTo == Waypoints.Length - 1)
+        {
+            if (cont == 0)
+            {
+                arrived = true;
+                cont++;
+            }
+        }
 
-	}
+    }
 
 	private void GoToNext()
 	{
@@ -109,5 +119,10 @@ public class Payload : MonoBehaviour {
 	private void lose()
 	{
 
-	}
+    }
+
+    public bool GetArrived()
+    {
+        return arrived;
+    }
 }
