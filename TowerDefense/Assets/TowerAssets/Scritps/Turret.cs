@@ -6,7 +6,7 @@ public class Turret : MonoBehaviour {
     public GameObject prefab;
 
     private Transform target;
-	private EnemyBehaviour targetEnemy;
+    private EnemyBehaviour targetEnemy;
 
 	[Header("General")]
 
@@ -20,7 +20,9 @@ public class Turret : MonoBehaviour {
 	[Header("Use Laser")]
 	public bool useLaser = false;
 
-	public int damageOverTime = 1;
+    public bool attackStart = false;
+
+    public int damageOverTime = 1;
 	public float slowAmount = .5f;
 
 	public LineRenderer lineRenderer;
@@ -39,7 +41,7 @@ public class Turret : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
-	}
+    }
 	
 	void UpdateTarget ()
 	{
@@ -58,9 +60,11 @@ public class Turret : MonoBehaviour {
 
         if (nearestEnemy != null && shortestDistance <= range && !nearestEnemy.GetComponent<EnemyBehaviour>().isDead)
 		{
+            CancelInvoke("DamageOverTime");
 			target = nearestEnemy.transform;
 			targetEnemy = nearestEnemy.GetComponent<EnemyBehaviour>();
-		} else
+            attackStart = true;
+        } else
 		{
 			target = null;
 		}
@@ -75,7 +79,8 @@ public class Turret : MonoBehaviour {
 			{
 				if (lineRenderer.enabled)
 				{
-					lineRenderer.enabled = false;
+                    attackStart = false;
+                    lineRenderer.enabled = false;
 					impactEffect.Stop();
 					impactLight.enabled = false;
 				}
@@ -84,12 +89,12 @@ public class Turret : MonoBehaviour {
 			return;
 		}
 
-		LockOnTarget();
+        LockOnTarget();
 
 		if (useLaser)
 		{
-			Laser();
-		} else
+            Laser();
+        } else
 		{
 			if (fireCountdown <= 0f)
 			{
@@ -110,26 +115,28 @@ public class Turret : MonoBehaviour {
 		partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 	}
 
-	void Laser ()
-	{
-        targetEnemy.SendMessage("Hurt", 1, SendMessageOptions.DontRequireReceiver);
+    void Laser()
+    {
+        if (!lineRenderer.enabled)
+        {
+            lineRenderer.enabled = true;
+            impactEffect.Play();
+            impactLight.enabled = true;
+        }
 
-		if (!lineRenderer.enabled)
-		{
-			lineRenderer.enabled = true;
-			impactEffect.Play();
-			impactLight.enabled = true;
-		}
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, target.position);
 
-		lineRenderer.SetPosition(0, firePoint.position);
-		lineRenderer.SetPosition(1, target.position);
+        Vector3 dir = firePoint.position - target.position;
 
-		Vector3 dir = firePoint.position - target.position;
+        impactEffect.transform.position = target.position + dir.normalized;
 
-		impactEffect.transform.position = target.position + dir.normalized;
-
-		impactEffect.transform.rotation = Quaternion.LookRotation(dir);
-	}
+        impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+        if (attackStart) {
+            InvokeRepeating("DamageOverTime", 0, 1f);
+            attackStart = false;
+        }
+    }
 
 	void Shoot ()
 	{
@@ -145,4 +152,12 @@ public class Turret : MonoBehaviour {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);
 	}
+
+
+    private void DamageOverTime()
+    {
+        if (targetEnemy!=null) {
+            targetEnemy.SendMessage("Hurt", 1, SendMessageOptions.DontRequireReceiver);
+        }
+    }
 }

@@ -88,10 +88,10 @@ public class PortalSpawner : MonoBehaviour {
 					GameObject enemy = Instantiate(enemyPrefab[i]);
 					j++;
 					areaStarted = true;
-					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 10;
-					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
-					enemy.GetComponent<EnemyBehaviour>().AttackRange = 5;
-					enemy.GetComponent<Navigator>().enabled = false;
+                    enemy.GetComponent<EnemyBehaviour>().MaxHealth = 25;
+                    enemy.GetComponent<EnemyBehaviour>().AttackDamage = 2;
+                    enemy.GetComponent<EnemyBehaviour>().AttackRange = 2;
+                    enemy.GetComponent<Navigator>().enabled = false;
 					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
 					enemy.GetComponent<NavMeshAgent>().radius = 2;
@@ -117,10 +117,10 @@ public class PortalSpawner : MonoBehaviour {
 					GameObject enemy = Instantiate(enemyPrefab[i]);
 					j++;
 					areaStarted = true;
-					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 25;
-					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 2;
-					enemy.GetComponent<EnemyBehaviour>().AttackRange = 1;
-					enemy.GetComponent<Navigator>().enabled = false;
+					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 10;
+                    enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
+                    enemy.GetComponent<EnemyBehaviour>().AttackRange = 3;
+                    enemy.GetComponent<Navigator>().enabled = false;
 					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
 					enemy.GetComponent<NavMeshAgent>().radius = 2;
@@ -148,7 +148,7 @@ public class PortalSpawner : MonoBehaviour {
 					areaStarted = true;
 					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 40;
 					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 5;
-					enemy.GetComponent<EnemyBehaviour>().AttackRange = 1;
+					enemy.GetComponent<EnemyBehaviour>().AttackRange = 2;
 					enemy.GetComponent<Navigator>().enabled = false;
 					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 0;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
