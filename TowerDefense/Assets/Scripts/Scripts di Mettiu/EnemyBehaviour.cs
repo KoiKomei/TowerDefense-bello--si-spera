@@ -20,6 +20,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
     public bool isDead = false;
 	private float maXHealthBar;
 	private bool attacking = false;
+	[SerializeField] private GameObject AttaccoAldo;
 	[SerializeField] private RectTransform HealthBar;
 
 	public void Attack(GameObject target)
@@ -94,7 +95,16 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		attacking = true;
 
 		yield return new WaitForSeconds(atkClip.length-1.5f);
-		target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
+		if (!(AttackRange >= 3))
+		{
+			target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
+		}
+		if (AttackRange >= 3)
+		{
+			GameObject att=Instantiate(AttaccoAldo) as GameObject;
+			att.transform.position = transform.TransformPoint(new Vector3(0,0.5f,1));
+			att.transform.rotation = transform.rotation;
+		}
 		//Debug.Log(this.name+" Attacked " +target.name);
 		yield return new WaitForSeconds(1f);
 

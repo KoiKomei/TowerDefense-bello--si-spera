@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour {
 
-    private float speed = 10.0f;
+    private float speed = 5.0f;
     private int damage = 10;
 	
 
@@ -18,10 +18,13 @@ public class Fireball : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerCharacter player = other.GetComponent<PlayerCharacter>();
+		
+        TPSMovement player = other.GetComponent<TPSMovement>();
         if (player != null) {
-            player.Hurt(damage);
-        }
-        Destroy(this.gameObject);
+			Debug.Log(12345);
+			player.SendMessage("Hurt", damage, SendMessageOptions.DontRequireReceiver);
+			Destroy(this.gameObject);
+		}
+        
     }
 }
