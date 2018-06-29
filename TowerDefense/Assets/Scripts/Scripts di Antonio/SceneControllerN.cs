@@ -25,7 +25,6 @@ public class SceneControllerN : MonoBehaviour {
                 enemies[i].transform.position = new Vector3(0f, 1f, 0f);
                 float angle = Random.Range(0, 360);
                 enemies[i].transform.Rotate(0, angle, 0);
-                Debug.Log("Enemy " + i);
             }
         }
     }
