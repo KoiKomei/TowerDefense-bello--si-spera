@@ -97,7 +97,10 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		yield return new WaitForSeconds(atkClip.length-1.5f);
 		if (!(AttackRange >= 3))
 		{
-			target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
+			if (Vector3.Distance(this.transform.position, target.transform.position) <= AttackRange)
+			{
+				target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
+			}
 		}
 		if (AttackRange >= 3)
 		{
@@ -119,5 +122,9 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	public bool isAttacking()
 	{
 		return attacking;
+	}
+	public void setAttaccoAldo(GameObject g)
+	{
+		AttaccoAldo = g;
 	}
 }

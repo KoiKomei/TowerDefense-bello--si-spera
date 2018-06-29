@@ -12,6 +12,7 @@ public class PortalSpawner : MonoBehaviour {
 	[SerializeField] private int[] nEnemyPerType;
     [SerializeField] public Text runMessage;
     [SerializeField] private GameObject camera;
+	[SerializeField] private GameObject AttaccoAldo;
 
     public int Waves=3;
 	public float SpawnInterval = 1;
@@ -120,8 +121,9 @@ public class PortalSpawner : MonoBehaviour {
 					areaStarted = true;
 					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 10;
                     enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
-                    enemy.GetComponent<EnemyBehaviour>().AttackRange = 3;
-                    enemy.GetComponent<Navigator>().enabled = false;
+                    enemy.GetComponent<EnemyBehaviour>().AttackRange = 5;
+					enemy.GetComponent<EnemyBehaviour>().setAttaccoAldo(AttaccoAldo);
+					enemy.GetComponent<Navigator>().enabled = false;
 					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
 					enemy.GetComponent<NavMeshAgent>().radius = 2;
