@@ -25,7 +25,6 @@ public class WaveController : MonoBehaviour {
 		bool empty = true;
 		foreach(PortalSpawner p in portals)
 		{
-            Debug.Log(p);
 			foreach(GameObject g in list)
 			{
 				if (g != null)

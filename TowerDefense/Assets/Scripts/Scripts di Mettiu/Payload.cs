@@ -84,7 +84,7 @@ public class Payload : MonoBehaviour {
 					GoToNext();
 
         }
-        if (agent.remainingDistance < 5 && goingTo == Waypoints.Length - 1)
+        if (agent.remainingDistance < 1 && goingTo == Waypoints.Length - 1)
         {
             if (cont == 0)
             {

@@ -86,12 +86,14 @@ public class GameController : MonoBehaviour {
 
             if (payload.GetComponent<Payload>().GetArrived())
             {
+                area = 0;
+                payload.GetComponent<Payload>().enabled = false;
+                payload.GetComponent<NavMeshAgent>().enabled = false;
                 runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
                 yield return new WaitForSeconds(3);
                 runMessage.text = "HAI SALVATO LA TERRA";
                 yield return new WaitForSeconds(2);
-                Destroy();
-                area = 0;
+                
             }
         }
     }
@@ -111,12 +113,6 @@ public class GameController : MonoBehaviour {
         explosionEffect.transform.position = payload.transform.position;
     }
 
-    private void Destroy()
-    {
-        Destroy(payload);
-        GameObject effect = (GameObject)Instantiate(explosionEffect, transform.position, transform.rotation);
-        Destroy(effect, 5f);
-    }
 
     private void Destroy1()
     {
