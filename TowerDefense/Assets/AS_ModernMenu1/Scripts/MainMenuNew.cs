@@ -36,13 +36,13 @@ public class MainMenuNew : MonoBehaviour {
 		areYouSure.gameObject.SetActive(false);
 		continueBtn.gameObject.SetActive(true);
 		newGameBtn.gameObject.SetActive(true);
-		loadGameBtn.gameObject.SetActive(true);
+		//loadGameBtn.gameObject.SetActive(true);
 	}
 
 	public void  DisablePlayCampaign (){
 		continueBtn.gameObject.SetActive(false);
 		newGameBtn.gameObject.SetActive(false);
-		loadGameBtn.gameObject.SetActive(false);
+		//loadGameBtn.gameObject.SetActive(false);
 	}
 
 	public void  Position2 (){
@@ -159,6 +159,6 @@ public class MainMenuNew : MonoBehaviour {
 
     public void playNewGame()
     {
-        SceneManager.LoadScene("game", LoadSceneMode.Additive);
+        PlayerPrefs.SetInt("scene", 1);
     }
 }

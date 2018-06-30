@@ -26,7 +26,6 @@ public class PlayerCharacter : MonoBehaviour {
         //barValueDamage = Managers.Player.barValueDamage;
 
         healthBarBackground = healthBar.GetComponentInChildren<Image>();
-        SceneManager.UnloadSceneAsync("Menu_Scene");
     }
 	
 	// Update is called once per frame
