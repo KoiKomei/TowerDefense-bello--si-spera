@@ -18,8 +18,8 @@ public class SceneManagerScript : MonoBehaviour {
 
         loadGame();
         loadMenu();
-        
-	}
+        loadMenuFromGame();
+    }
 
     void loadGame()
     {
@@ -40,6 +40,17 @@ public class SceneManagerScript : MonoBehaviour {
             Debug.Log("loading menu");
             SceneManager.LoadScene("Menu_Scene", LoadSceneMode.Additive);
             //SceneManager.UnloadScene("game");
+            PlayerPrefs.SetInt("scene", 2);
+        }
+    }
+
+    void loadMenuFromGame()
+    {
+        if (PlayerPrefs.GetInt("scene") == 3)
+        {
+            Debug.Log("loading menu");
+            SceneManager.UnloadScene("game");
+            SceneManager.LoadScene("Menu_Scene", LoadSceneMode.Additive);
             PlayerPrefs.SetInt("scene", 2);
         }
     }
