@@ -159,10 +159,7 @@ public class MainMenuNew : MonoBehaviour {
 
     public void playNewGame()
     {
-<<<<<<< HEAD
         PlayerPrefs.SetInt("scene", 1);
-=======
-        SceneManager.LoadScene("game", LoadSceneMode.Single);
->>>>>>> 8633b6c7099c4e579fca2d3e83aadfcdf180d557
+
     }
 }

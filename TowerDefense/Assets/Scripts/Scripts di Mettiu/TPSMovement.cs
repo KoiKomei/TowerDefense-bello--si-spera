@@ -68,7 +68,7 @@ public class TPSMovement : MonoBehaviour {
 
         _soundSource = GetComponent<AudioSource>();
         _step = true;
-        
+        _soundSource.volume = PlayerPrefs.GetFloat("SFXVolume");
 
     }
 

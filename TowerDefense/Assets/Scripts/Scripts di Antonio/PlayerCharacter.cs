@@ -32,10 +32,9 @@ public class PlayerCharacter : MonoBehaviour {
         //barValueDamage = Managers.Player.barValueDamage;
 
         healthBarBackground = healthBar.GetComponentInChildren<Image>();
-<<<<<<< HEAD
-=======
-        
->>>>>>> 8633b6c7099c4e579fca2d3e83aadfcdf180d557
+
+        _sound.volume = PlayerPrefs.GetFloat("SFXVolume");
+
     }
 	
 	// Update is called once per frame

@@ -45,8 +45,8 @@ public class AudioManager : MonoBehaviour, IGameManager {
         Debug.Log("Audio Manager Starting...");
         musicSource.ignoreListenerVolume = true;
         musicSource.ignoreListenerPause = true;
-        soundVolume = 1f;
-        musicVolume = 1f;
+        soundVolume = PlayerPrefs.GetFloat("SFXVolume");
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         status = ManagerStatus.Started;
     }
 
