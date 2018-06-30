@@ -64,7 +64,7 @@ public class TPSMovement2 : MonoBehaviour {
         animator = GetComponent<Animator>();
         _soundSource = GetComponent<AudioSource>();
         player = GetComponentInParent<PlayerCharacter>();
-
+        _soundSource.volume = PlayerPrefs.GetFloat("SFXVolume");
         _vertSpeed = minFall;
         _shooting = false;
         _step = true;

@@ -199,8 +199,7 @@ public class OptionsMenuNew : MonoBehaviour {
 		sliderValueXSensitivity = sensitivityXSlider.GetComponent<Slider>().value;
 		sliderValueYSensitivity = sensitivityYSlider.GetComponent<Slider>().value;
 		sliderValueSmoothing = mouseSmoothSlider.GetComponent<Slider>().value;
-        MusicSlider();
-        SFXSlider();
+        
 	}
 
 	public void  FullScreen (){
