@@ -26,7 +26,7 @@ public class SceneManagerScript : MonoBehaviour {
         if (PlayerPrefs.GetInt("scene") == 1)
         {
             Debug.Log("loading game");
-            SceneManager.UnloadScene("Menu_Scene");
+            SceneManager.UnloadSceneAsync("Menu_Scene");
             SceneManager.LoadScene("game", LoadSceneMode.Additive);
             PlayerPrefs.SetInt("scene", 2);
 
@@ -39,8 +39,9 @@ public class SceneManagerScript : MonoBehaviour {
         {
             Debug.Log("loading menu");
             SceneManager.LoadScene("Menu_Scene", LoadSceneMode.Additive);
-            //SceneManager.UnloadScene("game");
+            
             PlayerPrefs.SetInt("scene", 2);
+           // SceneManager.UnloadSceneAsync("game");
         }
     }
 
