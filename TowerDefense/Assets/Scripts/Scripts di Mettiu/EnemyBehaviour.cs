@@ -22,8 +22,11 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	private bool attacking = false;
 	[SerializeField] private GameObject AttaccoAldo;
 	[SerializeField] private RectTransform HealthBar;
+    [SerializeField] private AudioClip hurt;
+    [SerializeField] private AudioClip death;
+    private AudioSource _playsound;
 
-	public void Attack(GameObject target)
+    public void Attack(GameObject target)
 	{
 		StartCoroutine(WaitAndAttack(target));
 	}
@@ -31,6 +34,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	public void Die()
 	{
 		agent.isStopped = true;
+        //_playsound.PlayOneShot(death);
 		animator.SetBool("Dead", true);
 		GetComponentInChildren<Navigator>().enabled = false;
 		GetComponentInChildren<EnemyCursor>().gameObject.SetActive(false);
@@ -39,6 +43,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
 	public void Hurt(int damage)
 	{
+        //_playsound.PlayOneShot(hurt);
 		Health -= damage;
 		Health = Mathf.Clamp(Health, 0, MaxHealth);
 		HealthBar.sizeDelta = new Vector2((maXHealthBar * Health) / MaxHealth, HealthBar.sizeDelta.y);
