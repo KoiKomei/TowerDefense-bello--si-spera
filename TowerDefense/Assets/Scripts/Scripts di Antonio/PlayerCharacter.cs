@@ -14,12 +14,18 @@ public class PlayerCharacter : MonoBehaviour {
     private Image healthBarBackground;
     private bool damaged;
 
+    [SerializeField] private AudioClip deathsound;
+
+    private AudioSource _sound;
+
+ 
+
     [SerializeField] private Slider healthBar;
 
     // Use this for initialization
     void Start () {
 
-       
+        _sound = GetComponent<AudioSource>();
         hp = Managers.Player.health;
         healthBar.maxValue = Managers.Player.maxHealth;
         healthPackValue = Managers.Player.healthPackValue;
@@ -34,7 +40,9 @@ public class PlayerCharacter : MonoBehaviour {
 
         if (hp <= 0)
         {
+           
             Death();
+            
         }
         if (damaged)
         {
@@ -64,6 +72,7 @@ public class PlayerCharacter : MonoBehaviour {
     }
 
     public void Death() {
+       
         Time.timeScale = 0;
         healthBarBackground.color = Color.red;
     }
