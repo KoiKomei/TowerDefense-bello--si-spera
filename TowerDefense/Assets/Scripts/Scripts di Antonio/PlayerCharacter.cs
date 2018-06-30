@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class PlayerCharacter : MonoBehaviour {
 
@@ -14,18 +14,28 @@ public class PlayerCharacter : MonoBehaviour {
     private Image healthBarBackground;
     private bool damaged;
 
+    [SerializeField] private AudioClip deathsound;
+
+    private AudioSource _sound;
+
+ 
+
     [SerializeField] private Slider healthBar;
 
     // Use this for initialization
     void Start () {
 
-       
+        _sound = GetComponent<AudioSource>();
         hp = Managers.Player.health;
         healthBar.maxValue = Managers.Player.maxHealth;
         healthPackValue = Managers.Player.healthPackValue;
         //barValueDamage = Managers.Player.barValueDamage;
 
         healthBarBackground = healthBar.GetComponentInChildren<Image>();
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 8633b6c7099c4e579fca2d3e83aadfcdf180d557
     }
 	
 	// Update is called once per frame
@@ -33,7 +43,9 @@ public class PlayerCharacter : MonoBehaviour {
 
         if (hp <= 0)
         {
+           
             Death();
+            
         }
         if (damaged)
         {
@@ -63,6 +75,7 @@ public class PlayerCharacter : MonoBehaviour {
     }
 
     public void Death() {
+       
         Time.timeScale = 0;
         healthBarBackground.color = Color.red;
     }
