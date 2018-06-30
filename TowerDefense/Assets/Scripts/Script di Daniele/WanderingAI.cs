@@ -34,10 +34,10 @@ public class WanderingAI : MonoBehaviour,IEnemy {
         if (_alive) {
             transform.Translate(0, 0, speed * Time.deltaTime);
 
-            Ray ray = new Ray(transform.position, transform.forward);
+            Ray ray = new Ray(transform.position, transform.forward*0.5f);
             RaycastHit hit;
 
-            if (Physics.SphereCast(ray, 0.75f, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 GameObject hitObject = hit.transform.gameObject;
 

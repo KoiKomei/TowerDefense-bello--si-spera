@@ -93,11 +93,18 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		//animator.SetFloat("Speed", 0);
 		animator.SetBool("Attack", true);
 		attacking = true;
-
+		this.transform.LookAt(target.transform);
 		yield return new WaitForSeconds(atkClip.length-1.5f);
 		if (!(AttackRange >= 3))
 		{
-			if (Vector3.Distance(this.transform.position, target.transform.position) <= AttackRange)
+			if (target.GetComponent<Payload>() == null)
+			{
+				if (Vector3.Distance(this.transform.position, target.transform.position) <= AttackRange)
+				{
+					target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
+				}
+			}
+			else
 			{
 				target.SendMessage("Hurt", AttackDamage, SendMessageOptions.DontRequireReceiver);
 			}
@@ -107,6 +114,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 			GameObject att=Instantiate(AttaccoAldo) as GameObject;
 			att.transform.position = transform.TransformPoint(new Vector3(0,0.5f,1));
 			att.transform.rotation = transform.rotation;
+			att.GetComponent<Fireball>().damage = AttackDamage;
 		}
 		//Debug.Log(this.name+" Attacked " +target.name);
 		yield return new WaitForSeconds(1f);

@@ -86,15 +86,15 @@ public class PortalSpawner : MonoBehaviour {
         foreach (int i in enemies) {
 			if (this.transform.position.y > 4)
 			{
-				if (enemies[i]==0) { 
+				//if (enemies[i]==0) { 
 					GameObject enemy = Instantiate(enemyPrefab[i]);
 					j++;
 					areaStarted = true;
-                    enemy.GetComponent<EnemyBehaviour>().MaxHealth = 25;
-                    enemy.GetComponent<EnemyBehaviour>().AttackDamage = 2;
-                    enemy.GetComponent<EnemyBehaviour>().AttackRange = 2;
+                    //enemy.GetComponent<EnemyBehaviour>().MaxHealth = 25;
+                   // enemy.GetComponent<EnemyBehaviour>().AttackDamage = 2;
+                    //enemy.GetComponent<EnemyBehaviour>().AttackRange = 2;
                     enemy.GetComponent<Navigator>().enabled = false;
-					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
+					//enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
 					enemy.GetComponent<NavMeshAgent>().radius = 2;
 					enemy.GetComponent<NavMeshAgent>().baseOffset=0.1f;
@@ -113,16 +113,16 @@ public class PortalSpawner : MonoBehaviour {
 
 					list.Add(enemy);
 					onGoing = true;
-				}
-				if (enemies[i] == 1)
+				//}
+				/*if (enemies[i] == 1)
 				{
 					GameObject enemy = Instantiate(enemyPrefab[i]);
 					j++;
 					areaStarted = true;
-					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 10;
-                    enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
-                    enemy.GetComponent<EnemyBehaviour>().AttackRange = 5;
-					enemy.GetComponent<EnemyBehaviour>().setAttaccoAldo(AttaccoAldo);
+					//enemy.GetComponent<EnemyBehaviour>().MaxHealth = 10;
+                    //enemy.GetComponent<EnemyBehaviour>().AttackDamage = 1;
+					//enemy.GetComponent<EnemyBehaviour>().AttackRange = 5;
+					//enemy.GetComponent<EnemyBehaviour>().setAttaccoAldo(AttaccoAldo);
 					enemy.GetComponent<Navigator>().enabled = false;
 					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 5;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
@@ -149,9 +149,9 @@ public class PortalSpawner : MonoBehaviour {
 					GameObject enemy = Instantiate(enemyPrefab[i]);
 					j++;
 					areaStarted = true;
-					enemy.GetComponent<EnemyBehaviour>().MaxHealth = 40;
-					enemy.GetComponent<EnemyBehaviour>().AttackDamage = 5;
-					enemy.GetComponent<EnemyBehaviour>().AttackRange = 2;
+					//enemy.GetComponent<EnemyBehaviour>().MaxHealth = 40;
+					//enemy.GetComponent<EnemyBehaviour>().AttackDamage = 5;
+					//enemy.GetComponent<EnemyBehaviour>().AttackRange = 2;
 					enemy.GetComponent<Navigator>().enabled = false;
 					enemy.GetComponent<Navigator>().PlayerDetectionRadius = 0;
 					enemy.GetComponent<NavMeshAgent>().enabled = false;
@@ -172,7 +172,7 @@ public class PortalSpawner : MonoBehaviour {
 
 					list.Add(enemy);
 					onGoing = true;
-				}
+				}*/
 			}
 			yield return new WaitForSeconds(interval);
 		}
