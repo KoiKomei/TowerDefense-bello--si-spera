@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class PlayerCharacter : MonoBehaviour {
 
@@ -26,7 +26,7 @@ public class PlayerCharacter : MonoBehaviour {
         //barValueDamage = Managers.Player.barValueDamage;
 
         healthBarBackground = healthBar.GetComponentInChildren<Image>();
-        SceneManager.UnloadSceneAsync("Menu_Scene");
+        
     }
 	
 	// Update is called once per frame
