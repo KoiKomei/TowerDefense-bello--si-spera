@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerCharacter : MonoBehaviour {
 
@@ -18,13 +19,14 @@ public class PlayerCharacter : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+       
         hp = Managers.Player.health;
         healthBar.maxValue = Managers.Player.maxHealth;
         healthPackValue = Managers.Player.healthPackValue;
         //barValueDamage = Managers.Player.barValueDamage;
 
-        healthBarBackground = healthBar.GetComponentInChildren<Image>();   
-
+        healthBarBackground = healthBar.GetComponentInChildren<Image>();
+        SceneManager.UnloadSceneAsync("Menu_Scene");
     }
 	
 	// Update is called once per frame
