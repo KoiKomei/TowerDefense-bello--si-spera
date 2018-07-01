@@ -40,44 +40,54 @@ public class GameController : MonoBehaviour {
     {
         if (area == 4)
         {
-            if (Portal1A.GetComponent<PortalSpawner>().GetWave() == 4)
-            {
-                area = 0;
-                Destroy1();
-                Collider1.GetComponent<BoxCollider>().enabled = false;
-                payload.GetComponent<Payload>().enabled = true;
-				payload.GetComponent<NavMeshAgent>().isStopped = false;
-				runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
-                yield return new WaitForSeconds(3);
-                runMessage.text = "";
+            if (Portal1A != null) {
+                if (Portal1A.GetComponent<PortalSpawner>().GetWave() == 4)
+                {
+                    area = 0;
+                    Destroy1();
+                    Collider1.GetComponent<BoxCollider>().enabled = false;
+                    payload.GetComponent<Payload>().enabled = true;
+                    payload.GetComponent<NavMeshAgent>().isStopped = false;
+                    runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
+                    yield return new WaitForSeconds(3);
+                    runMessage.text = "";
+                }
             }
         }
 
         if (area == 1)
         {
-            if (Portal2.GetComponent<PortalSpawner>().GetWave()>3)
-            {
-                area = 0;
-                Destroy(postoDiBlocco);
-                Destroy2();
-                Collider2.GetComponent<BoxCollider>().enabled = false;
-                payload.GetComponent<Payload>().enabled = true;
-                runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
-                yield return new WaitForSeconds(3);
-                runMessage.text = "";
+            if (Portal2 != null) {
+
+                if (Portal2.GetComponent<PortalSpawner>().GetWave() > 3)
+                {
+                    area = 0;
+                    Destroy(postoDiBlocco);
+                    Destroy2();
+                    Collider2.GetComponent<BoxCollider>().enabled = false;
+                    payload.GetComponent<Payload>().enabled = true;
+                    runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
+                    yield return new WaitForSeconds(3);
+                    runMessage.text = "";
+                }
             }
         }
 
         if (area == 2)
         {
-            if (Portal3A.GetComponent<PortalSpawner>().GetWave() == 4)
+
+            if (Portal3A != null)
             {
-                area = 0;
-                Destroy3();
-                Collider3.GetComponent<BoxCollider>().enabled = false;
-                runMessage.text = "VAI AVANTI PER PORTARE IL CARICO A DESTINAZIONE";
-                yield return new WaitForSeconds(3);
-                runMessage.text = "";
+
+                if (Portal3A.GetComponent<PortalSpawner>().GetWave() == 4)
+                {
+                    area = 0;
+                    Destroy3();
+                    Collider3.GetComponent<BoxCollider>().enabled = false;
+                    runMessage.text = "VAI AVANTI PER PORTARE IL CARICO A DESTINAZIONE";
+                    yield return new WaitForSeconds(3);
+                    runMessage.text = "";
+                }
             }
         }
 

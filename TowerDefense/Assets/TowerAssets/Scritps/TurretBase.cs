@@ -35,7 +35,7 @@ public class TurretBase : MonoBehaviour {
         builded = false;
         type = 1;
         selected = false;
-        triggerController.GetComponent<TriggerDestroy>().SetNumber(5);
+        triggerController.GetComponent<TriggerDestroy>().SetNumber(6);
         turretNumber = triggerController.GetComponent<TriggerDestroy>().GetNumber();
     }
 

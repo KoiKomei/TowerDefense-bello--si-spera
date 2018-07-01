@@ -7,10 +7,7 @@ public class WaveController : MonoBehaviour {
 	[SerializeField] private PortalSpawner[] portals;
 
 	private ArrayList list;
-
-
-	public GameObject Fontain;
-
+    
 	// Use this for initialization
 	private void Awake()
 	{
@@ -39,13 +36,6 @@ public class WaveController : MonoBehaviour {
 				p.SetWave(p.GetWave() + 1);
 				p.SetOnGoingFalse();
 				//Debug.Log(p.GetWave());
-			}
-			if (p.GetWave() > 3)
-			{
-				if (!Fontain.GetComponent<fountain>().getTriggered())
-				{
-					Fontain.GetComponent<fountain>().Activate();
-				}
 			}
 		}
 	}
