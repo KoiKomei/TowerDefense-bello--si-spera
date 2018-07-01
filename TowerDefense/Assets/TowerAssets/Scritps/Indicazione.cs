@@ -7,7 +7,7 @@ public class Indicazione : MonoBehaviour {
 
     [SerializeField] public Text runMessage;
 
-    private IEnumerator OnTriggerEnter(Collider c)
+	private IEnumerator OnTriggerEnter(Collider c)
     {
         if (c.CompareTag("Human"))
         {

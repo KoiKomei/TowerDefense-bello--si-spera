@@ -166,7 +166,7 @@ public class TurretBase : MonoBehaviour {
             GameObject effect = (GameObject)Instantiate(destroyEffect, transform.position, transform.rotation);
             Destroy(effect, 5f);
             builded = false;
-            triggerController.GetComponent<TriggerDestroy>().SetNumber(5);
+            triggerController.GetComponent<TriggerDestroy>().SetNumber(6);
         }
     }
     

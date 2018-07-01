@@ -9,8 +9,10 @@ public class TriggerStartArea2 : MonoBehaviour {
     public GameObject Portal1;
     public GameObject ParticlePortal1;
     public Collider collider;
+	public GameObject payloadLife;
 
-    private float movementUp = 0.1f;
+
+	private float movementUp = 0.1f;
     private bool levelStart = false;
     private int cont = 0;
     public GameObject payload;
@@ -24,7 +26,8 @@ public class TriggerStartArea2 : MonoBehaviour {
                 collider.GetComponent<BoxCollider>().enabled = true;
                 payload.GetComponent<Payload>().enabled = false;
                 runMessage.text = "RESISTI ALLE ONDATE PER MUOVERE IL CARICO";
-                yield return new WaitForSeconds(3);
+				payloadLife.SetActive(true);
+				yield return new WaitForSeconds(3);
                 runMessage.text = "";
                 levelStart = true;
                 cont++;
