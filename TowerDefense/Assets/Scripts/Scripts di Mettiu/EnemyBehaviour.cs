@@ -10,6 +10,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	private NavMeshAgent agent;
 	private Animator animator;
 	private AnimationClip atkClip;
+	private Vector3 targetPosition;
 
     public int MaxHealth = 25;
 	private int Health;
@@ -28,6 +29,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 
     public void Attack(GameObject target)
 	{
+		
 		StartCoroutine(WaitAndAttack(target));
 	}
 
@@ -65,6 +67,8 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		agent = GetComponent<NavMeshAgent>();
 		Speed = agent.speed;
 
+		targetPosition = Vector3.zero;
+
 		foreach(AnimationClip c in animator.runtimeAnimatorController.animationClips)
 		{
 			if (c.name == "Attack")
@@ -96,10 +100,18 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	private IEnumerator WaitAndAttack(GameObject target)
 	{
 		//animator.SetFloat("Speed", 0);
+		if (!(targetPosition.x == target.transform.position.x && targetPosition.y == target.transform.position.y && targetPosition.z == target.transform.position.z))
+		{
+			targetPosition = target.transform.position;
+			this.transform.LookAt(target.transform);
+
+		}
+		
 		animator.SetBool("Attack", true);
 		attacking = true;
-		this.transform.LookAt(target.transform);
+		
 		yield return new WaitForSeconds(atkClip.length-1.5f);
+		
 		if (!(AttackRange >= 3))
 		{
 			if (target.GetComponent<Payload>() == null)

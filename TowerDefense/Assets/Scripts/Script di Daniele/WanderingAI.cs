@@ -31,35 +31,37 @@ public class WanderingAI : MonoBehaviour,IEnemy {
     // Update is called once per frame
     void Update() {
 
-        if (_alive) {
-            transform.Translate(0, 0, speed * Time.deltaTime);
+		    if (_alive) {
+				transform.Translate(0, 0, speed * Time.deltaTime);
 
-            Ray ray = new Ray(transform.position, transform.forward*0.5f);
-            RaycastHit hit;
+				Ray ray = new Ray(transform.position, transform.forward*1.5f);
+				RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                GameObject hitObject = hit.transform.gameObject;
+				if (Physics.SphereCast(ray, 0.75f, out hit))
+				{
+					GameObject hitObject = hit.transform.gameObject;
+					//Debug.Log(hitObject.name);
 
-                if (hitObject.GetComponent<TPSMovement2>())
-                {
-                    if (_fireball == null)
-                    {
-                        _fireball = Instantiate(fireballPrefab) as GameObject;
-                        _fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
-                        _fireball.transform.rotation = transform.rotation;
-                    }
-                }
+					if (hitObject.GetComponent<TPSMovement2>())
+					{
 
-                else if (hit.distance < obstacleRange && rand)
-                {
-                    float angle = Random.Range(-110, 110);
-                    transform.Rotate(0, angle, 0);
-                }
-            }
+						if (_fireball == null)
+						{
+							_fireball = Instantiate(fireballPrefab) as GameObject;
+							_fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
+							_fireball.transform.rotation = transform.rotation;
+						}
+					}
 
-        }
-    }
+					else if (hit.distance < obstacleRange && rand)
+					{
+						float angle = Random.Range(-110, 110);
+						transform.Rotate(0, angle, 0);
+					}
+				}
+
+			}
+	}
 
 	public void Hurt(int damage)
 	{
