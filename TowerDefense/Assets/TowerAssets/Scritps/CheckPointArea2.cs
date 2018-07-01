@@ -30,7 +30,7 @@ public class CheckPointArea2 : MonoBehaviour {
                 PlayerPrefs.SetFloat("PayloadPosX", payload.transform.position.x);
                 PlayerPrefs.SetFloat("PayloadPosY", payload.transform.position.y);
                 PlayerPrefs.SetFloat("PayloadPosZ", payload.transform.position.z);
-
+                //Debug.Log(c.transform.position.x+"posCheck");
                 fountain.GetComponent<fountain>().Activate();
                 cont++;
             }

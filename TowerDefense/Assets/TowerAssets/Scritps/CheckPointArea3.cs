@@ -25,7 +25,8 @@ public class CheckPointArea3 : MonoBehaviour
                 PlayerPrefs.SetFloat("PlayerPosX", c.transform.position.x);
                 PlayerPrefs.SetFloat("PlayerPosY", c.transform.position.y);
                 PlayerPrefs.SetFloat("PlayerPosZ", c.transform.position.z);
-               
+
+                Debug.Log(c.transform.position.x + "check");
 
                 fountain.GetComponent<fountain>().Activate();
                 cont++;
