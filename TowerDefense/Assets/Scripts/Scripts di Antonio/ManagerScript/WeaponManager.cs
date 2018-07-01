@@ -55,6 +55,7 @@ public class WeaponManager : MonoBehaviour, IGameManager {
             firstWeaponAssigned = true;
             changeWeapon = true;
         }
+
         //ASSEGNAMENTO CAMBIO ARMA
         else if (notChanged != sw.getSelectedWeapon()) {
             string nextWeaponName = inventory.GetWeaponsList()[sw.getSelectedWeapon()];
