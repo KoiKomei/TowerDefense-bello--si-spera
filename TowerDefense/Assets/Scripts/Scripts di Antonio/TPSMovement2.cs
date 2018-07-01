@@ -71,7 +71,7 @@ public class TPSMovement2 : MonoBehaviour
 		_shooting = false;
 		_step = true;
 
-		if (PlayerPrefs.GetInt("Continue") == 0)
+		/*if (PlayerPrefs.GetInt("Continue") == 0)
 		{
 			PlayerPrefs.SetFloat("PlayerPosX", player.transform.position.x);
 			PlayerPrefs.SetFloat("PlayerPosY", player.transform.position.y);
@@ -82,7 +82,7 @@ public class TPSMovement2 : MonoBehaviour
 		{
 			player.transform.position.Set(PlayerPrefs.GetFloat("PlayerPosX"), PlayerPrefs.GetFloat("PlayerPosY"), PlayerPrefs.GetFloat("PlayerPosZ"));
 			PlayerPrefs.SetInt("Continue", 0);
-		}
+		}*/
 	}
 
 
