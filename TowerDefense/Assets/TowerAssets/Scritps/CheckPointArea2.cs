@@ -24,6 +24,12 @@ public class CheckPointArea2 : MonoBehaviour {
                 runMessage.text = "";
 
                 //salva posizione player (c.transform.position.x, c.transform.position.y, c.transform.position.z) e payload (payload.transform.position.x, payload.transform.position.y, payload.transform.position.z)
+                PlayerPrefs.SetFloat("PlayerPosX", c.transform.position.x);
+                PlayerPrefs.SetFloat("PlayerPosY", c.transform.position.y);
+                PlayerPrefs.SetFloat("PlayerPosZ", c.transform.position.z);
+                PlayerPrefs.SetFloat("PayloadPosX", payload.transform.position.x);
+                PlayerPrefs.SetFloat("PayloadPosY", payload.transform.position.y);
+                PlayerPrefs.SetFloat("PayloadPosZ", payload.transform.position.z);
 
                 fountain.GetComponent<fountain>().Activate();
                 cont++;
