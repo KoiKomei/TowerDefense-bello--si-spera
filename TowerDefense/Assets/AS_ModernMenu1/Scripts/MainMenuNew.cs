@@ -159,7 +159,15 @@ public class MainMenuNew : MonoBehaviour {
 
     public void playNewGame()
     {
+        PlayerPrefs.SetInt("Continue", 0);
+
         PlayerPrefs.SetInt("scene", 1);
 
+    }
+
+    public void continueGame()
+    {
+        PlayerPrefs.SetInt("Continue", 1);
+        PlayerPrefs.SetInt("scene", 1);
     }
 }

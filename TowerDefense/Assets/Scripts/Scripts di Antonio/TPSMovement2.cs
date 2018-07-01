@@ -68,7 +68,19 @@ public class TPSMovement2 : MonoBehaviour {
         _vertSpeed = minFall;
         _shooting = false;
         _step = true;
+        
+        if (PlayerPrefs.GetInt("Continue") == 0)
+        {
+            PlayerPrefs.SetFloat("PlayerPosX", player.transform.position.x);
+            PlayerPrefs.SetFloat("PlayerPosY", player.transform.position.y);
+            PlayerPrefs.SetFloat("PlayerPosZ", player.transform.position.z);
+        }
 
+        if (PlayerPrefs.GetInt("Continue") == 1)
+        {
+            player.transform.position.Set(PlayerPrefs.GetFloat("PlayerPosX"), PlayerPrefs.GetFloat("PlayerPosY"), PlayerPrefs.GetFloat("PlayerPosZ"));
+            PlayerPrefs.SetInt("Continue", 0);
+        }
     }
 
 	
