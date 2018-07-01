@@ -86,24 +86,26 @@ public class UIController : MonoBehaviour {
     private void LockCursor() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1f;
     }
 
     private void UnlockCursor() {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
-
-    public void RestartScene() {
-        SceneManager.LoadScene("Game");
+        Time.timeScale = 0f;
     }
 
     public void MainMenuScene() {
-        SceneManager.LoadScene("Menu_Scene");
+
+        Debug.Log("premuto");
+        PlayerPrefs.SetInt("scene", 3);
     }
 
     public void ExitScene() {
-        SceneManager.LoadScene("TestAnt");
+
+        Application.Quit();
     }
 	
+
 	
 }
