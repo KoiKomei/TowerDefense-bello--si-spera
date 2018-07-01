@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour {
         {
             isSettingsPopupOpen = false;
             OnCloseSettings();
-            LockCursor();
+            if (!isSettingsPopupOpen && !isInventoryPopupOpen) LockCursor();
         }
 
         //Apertura e Chiusura Inventario
@@ -57,7 +57,7 @@ public class UIController : MonoBehaviour {
         {
             isInventoryPopupOpen = false;
             OnCloseInventory();
-            LockCursor();
+            if (!isSettingsPopupOpen && !isInventoryPopupOpen) LockCursor();
         }
     }
 
@@ -92,5 +92,18 @@ public class UIController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    
+
+    public void RestartScene() {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void MainMenuScene() {
+        SceneManager.LoadScene("Menu_Scene");
+    }
+
+    public void ExitScene() {
+        SceneManager.LoadScene("TestAnt");
+    }
+	
+	
 }
