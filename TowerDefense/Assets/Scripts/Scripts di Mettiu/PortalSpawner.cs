@@ -57,9 +57,16 @@ public class PortalSpawner : MonoBehaviour {
 			
 			for(int i=0;i<nEnemyPerType.Length;i++)
 			{
-				nEnemyPerType[i] += 1;
+                if (PlayerPrefs.GetInt("HardCoreDifficulty") == 1){
+                    nEnemyPerType[i] += 3;
+                }
+                else
+                {
+                    nEnemyPerType[i] += 1;
+                }
+             
 			}
-
+            Debug.Log("Difficolta"+PlayerPrefs.GetInt("HardcoreDifficult"));
 			
 			StartCoroutine(SpawnEnemies(SpawnInterval));
 		}
