@@ -134,6 +134,7 @@ public class InventoryManager : MonoBehaviour, IGameManager {
         else if (type == Categoria.Consumable) {
             if (consumables.ContainsKey(name)) {
                 consumables[name]--;
+                FindObjectOfType<PlayerCharacter>().SendMessage("UsePotion", 30, SendMessageOptions.DontRequireReceiver);
                 if (consumables[name] == 0) {
                     consumables.Remove(name);
                     numConsumables--;

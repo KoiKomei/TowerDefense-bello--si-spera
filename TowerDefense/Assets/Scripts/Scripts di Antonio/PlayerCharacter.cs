@@ -73,6 +73,14 @@ public class PlayerCharacter : MonoBehaviour {
 		Debug.Log("ouch");
     }
 
+    public void UsePotion(int life)
+    {
+        hp += life;
+        healthBar.value += life;
+        Debug.Log("ahhhh");
+    }
+
+
     public void Death() {
        
         Time.timeScale = 0;
