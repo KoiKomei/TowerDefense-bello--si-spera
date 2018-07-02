@@ -25,7 +25,7 @@ public class CheckPointArea2 : MonoBehaviour {
             payloadLife.SetActive(true);
             ColliderA.GetComponent<BoxCollider>().enabled = false;
             ColliderB.GetComponent<BoxCollider>().enabled = true;
-            TriggerInizioArea2.GetComponent<TriggerStartArea2>().enabled = false;
+            TriggerInizioArea2.SetActive(false);
             PlayerPrefs.SetInt("ContinueArea2", 0);
         }
     }
