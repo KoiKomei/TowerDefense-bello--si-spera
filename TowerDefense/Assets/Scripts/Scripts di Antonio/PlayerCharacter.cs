@@ -21,9 +21,9 @@ public class PlayerCharacter : MonoBehaviour {
 
     private AudioSource _sound;
 
+ 
 
-	[SerializeField] UIController UI;
-	[SerializeField] private Slider healthBar;
+    [SerializeField] private Slider healthBar;
 
     // Use this for initialization
     void Start () {
@@ -88,15 +88,8 @@ public class PlayerCharacter : MonoBehaviour {
     public void Death() {
         anim.SetBool("Death", true);
         IKController.ikActive = false;
-		StartCoroutine(Lose());
     }
 
-	IEnumerator Lose()
-	{
-		yield return new WaitForSeconds(3);
-		UI.SendMessage("lose1");
-		Time.timeScale = 0;
 
-	}
    
 }

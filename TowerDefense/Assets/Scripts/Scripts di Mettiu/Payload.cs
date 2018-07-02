@@ -17,7 +17,6 @@ public class Payload : MonoBehaviour {
     private int barValueDamage;
     private Image healthBarBackground;
 
-	[SerializeField] UIController UI;
     [SerializeField] private Transform[] Waypoints;
 	public float DetectionRadius;
 	public int StoppingNumberOfEnemies = 3;
@@ -33,7 +32,7 @@ public class Payload : MonoBehaviour {
     void Start () {
 
 
-        hp = Managers.Payload.maxHealth;
+        hp = Managers.Player.health;
         healthBarPayload.maxValue = Managers.Payload.maxHealth;
         healthPackValue = Managers.Payload.healthPackValue;
 
@@ -109,23 +108,20 @@ public class Payload : MonoBehaviour {
 
 	public void Hurt(int damage)
 	{
-		hp -= damage;
+		Health -= damage;
         healthBarPayload.value -= damage;
-        if (hp <= 0)
+        if (Health <= 0)
 		{
-			StartCoroutine(Lose());
+			lose();
 		}
 	}
 
-	IEnumerator Lose()
+	private void lose()
 	{
-		yield return new WaitForSeconds(1);
-		UI.SendMessage("lose2");
-		Time.timeScale = 0;
-		
-	}
 
-	public bool GetArrived()
+    }
+
+    public bool GetArrived()
     {
         return arrived;
     }
