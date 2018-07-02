@@ -33,8 +33,9 @@ public class Mouselook : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        
-        
+
+        if (!UIController.isPaused)
+        {
             if (axes == RotationAxes.MouseX)
             {
                 transform.Rotate(0, Input.GetAxis("Mouse X") * sensivityhor, 0);
@@ -58,6 +59,6 @@ public class Mouselook : MonoBehaviour {
                 transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
             }
 
-        
+        }
     }
 }

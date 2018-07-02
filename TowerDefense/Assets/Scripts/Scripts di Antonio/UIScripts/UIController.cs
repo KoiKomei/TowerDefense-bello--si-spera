@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour {
 
     private bool isSettingsPopupOpen = false;
     private bool isInventoryPopupOpen = false;
-
+    public static bool isPaused = false;
     // Use this for initialization
     void Start () {
         LockCursor();
@@ -38,9 +38,11 @@ public class UIController : MonoBehaviour {
             isSettingsPopupOpen = true;
             OnOpenSettings();
             UnlockCursor();
+            isPaused = true;
         }
         else if (Input.GetButtonDown("Cancel") && isSettingsPopupOpen)
         {
+            isPaused = false;
             isSettingsPopupOpen = false;
             OnCloseSettings();
             if (!isSettingsPopupOpen && !isInventoryPopupOpen) LockCursor();
