@@ -128,5 +128,13 @@ public class UIController : MonoBehaviour {
 		UnlockCursor();
 		isPaused = true;
 	}
+	private void win()
+	{
+		lost.text = "HAI VINTO!";
+		isSettingsPopupOpen = true;
+		OnOpenSettings();
+		UnlockCursor();
+		isPaused = true;
+	}
 
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FinalExplosion : MonoBehaviour {
 
-
-    private float movementUp = 0.2f;
+	[SerializeField] UIController UI;
+	public float movementUp = 20f;
 
     public GameObject spaceShip;
 
@@ -25,7 +25,8 @@ public class FinalExplosion : MonoBehaviour {
     {
         if (this.transform.position.y < 225)
         {
-            this.transform.Translate(0, movementUp, 0);
+
+            this.transform.Translate(0, movementUp*Time.deltaTime, 0);
         }
         else
         {
@@ -39,6 +40,8 @@ public class FinalExplosion : MonoBehaviour {
         yield return new WaitForSeconds(1);
         Destroy(this.gameObject);
         Destroy(spaceShip);
+		UI.SendMessage("win");
+
     }
 
 }
