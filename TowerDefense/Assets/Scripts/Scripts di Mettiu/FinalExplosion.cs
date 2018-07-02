@@ -20,6 +20,7 @@ public class FinalExplosion : MonoBehaviour {
     private void Start()
     {
         _sound = GetComponent<AudioSource>();
+        _sound.volume = PlayerPrefs.GetFloat("SFXVolume");
     }
 
 
@@ -33,6 +34,11 @@ public class FinalExplosion : MonoBehaviour {
                 Managers.Audio.PlayWinMusic();
             }
             goUp();
+        }
+
+        if (UIController.isPaused)
+        {
+            _sound.volume = PlayerPrefs.GetFloat("SFXVolume");
         }
     }
 

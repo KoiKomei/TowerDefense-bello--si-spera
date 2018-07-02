@@ -59,7 +59,11 @@ public class AudioManager : MonoBehaviour, IGameManager {
 	// Update is called once per frame
 	void Update () {
        
-
+        if (UIController.isPaused)
+        {
+            soundVolume = PlayerPrefs.GetFloat("SFXVolume");
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        }
     }
 
     public void PlaySound(AudioClip clip) {

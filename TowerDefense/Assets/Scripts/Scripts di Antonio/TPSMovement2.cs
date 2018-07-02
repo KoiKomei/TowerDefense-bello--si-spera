@@ -69,6 +69,8 @@ public class TPSMovement2 : MonoBehaviour
 		_soundSource = GetComponent<AudioSource>();
 		player = GetComponentInParent<PlayerCharacter>();
 
+        _soundSource.volume = PlayerPrefs.GetFloat("SFXVolume");
+
 		_vertSpeed = minFall;
 		_shooting = false;
 		_step = true;
@@ -96,6 +98,11 @@ public class TPSMovement2 : MonoBehaviour
         if (PlayerCharacter.dead == true)
         {
             return;
+        }
+
+        if (UIController.isPaused)
+        {
+            _soundSource.volume = PlayerPrefs.GetFloat("SFXVolume");
         }
         
 		//Cambio Arma

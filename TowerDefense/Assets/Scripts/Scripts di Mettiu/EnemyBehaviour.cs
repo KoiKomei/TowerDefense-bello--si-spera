@@ -31,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 	{
 		
 		StartCoroutine(WaitAndAttack(target));
+        
 	}
 
 	public void Die()
@@ -79,8 +80,8 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 			}
 			
 		}
-
-	}
+        _playsound.volume = PlayerPrefs.GetFloat("SFXVolume");
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -95,6 +96,11 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 			}
 
 		}
+
+        if (UIController.isPaused)
+        {
+            _playsound.volume = PlayerPrefs.GetFloat("SFXVolume");
+        }
 
     }
 

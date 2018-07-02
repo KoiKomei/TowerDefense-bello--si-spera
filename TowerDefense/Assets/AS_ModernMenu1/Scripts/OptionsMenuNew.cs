@@ -22,9 +22,7 @@ public class OptionsMenuNew : MonoBehaviour {
 
 	private float sliderValue = 0.0f;
 	private float sliderValueSFX = 0.0f;
-	private float sliderValueXSensitivity = 0.0f;
-	private float sliderValueYSensitivity = 0.0f;
-	private float sliderValueSmoothing = 0.0f;
+	
 
 	public void  Start (){
 		// check difficulty
