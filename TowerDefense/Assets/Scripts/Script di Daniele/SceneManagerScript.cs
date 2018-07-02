@@ -50,7 +50,7 @@ public class SceneManagerScript : MonoBehaviour {
         {
             Debug.Log("loading menu");
             SceneManager.LoadScene("Menu_Scene", LoadSceneMode.Additive);
-            SceneManager.UnloadScene("game");
+            SceneManager.UnloadSceneAsync("game");
             PlayerPrefs.SetInt("scene", 2);
         }
 

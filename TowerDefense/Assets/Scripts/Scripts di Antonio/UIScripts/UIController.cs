@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour {
     void Start () {
         LockCursor();
         initializeUI();
+        isPaused = false;
 	}
 
     // Update is called once per frame
