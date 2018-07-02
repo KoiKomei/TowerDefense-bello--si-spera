@@ -12,8 +12,10 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Text healthLabel;
     [SerializeField] private Slider payloadHealthBar;
     [SerializeField] private Text payloadHealthLabel;
+	[SerializeField] private Text lost;
 
-    private bool isSettingsPopupOpen = false;
+
+	private bool isSettingsPopupOpen = false;
     private bool isInventoryPopupOpen = false;
     public static bool isPaused = false;
     // Use this for initialization
@@ -109,6 +111,22 @@ public class UIController : MonoBehaviour {
         Application.Quit();
     }
 	
+	private void lose1()
+	{
 
-	
+		lost.text = "SEI MORTO";
+		isSettingsPopupOpen = true;
+		OnOpenSettings();
+		UnlockCursor();
+		isPaused = true;
+	}
+	private void lose2()
+	{
+		lost.text = "IL CARICO E' STATO DISTRUTTO";
+		isSettingsPopupOpen = true;
+		OnOpenSettings();
+		UnlockCursor();
+		isPaused = true;
+	}
+
 }
