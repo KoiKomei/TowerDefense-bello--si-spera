@@ -46,6 +46,9 @@ public class MainMenuNew : MonoBehaviour {
 	}
 
 	public void  Position2 (){
+
+        Time.timeScale = 1f;
+
 		DisablePlayCampaign();
 		CameraObject.SetFloat("Animate",1);
 	}
