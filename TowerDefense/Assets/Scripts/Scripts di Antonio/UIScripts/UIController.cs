@@ -103,7 +103,8 @@ public class UIController : MonoBehaviour {
     public void MainMenuScene() {
 
         Debug.Log("premuto");
-        PlayerPrefs.SetInt("scene", 3);
+        //PlayerPrefs.SetInt("scene", 3);
+        SceneManager.LoadScene("Menu_Scene");
     }
 
     public void ExitScene() {

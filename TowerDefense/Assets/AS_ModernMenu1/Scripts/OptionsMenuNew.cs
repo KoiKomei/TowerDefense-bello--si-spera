@@ -58,7 +58,7 @@ public class OptionsMenuNew : MonoBehaviour {
 
 	public void  MusicSlider (){
 		PlayerPrefs.SetFloat("MusicVolume", sliderValue);
-        Debug.Log(sliderValue);
+       // Debug.Log(sliderValue);
 	}
 
 	public void  SFXSlider (){
