@@ -24,6 +24,7 @@ public class PlayerCharacter : MonoBehaviour {
 
 	[SerializeField] UIController UI;
 	[SerializeField] private Slider healthBar;
+	[SerializeField] private AudioClip deathsound;
 
     // Use this for initialization
     void Start () {
@@ -38,14 +39,16 @@ public class PlayerCharacter : MonoBehaviour {
         healthBarBackground = healthBar.GetComponentInChildren<Image>();
 
         _sound.volume = PlayerPrefs.GetFloat("SFXVolume");
+	
 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (hp <= 0)
+        if (hp <= 99  && !dead)
         {
+
             dead = true;
             Death();
             
@@ -88,6 +91,8 @@ public class PlayerCharacter : MonoBehaviour {
     public void Death() {
         anim.SetBool("Death", true);
         IKController.ikActive = false;
+		_sound.PlayOneShot(deathsound);
+		Managers.Audio.PlayLevelMusic();
 		StartCoroutine(Lose());
     }
 

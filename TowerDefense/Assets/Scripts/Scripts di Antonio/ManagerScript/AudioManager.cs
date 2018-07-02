@@ -38,8 +38,9 @@ public class AudioManager : MonoBehaviour, IGameManager {
 
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private string introBGMusic;
-    [SerializeField] private string levelBGMusic;
+    [SerializeField] private string Background;
+    [SerializeField] private string Lose;
+	[SerializeField] private string Win;
 
     public void Startup() {
         Debug.Log("Audio Manager Starting...");
@@ -66,12 +67,16 @@ public class AudioManager : MonoBehaviour, IGameManager {
     }
 
     public void PlayIntroMusic() {
-        PlayMusic((AudioClip) Resources.Load("Music/" + introBGMusic));
+        PlayMusic((AudioClip) Resources.Load("Music/" + Background));
     }
 
     public void PlayLevelMusic() {
-        PlayMusic((AudioClip) Resources.Load("Music/" + levelBGMusic));
+        PlayMusic((AudioClip) Resources.Load("Music/" + Lose));
     }
+
+	public void PlayWinMusic() {
+		PlayMusic((AudioClip)Resources.Load("Music/" + Win));
+	}
 
     private void PlayMusic(AudioClip clip) {
         musicSource.clip = clip;

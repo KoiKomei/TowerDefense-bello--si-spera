@@ -17,6 +17,7 @@ public class FinalExplosion : MonoBehaviour {
         
         if (this.GetComponent<Payload>().GetArrived())
         {
+			Managers.Audio.PlayWinMusic();
             goUp();
         }
     }
