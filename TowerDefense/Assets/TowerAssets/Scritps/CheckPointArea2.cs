@@ -8,10 +8,27 @@ public class CheckPointArea2 : MonoBehaviour {
     [SerializeField] public Text runMessage;
     public GameObject fountain;
     public GameObject payload;
+    public GameObject payloadLife;
+    public GameObject ColliderA;
+    public GameObject ColliderB;
+    public GameObject TriggerInizioArea2;
+
 
     public float range = 5;
     private int cont = 0;
     private bool save = false;
+
+    public void Start()
+    {
+        if (PlayerPrefs.GetInt("ContinueArea2") == 1)
+        {
+            payloadLife.SetActive(true);
+            ColliderA.GetComponent<BoxCollider>().enabled = false;
+            ColliderB.GetComponent<BoxCollider>().enabled = true;
+            TriggerInizioArea2.GetComponent<TriggerStartArea2>().enabled = false;
+            PlayerPrefs.SetInt("ContinueArea2", 0);
+        }
+    }
 
     private IEnumerator OnTriggerEnter(Collider c)
     {
