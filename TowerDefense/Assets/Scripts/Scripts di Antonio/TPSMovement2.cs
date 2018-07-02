@@ -38,7 +38,7 @@ public class TPSMovement2 : MonoBehaviour
 	[SerializeField] private AudioClip footStepSound;
 	private float _footStepSoundLength = 0.6f;
 	private bool _step;
-    [SerializeField] private AudioClip deathsound;
+    
 
 
     /*munizione e ricarica*/

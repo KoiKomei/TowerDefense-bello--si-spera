@@ -46,7 +46,7 @@ public class PlayerCharacter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (hp <= 99  && !dead)
+        if (hp <= 0  && !dead)
         {
 
             dead = true;
