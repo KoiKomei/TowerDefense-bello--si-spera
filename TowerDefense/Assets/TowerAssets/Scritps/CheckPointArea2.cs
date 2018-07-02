@@ -43,7 +43,7 @@ public class CheckPointArea2 : MonoBehaviour {
                 //salva posizione player (c.transform.position.x, c.transform.position.y, c.transform.position.z) e payload (payload.transform.position.x, payload.transform.position.y, payload.transform.position.z)
                 PlayerPrefs.SetFloat("PlayerPosX", 236.75f);
                 PlayerPrefs.SetFloat("PlayerPosY", 1.02f);
-                PlayerPrefs.SetFloat("PlayerPosZ", 326.19f);
+                PlayerPrefs.SetFloat("PlayerPosZ", 310.19f);
                 PlayerPrefs.SetInt("ContinueArea2", 1);
                 //Debug.Log(c.transform.position.x+"posCheck");
                 fountain.GetComponent<fountain>().Activate();
