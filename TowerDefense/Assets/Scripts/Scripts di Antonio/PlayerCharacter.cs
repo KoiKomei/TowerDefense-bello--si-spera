@@ -13,8 +13,11 @@ public class PlayerCharacter : MonoBehaviour {
     private int barValueDamage;
     private Image healthBarBackground;
     private bool damaged;
+    private Animator anim;
 
-    [SerializeField] private AudioClip deathsound;
+    public static bool dead;
+
+   
 
     private AudioSource _sound;
 
@@ -24,12 +27,13 @@ public class PlayerCharacter : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        dead = false;
         _sound = GetComponent<AudioSource>();
         hp = Managers.Player.health;
         healthBar.maxValue = Managers.Player.maxHealth;
         healthPackValue = Managers.Player.healthPackValue;
         //barValueDamage = Managers.Player.barValueDamage;
+        anim = GetComponent<Animator>();
 
         healthBarBackground = healthBar.GetComponentInChildren<Image>();
 
@@ -42,7 +46,7 @@ public class PlayerCharacter : MonoBehaviour {
 
         if (hp <= 0)
         {
-           
+            dead = true;
             Death();
             
         }
@@ -82,9 +86,10 @@ public class PlayerCharacter : MonoBehaviour {
 
 
     public void Death() {
-       
-        Time.timeScale = 0;
-        healthBarBackground.color = Color.red;
+        anim.SetBool("Death", true);
+        IKController.ikActive = false;
     }
 
+
+   
 }

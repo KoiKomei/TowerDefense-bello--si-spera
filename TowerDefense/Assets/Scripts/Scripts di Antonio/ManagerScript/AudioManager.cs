@@ -52,13 +52,14 @@ public class AudioManager : MonoBehaviour, IGameManager {
 
 	// Use this for initialization
 	void Start () {
-		
+    
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+       
+
+    }
 
     public void PlaySound(AudioClip clip) {
         soundSource.PlayOneShot(clip);

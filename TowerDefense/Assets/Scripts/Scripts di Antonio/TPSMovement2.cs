@@ -38,10 +38,11 @@ public class TPSMovement2 : MonoBehaviour
 	[SerializeField] private AudioClip footStepSound;
 	private float _footStepSoundLength = 0.6f;
 	private bool _step;
+    [SerializeField] private AudioClip deathsound;
 
 
-	/*munizione e ricarica*/
-	private WeaponManager weaponManager;
+    /*munizione e ricarica*/
+    private WeaponManager weaponManager;
 	private AudioClip shotSound;
 	private int maxAmmo;
 	private int currentAmmo;
@@ -60,6 +61,7 @@ public class TPSMovement2 : MonoBehaviour
 	void Start()
 	{
 
+
 		weaponManager = Managers.Weapon;
 
 		_charController = GetComponent<CharacterController>();
@@ -70,7 +72,7 @@ public class TPSMovement2 : MonoBehaviour
 		_vertSpeed = minFall;
 		_shooting = false;
 		_step = true;
-
+        Managers.Audio.PlayIntroMusic();
 
         if (PlayerPrefs.GetInt("Continue") == 0)
 		{
@@ -91,7 +93,11 @@ public class TPSMovement2 : MonoBehaviour
 
 	void Update()
 	{
-
+        if (PlayerCharacter.dead == true)
+        {
+            return;
+        }
+        
 		//Cambio Arma
 
 		if (weaponManager.changeWeapon)
@@ -273,7 +279,6 @@ public class TPSMovement2 : MonoBehaviour
 		animator.SetFloat("VelY", y);
 	}
 
-
 	/*Metodi aggiuntivi per sparare, ricaricare ed altro*/
 
 	void Shoot()
@@ -371,6 +376,8 @@ public class TPSMovement2 : MonoBehaviour
 		yield return new WaitForSeconds(stepsLength);
 		_step = true;
 	}
+
+   
 
 }
 
