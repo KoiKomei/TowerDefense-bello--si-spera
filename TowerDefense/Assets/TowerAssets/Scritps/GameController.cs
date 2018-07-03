@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
     public GameObject postoDiBlocco;
 
     private int area = 0;
+    private int cont = 0;
      
     public void Update() {
         //Debug.Log(area);
@@ -77,9 +78,9 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-            if (payload.GetComponent<Payload>().GetArrived())
+            if (payload.GetComponent<Payload>().GetArrived() && cont==0)
             {
-                payload.GetComponent<Payload>().SetArrived(false);
+                cont++;
                 payload.GetComponent<Payload>().enabled = false;
                 payload.GetComponent<NavMeshAgent>().enabled = false;
                 runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";

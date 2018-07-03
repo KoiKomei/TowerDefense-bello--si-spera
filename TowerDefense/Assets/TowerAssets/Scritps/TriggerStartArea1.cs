@@ -20,6 +20,7 @@ public class TriggerStartArea1 : MonoBehaviour {
     private float movementUp = 5f;
     private bool arrived = false;
     private int cont = 0;
+    private int contPayload = 0;
     private bool levelStart = false;
 
     private IEnumerator OnTriggerEnter(Collider c)
@@ -43,18 +44,21 @@ public class TriggerStartArea1 : MonoBehaviour {
     public void Update()
     {
 
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-
-        foreach (Collider c in colliders)
+        if(contPayload == 0)
         {
-            GameObject target = c.gameObject;
-            if (c.GetComponentInParent<Payload>() != null)
+            contPayload++;
+            Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+
+            foreach (Collider c in colliders)
             {
-                c.GetComponentInParent<Payload>().enabled = false;
-                c.GetComponentInParent<NavMeshAgent>().isStopped = true;
-                arrived = true;
-                break;
+                GameObject target = c.gameObject;
+                if (c.GetComponentInParent<Payload>() != null)
+                {
+                    c.GetComponentInParent<Payload>().enabled = false;
+                    c.GetComponentInParent<NavMeshAgent>().isStopped = true;
+                    arrived = true;
+                    break;
+                }
             }
         }
 
