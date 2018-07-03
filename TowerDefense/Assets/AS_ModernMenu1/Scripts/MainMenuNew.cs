@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuNew : MonoBehaviour {
 
 	public Animator CameraObject;
-	//public GameObject PanelControls;
-	//public GameObject PanelVideo;
+	
 	public GameObject PanelGame;
 	public GameObject PanelKeyBindings;
 	public GameObject PanelMovement;
@@ -21,12 +20,11 @@ public class MainMenuNew : MonoBehaviour {
 	// campaign button sub menu
 	public GameObject continueBtn;
 	public GameObject newGameBtn;
-	//public GameObject loadGameBtn;
+
 
 	// highlights
 	public GameObject lineGame;
-	//public GameObject lineVideo;
-	//public GameObject lineControls;
+	
 	public GameObject lineKeyBindings;
 	public GameObject lineMovement;
 	public GameObject lineCombat;
@@ -58,50 +56,23 @@ public class MainMenuNew : MonoBehaviour {
 	}
     
 	public void  GamePanel (){
-		//PanelControls.gameObject.SetActive(false);
-		//PanelVideo.gameObject.SetActive(false);
+		
 		PanelGame.gameObject.SetActive(true);
 		PanelKeyBindings.gameObject.SetActive(false);
 
 		lineGame.gameObject.SetActive(true);
-		//lineControls.gameObject.SetActive(false);
-		//lineVideo.gameObject.SetActive(false);
+		
 		lineKeyBindings.gameObject.SetActive(false);
 	}
-    /*
-	public void  VideoPanel (){
-		PanelControls.gameObject.SetActive(false);
-		PanelVideo.gameObject.SetActive(true);
-		PanelGame.gameObject.SetActive(false);
-		PanelKeyBindings.gameObject.SetActive(false);
-
-		lineGame.gameObject.SetActive(false);
-		lineControls.gameObject.SetActive(false);
-		lineVideo.gameObject.SetActive(true);
-		lineKeyBindings.gameObject.SetActive(false);
-	}*/
-    /*
-	public void  ControlsPanel (){
-		PanelControls.gameObject.SetActive(true);
-		PanelVideo.gameObject.SetActive(false);
-		PanelGame.gameObject.SetActive(false);
-		PanelKeyBindings.gameObject.SetActive(false);
-
-		lineGame.gameObject.SetActive(false);
-		lineControls.gameObject.SetActive(true);
-		lineVideo.gameObject.SetActive(false);
-		lineKeyBindings.gameObject.SetActive(false);
-	}*/
+   
 
 	public void  KeyBindingsPanel (){
-		//PanelControls.gameObject.SetActive(false);
-		//PanelVideo.gameObject.SetActive(false);
+		
 		PanelGame.gameObject.SetActive(false);
 		PanelKeyBindings.gameObject.SetActive(true);
 
 		lineGame.gameObject.SetActive(false);
-		//lineControls.gameObject.SetActive(false);
-		//lineVideo.gameObject.SetActive(true);
+		
 		lineKeyBindings.gameObject.SetActive(true);
 	}
 
@@ -163,8 +134,7 @@ public class MainMenuNew : MonoBehaviour {
     public void playNewGame()
     {
         PlayerPrefs.SetInt("Continue", 0);
-        /*Debug.Log("premuto newGame");
-        PlayerPrefs.SetInt("scene", 1);*/
+        
         SceneManager.LoadScene("game");
 
     }
@@ -172,7 +142,7 @@ public class MainMenuNew : MonoBehaviour {
     public void continueGame()
     {
         PlayerPrefs.SetInt("Continue", 1);
-        //PlayerPrefs.SetInt("scene", 1);
+        
         SceneManager.LoadScene("game");
     }
 }
