@@ -3,8 +3,18 @@ guid: 8d2d477a8a3454e45a545f49a2001f77
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: LW-Hydrant
-  externalObjects: {}
+    11100000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HYDRANT
+    second: {fileID: 2100000, guid: 247d5dea97421dc47bef9ea04ea31bf3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
