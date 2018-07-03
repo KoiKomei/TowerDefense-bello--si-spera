@@ -25,6 +25,7 @@ public class PlayerCharacter : MonoBehaviour {
 	[SerializeField] UIController UI;
 	[SerializeField] private Slider healthBar;
 	[SerializeField] private AudioClip deathsound;
+    [SerializeField] private AudioClip oof;
 
     // Use this for initialization
     void Start () {
@@ -75,6 +76,10 @@ public class PlayerCharacter : MonoBehaviour {
 
     public void Hurt(int damage){
         damaged = true;
+        if (!dead)
+        {
+            _sound.PlayOneShot(oof);
+        }
         hp -= damage;
         healthBar.value -= damage;
 		Debug.Log("ouch");
