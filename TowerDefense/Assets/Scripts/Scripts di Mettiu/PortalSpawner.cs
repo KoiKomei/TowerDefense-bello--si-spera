@@ -71,6 +71,10 @@ public class PortalSpawner : MonoBehaviour {
 			
 			StartCoroutine(SpawnEnemies(SpawnInterval));
 		}
+        if (wave > Waves)
+        {
+            Destroy(this.gameObject);
+        }
 
     }
 

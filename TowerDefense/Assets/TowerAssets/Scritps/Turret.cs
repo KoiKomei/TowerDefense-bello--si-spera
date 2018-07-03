@@ -58,18 +58,26 @@ public class Turret : MonoBehaviour {
 			}
 		}
 
-        if (nearestEnemy != null && shortestDistance <= range && !nearestEnemy.GetComponent<EnemyBehaviour>().isDead)
-		{
-            CancelInvoke("DamageOverTime");
-			target = nearestEnemy.transform;
-			targetEnemy = nearestEnemy.GetComponent<EnemyBehaviour>();
-            attackStart = true;
-        } else
-		{
-			target = null;
-		}
+        if (nearestEnemy.GetComponent<EnemyBehaviour>() != null)
+        {
+            if (shortestDistance <= range && !nearestEnemy.GetComponent<EnemyBehaviour>().isDead)
+            {
+                CancelInvoke("DamageOverTime");
+                target = nearestEnemy.transform;
+                targetEnemy = nearestEnemy.GetComponent<EnemyBehaviour>();
+                attackStart = true;
+            }
+            else
+            {
+                target = null;
+            }
+        }
+        else
+        {
+            target = null;
+        }
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update () {
