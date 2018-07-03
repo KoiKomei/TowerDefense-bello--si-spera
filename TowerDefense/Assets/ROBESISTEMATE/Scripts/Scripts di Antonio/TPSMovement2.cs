@@ -15,7 +15,7 @@ public class TPSMovement2 : MonoBehaviour
 
 	/*statistiche personaggio*/
 	[SerializeField] private Transform target;
-	public float rotSpeed = 15f;
+
 	public float pushForce = 3.0f;
 
 	public float moveSpeed = 1.0f;
@@ -161,9 +161,7 @@ public class TPSMovement2 : MonoBehaviour
 			movement = target.TransformDirection(movement);
 			target.rotation = tmp;
 
-			//Quaternion direction = Quaternion.LookRotation(movement);
-
-			//transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
+		
 		}
 
 		if (_charController.velocity.magnitude > 1f && _step && _charController.isGrounded)
@@ -320,7 +318,7 @@ public class TPSMovement2 : MonoBehaviour
 				GameObject hitted = hit.transform.gameObject; //Mattia start
 				if (hitted != null)
 				{
-					hitted.SendMessage("Hurt", 1, SendMessageOptions.DontRequireReceiver);
+					hitted.SendMessage("Hurt", damage, SendMessageOptions.DontRequireReceiver);
 				}
 			}
 			if (hit.rigidbody != null)

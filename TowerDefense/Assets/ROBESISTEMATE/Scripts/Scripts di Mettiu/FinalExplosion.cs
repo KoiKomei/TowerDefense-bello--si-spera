@@ -16,11 +16,13 @@ public class FinalExplosion : MonoBehaviour {
     private bool collision = false;
     private bool musicon = false;
     public GameObject explosion;
+    private bool ohno;
 
     private void Start()
     {
         _sound = GetComponent<AudioSource>();
         _sound.volume = PlayerPrefs.GetFloat("SFXVolume");
+        ohno = false;
     }
 
 
@@ -60,8 +62,16 @@ public class FinalExplosion : MonoBehaviour {
 
     public IEnumerator Explosion()
     {
-        GameObject boom = Instantiate(explosion, this.transform);
-        _sound.PlayOneShot(boooom);
+        if (!ohno)
+        {
+            ohno = true;
+            GameObject boom = Instantiate(explosion, this.transform);
+            _sound.PlayOneShot(boooom);
+
+        }
+        PlayerPrefs.SetFloat("PlayerPosX", -213.5f);
+        PlayerPrefs.SetFloat("PlayerPosY", 0.547f);
+        PlayerPrefs.SetFloat("PlayerPosZ", 4f);
         yield return new WaitForSeconds(3);
         Destroy(this.gameObject);
         Destroy(spaceShip);

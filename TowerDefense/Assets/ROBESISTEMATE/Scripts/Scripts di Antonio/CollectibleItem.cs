@@ -32,7 +32,7 @@ public class CollectibleItem : MonoBehaviour {
     }
 
     private IEnumerator IssTrigger() {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         colliderr.enabled = true;
     }
 }
