@@ -20,7 +20,6 @@ public class TriggerStartArea1 : MonoBehaviour {
     private float movementUp = 5f;
     private bool arrived = false;
     private int cont = 0;
-    private int contPayload = 0;
     private bool levelStart = false;
 
     private IEnumerator OnTriggerEnter(Collider c)
@@ -44,9 +43,8 @@ public class TriggerStartArea1 : MonoBehaviour {
     public void Update()
     {
 
-        if(contPayload == 0)
+        if(!arrived)
         {
-            contPayload++;
             Collider[] colliders = Physics.OverlapSphere(transform.position, range);
 
             foreach (Collider c in colliders)
