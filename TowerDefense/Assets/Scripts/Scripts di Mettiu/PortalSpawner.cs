@@ -14,6 +14,9 @@ public class PortalSpawner : MonoBehaviour {
     [SerializeField] private GameObject camera;
 	[SerializeField] private GameObject AttaccoAldo;
 
+
+    [SerializeField] private GameObject[] particellari;
+
     public int Waves=3;
 	public float SpawnInterval = 1;
 
@@ -74,6 +77,10 @@ public class PortalSpawner : MonoBehaviour {
         if (wave > Waves)
         {
             Destroy(this.gameObject);
+            foreach (GameObject i in particellari)
+            {
+                Destroy(i);
+            }
         }
 
     }

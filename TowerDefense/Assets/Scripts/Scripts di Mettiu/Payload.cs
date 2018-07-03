@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -128,5 +129,10 @@ public class Payload : MonoBehaviour {
 	public bool GetArrived()
     {
         return arrived;
+    }
+
+    public void SetArrived(bool b)
+    {
+        arrived = b;
     }
 }

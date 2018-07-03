@@ -40,13 +40,11 @@ public class GameController : MonoBehaviour {
     {
         
             if (Portal1A != null) {
-                if (Portal1A.GetComponent<PortalSpawner>().GetWave() == 4)
+                if (Portal1A.GetComponent<PortalSpawner>().GetWave() > 3)
                 {
-                    area = 0;
-                    //Destroy1();
                     Collider1.GetComponent<BoxCollider>().enabled = false;
-                    payload.GetComponent<Payload>().enabled = true;
                     payload.GetComponent<NavMeshAgent>().isStopped = false;
+                    payload.GetComponent<Payload>().enabled = true;
                     runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
                     yield return new WaitForSeconds(3);
                     runMessage.text = "";
@@ -58,9 +56,7 @@ public class GameController : MonoBehaviour {
 
                 if (Portal2.GetComponent<PortalSpawner>().GetWave() > 3)
                 {
-                    area = 0;
                     Destroy(postoDiBlocco);
-                    //Destroy2();
                     Collider2.GetComponent<BoxCollider>().enabled = false;
                     payload.GetComponent<Payload>().enabled = true;
                     runMessage.text = "PORTA IL CARICO ALLA ZONA DI ESPLOSIONE";
@@ -72,11 +68,8 @@ public class GameController : MonoBehaviour {
 
             if (Portal3A != null)
             {
-
-                if (Portal3A.GetComponent<PortalSpawner>().GetWave() == 4)
+                if (Portal3A.GetComponent<PortalSpawner>().GetWave() > 3)
                 {
-                    area = 0;
-                    //Destroy3();
                     Collider3.GetComponent<BoxCollider>().enabled = false;
                     runMessage.text = "VAI AVANTI PER PORTARE IL CARICO A DESTINAZIONE";
                     yield return new WaitForSeconds(3);
@@ -84,12 +77,9 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-        if (area == 5)
-        {
-
             if (payload.GetComponent<Payload>().GetArrived())
             {
-                area = 0;
+                payload.GetComponent<Payload>().SetArrived(false);
                 payload.GetComponent<Payload>().enabled = false;
                 payload.GetComponent<NavMeshAgent>().enabled = false;
                 runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
@@ -98,7 +88,7 @@ public class GameController : MonoBehaviour {
                 yield return new WaitForSeconds(2);
                 
             }
-        }
+
     }
 
     public void SetArea(int i)
@@ -117,6 +107,7 @@ public class GameController : MonoBehaviour {
     }
 
 
+    /*
     private void Destroy1()
     {
         Destroy(Portal1A);
@@ -138,5 +129,5 @@ public class GameController : MonoBehaviour {
         Destroy(Portal3A);
         Destroy(Portal3B);
     }
-
+    */
 }
