@@ -17,7 +17,8 @@ public class TriggerStartArea1 : MonoBehaviour {
     public Collider collider;
 	public float range = 5;
 
-    private float movementUp = 0.1f;
+    private float movementUp = 5f;
+    private bool arrived = false;
     private int cont = 0;
     private bool levelStart = false;
 
@@ -25,7 +26,7 @@ public class TriggerStartArea1 : MonoBehaviour {
     {
         if (c.CompareTag("Human"))
         {
-            if (cont == 0)
+            if (cont == 0 && arrived)
             {
                 collider.GetComponent<BoxCollider>().enabled = true;
                 runMessage.text = "PROTEGGI IL CARICO DAI NEMICI";
@@ -41,25 +42,49 @@ public class TriggerStartArea1 : MonoBehaviour {
 
     public void Update()
     {
+
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+
+        foreach (Collider c in colliders)
+        {
+            GameObject target = c.gameObject;
+            if (c.GetComponentInParent<Payload>() != null)
+            {
+                c.GetComponentInParent<Payload>().enabled = false;
+                c.GetComponentInParent<NavMeshAgent>().isStopped = true;
+                arrived = true;
+                break;
+            }
+        }
+
+        goUp();
+
+    }
+
+
+    public void goUp()
+    {
+
         if (Portal1 != null)
         {
             if (levelStart && Portal1.transform.position.y < 4.5)
             {
-                ParticlePortal1.transform.Translate(0, movementUp, 0);
-                Portal1.transform.Translate(0, movementUp, 0);
+                ParticlePortal1.transform.Translate(0, movementUp * Time.deltaTime, 0);
+                Portal1.transform.Translate(0, movementUp * Time.deltaTime, 0);
             }
             if (levelStart && Portal2.transform.position.y < 4.5)
             {
-                Portal2.transform.Translate(0, movementUp, 0);
+                Portal2.transform.Translate(0, movementUp * Time.deltaTime, 0);
             }
             if (levelStart && Portal3.transform.position.y < 4.5)
             {
-                Portal3.transform.Translate(0, movementUp, 0);
+                Portal3.transform.Translate(0, movementUp * Time.deltaTime, 0);
             }
             if (levelStart && Portal4.transform.position.y < 4.5)
             {
-                Portal4.transform.Translate(0, movementUp, 0);
-                ParticlePortal4.transform.Translate(0, movementUp, 0);
+                Portal4.transform.Translate(0, movementUp * Time.deltaTime, 0);
+                ParticlePortal4.transform.Translate(0, movementUp * Time.deltaTime, 0);
             }
             if (Portal1.transform.position.y >= 4.5)
             {
@@ -67,19 +92,6 @@ public class TriggerStartArea1 : MonoBehaviour {
             }
         }
 
-		Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-
-		foreach (Collider c in colliders)
-		{
-			GameObject target = c.gameObject;
-			if (c.GetComponentInParent<Payload>() != null)
-			{
-				c.GetComponentInParent<Payload>().enabled = false;
-				c.GetComponentInParent<NavMeshAgent>().isStopped = true;
-				break;
-			}
-		}
-
-	}
+    }
 
 }

@@ -12,7 +12,7 @@ public class TriggerStartArea2 : MonoBehaviour {
 	public GameObject payloadLife;
 
 
-	private float movementUp = 0.1f;
+	private float movementUp = 5f;
     private bool levelStart = false;
     private int cont = 0;
     public GameObject payload;
@@ -37,18 +37,27 @@ public class TriggerStartArea2 : MonoBehaviour {
 
     public void Update()
     {
-        if(Portal1!=null)
-        { 
+        goUp();
+    }
+
+
+    public void goUp()
+    {
+
+        if (Portal1 != null)
+        {
             if (levelStart && Portal1.transform.position.y < 4.5)
             {
-                Portal1.transform.Translate(0, movementUp, 0);
-                ParticlePortal1.transform.Translate(0, movementUp, 0);
+                ParticlePortal1.transform.Translate(0, movementUp * Time.deltaTime, 0);
+                Portal1.transform.Translate(0, movementUp * Time.deltaTime, 0);
             }
             if (Portal1.transform.position.y >= 4.5)
             {
                 levelStart = false;
             }
         }
+
     }
+
 
 }
