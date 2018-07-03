@@ -39,14 +39,19 @@ public class EnemyBehaviour : MonoBehaviour,IEnemy {
 		agent.isStopped = true;
         _playsound.PlayOneShot(death);
 		animator.SetBool("Dead", true);
+        GetComponent<CharacterController>().enabled = false;
 		GetComponentInChildren<Navigator>().enabled = false;
 		GetComponentInChildren<EnemyCursor>().gameObject.SetActive(false);
+
         Destroy(this.gameObject,5);
     }
 
 	public void Hurt(int damage)
 	{
-        _playsound.PlayOneShot(hurt);
+        if (!isDead)
+        {
+            _playsound.PlayOneShot(hurt);
+        }
 		Health -= damage;
 		Health = Mathf.Clamp(Health, 0, MaxHealth);
 		HealthBar.sizeDelta = new Vector2((maXHealthBar * Health) / MaxHealth, HealthBar.sizeDelta.y);
