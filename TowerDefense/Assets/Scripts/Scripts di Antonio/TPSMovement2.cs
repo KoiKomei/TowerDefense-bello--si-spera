@@ -61,7 +61,6 @@ public class TPSMovement2 : MonoBehaviour
 	void Start()
 	{
 
-
 		weaponManager = Managers.Weapon;
 
 		_charController = GetComponent<CharacterController>();
@@ -69,7 +68,7 @@ public class TPSMovement2 : MonoBehaviour
 		_soundSource = GetComponent<AudioSource>();
 		player = GetComponentInParent<PlayerCharacter>();
 
-        _soundSource.volume = PlayerPrefs.GetFloat("SFXVolume");
+        
 
 		_vertSpeed = minFall;
 		_shooting = false;
@@ -90,6 +89,7 @@ public class TPSMovement2 : MonoBehaviour
            // Debug.Log("playerX" + player.transform.position.x);
 		}
         
+        _soundSource.volume = PlayerPrefs.GetFloat("SFXVolume");
     }
 
 
