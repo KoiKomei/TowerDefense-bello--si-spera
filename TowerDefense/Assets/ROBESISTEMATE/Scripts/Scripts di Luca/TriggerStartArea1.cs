@@ -22,10 +22,9 @@ public class TriggerStartArea1 : MonoBehaviour {
     private int cont = 0;
     private bool levelStart = false;
 
-    private IEnumerator OnTriggerEnter(Collider c)
+    private IEnumerator startWave()
     {
-        if (c.CompareTag("Human"))
-        {
+        
             if (cont == 0 && arrived)
             {
                 collider.GetComponent<BoxCollider>().enabled = true;
@@ -35,7 +34,7 @@ public class TriggerStartArea1 : MonoBehaviour {
                 levelStart = true;
                 cont++;
             }
-        }
+        
         
 
     }
@@ -58,7 +57,11 @@ public class TriggerStartArea1 : MonoBehaviour {
                     break;
                 }
             }
-        }
+		}
+		else
+		{
+			StartCoroutine(startWave());
+		}
 
         goUp();
 
