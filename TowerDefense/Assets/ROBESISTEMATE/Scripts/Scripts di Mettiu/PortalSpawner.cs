@@ -62,10 +62,21 @@ public class PortalSpawner : MonoBehaviour {
 			{
                 if (PlayerPrefs.GetInt("HardCoreDifficulty") == 1)
                 {
-                    nEnemyPerType[i] += 1;
+                    Debug.Log("hardcore");
+                    if (i==1)
+                    {
+                        Debug.Log("aumentato");
+                        nEnemyPerType[i] += 2;
+                    }
+                    nEnemyPerType[i] += 0;
                 }
                 else
                 {
+                    if (i == 1)
+                    {
+                        Debug.Log("aumentato");
+                        nEnemyPerType[i] += 1;
+                    }
                     nEnemyPerType[i] += 0;
                 }
 

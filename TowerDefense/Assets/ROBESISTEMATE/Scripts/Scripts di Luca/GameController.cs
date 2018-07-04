@@ -78,16 +78,18 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-            if (payload.GetComponent<Payload>().GetArrived() && cont==0)
-            {
-                cont++;
-                payload.GetComponent<Payload>().enabled = false;
-                payload.GetComponent<NavMeshAgent>().enabled = false;
-                runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
-                yield return new WaitForSeconds(3);
-                runMessage.text = "HAI SALVATO LA TERRA";
-                yield return new WaitForSeconds(2);
-                
+            if (payload != null) {
+                if (payload.GetComponent<Payload>().GetArrived() && cont == 0)
+                {
+                    cont++;
+                    payload.GetComponent<Payload>().enabled = false;
+                    payload.GetComponent<NavMeshAgent>().enabled = false;
+                    runMessage.text = "GRANDE!!! HAI PORTATO IL CARICO A DESTINAZIONE";
+                    yield return new WaitForSeconds(3);
+                    runMessage.text = "HAI SALVATO LA TERRA";
+                    yield return new WaitForSeconds(2);
+
+                }
             }
 
     }
